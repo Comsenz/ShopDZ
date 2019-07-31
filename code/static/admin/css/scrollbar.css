@@ -1,0 +1,83 @@
+.scrollbar .content{
+	position: absolute;
+}
+
+.scrollbar {
+	overflow:hidden;
+	position: absolute;
+}
+
+.scrollbar.grab{
+	cursor: url(../cursors/openhand.cur) , move !important;
+	cursor: -moz-grab;
+	cursor: move;
+}
+.scrollbar.grabbing{
+	cursor: url(../cursors/closedhand.cur) , move !important;
+	cursor: -moz-grabbing;
+	cursor: move;
+}
+
+div.scrollbar_dragger {
+	position: relative;
+}
+div.scrollbar_dragger.vertical {
+	float:right;
+}
+div.scrollbar_dragger.horizontal {
+	
+}
+
+div.scrollbar_dragger *{
+	margin:0;
+	padding:0;
+	font-style:normal;
+	text-decoration:none;
+}
+
+div.scrollbar_dragger .back{
+	-webkit-transition: background-color 0.5s ease-out;
+	-moz-transition: background-color 0.5s ease-out;
+	transition: background-color 0.5s ease-out;
+	
+	cursor:pointer;
+	position:absolute;
+	
+	background-color:#E6E6E6;
+}
+
+div.scrollbar_dragger .back.over{
+	background-color:#CCCCCC;
+}
+
+div.scrollbar_dragger .dragger{
+	-webkit-transition: background-color 0.5s ease-out;
+	-moz-transition: background-color 0.5s ease-out;
+	transition: background-color 0.5s ease-out;
+	
+	cursor:pointer;
+	
+	position:absolute;
+
+	height:100px;
+	
+}
+
+div.scroll_button{
+	height:30px;
+	width:30px;
+	
+	position: relative;
+	margin:5px 0px;
+	margin-right:3px;
+	float:right;
+	
+	cursor:pointer;
+}
+
+div.scroll_button span.hover{
+	height:30px;
+	width:30px;
+	position: absolute;
+	cursor:pointer;
+}

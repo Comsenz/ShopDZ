@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="aplus-terminal" content="1"/>
+    <meta name="keywords" content="SHOPDZ" />
+	<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<link rel="shortcut icon" href="favicon.ico">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title></title>
+	<link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/swiper.min.css">
+	<link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/common.css" />
+</head>
+<body>
+    <!--header开始-->
+    <div id="header">
+    </div>
+    <!--header结束-->
+	<div class="wrapper" id="wrapper">
+         
+	   	<div id="footer"></div>
+	</div>
+	<!--wrapper结束-->
+    <script type="text/html" id="special_item_list">
+        <div class="content">
+            <% for(i in special_item_list){ %>
+                <% if (special_item_list[i].item_type == 'adv_list') { %>
+                    <!--焦点图轮播开始-->
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <% var v=special_item_list[i].item_data %>
+                            <% for(j in v){ %>
+                                <div class="swiper-slide"><a href="<%=v[j].url %>"><img src="<%=v[j].img %>"/></a></div>
+                            <% } %>
+                        </div>
+                        <!-- Add Pagination -->
+                       <div class="swiper-pagination"></div>
+                    </div>
+                    <!--焦点图轮播结束-->
+                <% } %>
+
+                <% if (special_item_list[i].item_type == 'adv_img') { %>
+                    <div class="topic-list">
+                        <div class="list-con">
+                            <% var g=special_item_list[i].item_data %>
+                            <% for(m in g){ %>
+                                <div class="list-img"><a href="<%=g[m].url %>"><img src="<%=g[m].img %>"/></a></div>
+                            <% } %>
+                        </div>
+                    </div>
+                <% } %>
+
+                <% if (special_item_list[i].item_type == 'adv_nav') { %>
+                    <div class="outside-link">
+                        <ul class="link-box">
+                            <% var a=special_item_list[i].item_data %>
+                            <% for(b in a){ %>
+                                <li class="link-li">
+                                    <a href="<%=a[b].url %>">
+                                        <% if (a[b].img != '') { %>
+                                            <img src="<%=a[b].img %>" class="link-img"/>
+                                        <% }else{ %>
+                                            <img src="../static/img/default_goods_image.gif" class="link-img"/>
+                                        <%  } %>
+                                        <p class="link-tit"><%=a[b].title %></p>
+                                    </a>
+                                </li>
+                            <% } %>
+                        </ul>
+                    </div>
+                <% } %>
+
+                <% if (special_item_list[i].item_type == 'goods') { %>
+                    <!--家居商品列表开始-->
+                    <div class="con-list">
+                        <div class="con1">
+                            <div class="listbox1">
+                                <% var t=special_item_list[i].goods_info %>
+                                <% for(s in t){ %>
+                                <a href="<%=WapSiteUrl %>/goods_detail.html?id=<%=t[s].goods_common_id %>">
+                                    <dl class="list-dl">
+                                        <dt class="image-index"><img  src="<%=t[s].goods_image %>"/></dt>
+                                        <dd>
+                                            <p class="dl-tit"><%=t[s].goods_name %></p>
+                                            <p class="price1"><span>¥</span><%=t[s].goods_price %></p>
+                                        </dd>
+                                    </dl>
+                                </a>
+                                <% } %>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!--家居商品列表结束-->
+                <% } %>
+
+                <% if (special_item_list[i].item_type == 'adv_html') { %>
+                    <div>
+                    <%=#special_item_list[i].item_data %>
+                    </div>
+                <% } %>
+
+            <% } %>
+        </div>
+
+    </script>
+	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="js/iscroll.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/template.js"></script>
+
+    <script type="text/javascript" src="js/tmpl/index.js"></script>
+    <script type="text/javascript" src="js/tmpl/footer.js"></script>
+    <script type="text/javascript" src="js/tmpl/category.js"></script> 
+	<script src="js/swiper.min.js"></script>
+    <script type="text/javascript">
+
+        $(function(){
+		
+            category();
+            })
+    </script>
+    <script type="text/javascript" src="js/tmpl/weixin.js"></script>
+    <script type="text/javascript" src="js/tmpl/weixinshare.js"></script>
+</body>
+</html>

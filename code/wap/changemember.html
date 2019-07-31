@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>修改个人信息</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<!--<link rel="stylesheet" href="css/date.css" />
+		<link rel="stylesheet" href="js/date1/zepto.mdatetimer.css" />-->
+		<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+		<!--<script type="text/javascript" src="js/date1/zepto.js"></script>
+		<script type="text/javascript" src="js/date1/mdatetimer.js"></script>
+		<script type="text/javascript" src="js/date1/zepto.mdatetimer.js"></script>
+		<script type="text/javascript" src="js/config.js"></script>-->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type='text/javascript' src='js/upload/LocalResizeIMG.js'></script>
+		<script type='text/javascript' src='js/upload/mobileBUGFix.mini.js'></script>
+		<style type="text/css">
+			.wx-bind{
+				overflow: hidden;
+			    zoom: 1;
+			    width: 64%;
+			    display: inline-block;
+			    margin-bottom: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="header_has_nav"></div>
+		<div class="wrapper" style="background: #f5f5f5;">
+			<div class="content" style="background: #f5f5f5;">
+				<div class="head-bg2">
+					<input type="file" id="uploadphoto" name="refund_images" value="" class="upload head-p2" title="请点击上传头像"/> 
+					<img src="img/head-img.png" class="head-img click-upload" />
+					<p class="head-p2 click-upload">点击修改头像</p>
+				</div>
+				
+				<!--信息编辑开始-->
+				<div id="member_info"> </div>
+				<script type="text/html" id="member_info_template" >
+				<ul class="detail-list" id="" style="padding: 0;">
+
+					<li><span class="list-span1 boxsizing">账号</span><input type="text" readonly="readonly" name="member_mobile" class="list-inp1" style="color:#888;" value="<%=member_username%>"/></li>
+
+
+					<li><span class="list-span1 boxsizing">昵称</span><input type="text" name="true_name" class="list-inp1" value="<%=member_truename%>"/></li>
+
+					<li><span class="list-span1 boxsizing">性别</span>
+						<div class="button-holder">
+							<input type="radio" id="radio-1-1" name="radio-1-set" class="regular-radio" <%if (member_sex == "0") {%> checked <%};%> value='0'/><label for="radio-1-1"></label><span class="radio-sex">男</span>
+							<input type="radio" id="radio-1-2" name="radio-1-set" class="regular-radio" <%if (member_sex == "1") {%> checked <%};%> value='1'/><label for="radio-1-2"></label><span class="radio-sex">女</span>
+						</div>
+					</li>
+					<!--<li class="posi1"><span class="list-span1 boxsizing">出生日期</span><span class="list-inp1-cover kbtn" id="birthday" value=""><% if (member_birthday != '0000-00-00') {%><%= member_birthday %><%}%></span><img src="img/jt-r.png" class="area-choice"/></li>-->
+					<%if(weixin_openid) {%>
+					<li class="posi1 member_wx" onclick="wxoutbing('wxoutbind')">
+						<span class="list-span1 boxsizing left">绑定微信</span>
+						<span class="left wx-bind"><p class="left">已绑定</p><p class="right wxbind-gray">点击解绑</p> </span>
+						<img src="img/jt-r.png" class="area-choice"/>
+					<%} else {%>
+					<li class="posi1 member_wx" onclick="location.href='/api.php/member/wxlogin'">
+						<span class="list-span1 boxsizing left">绑定微信</span>
+						<span class="left wx-bind"><p class="left">未绑定</p><p class="right wxbind-gray">点击绑定</p></span>
+						<img src="img/jt-r.png" class="area-choice"/>
+					<% } %>
+					<%if(!member_mobile) {%>
+					<li class="posi1 member_wx" onclick="location.href='wxlogin.html'">
+						<span class="list-span1 boxsizing left">绑定手机</span>
+
+						<span class="left wx-bind"><p class="left">未绑定</p><p class="right wxbind-gray">点击绑定</p></span>
+						<img src="img/jt-r.png" class="area-choice"/>
+					<% }else {%>
+					<li class="posi1 member_wx">
+						<span class="list-span1 boxsizing left">绑定手机</span>
+						<span class="left wx-bind"><p class="left"><%=member_mobile%></p></span>
+					<%}%>
+					</li>
+
+					</li>
+
+
+				</ul>
+				<!--信息编辑结束-->
+				<ul class="detail-list2">
+					<li class="posi1" onclick="wxoutbing('editpass')">
+						<span class="list-span1 boxsizing">修改密码</span>
+						<img src="img/jt-r.png" class="area-choice" />
+					</li>
+				</ul>
+				</script>
+			</div>
+			<div class="new-build foot-fixed foot-btn" id="submit">保存</div>
+		</div>
+		<!-- 日期列表 -->
+		<div id="datePlugin"></div>
+		<div class="cover"></div>
+		<div class="alertbox dele-sure none">
+			<p class="alert-p">确定解绑微信吗？</p>
+			<div class="btnbox1">
+				<span class="cancelbtn1">取消</span>
+				<span class="surebtn1">确定</span>
+			</div>
+		</div>
+		<script type="text/javascript">
+			redirectindex();
+			$(function(){
+				$('.click-upload').click(function(){
+					$('#uploadphoto').click();
+				});
+				SizeLimit($(".head-img"));
+				UnBindClick();
+			})
+			function UnBindClick(){
+				$(".back-icon").unbind().bind('click',function(){
+
+					window.location.href='member.html';
+				})
+			}
+		</script>
+		<script type="text/javascript" src="js/tmpl/changemember.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixinshare.js"></script>
+		<div class="cover"></div>
+		<div class="inner">
+		    <div class="load-container loading">
+		      	<div class="loader">Loading...</div>
+		     </div>
+		</div>
+	</body>
+	
+</html>

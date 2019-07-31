@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>	
+		<title>退货</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type="text/javascript" src="js/tmpl/retreat.js"></script>
+	</head>
+	<body>
+		<div id="header_has_nav">
+		</div>
+		<!--wrapper开始-->
+		<div id="retreat" class="wrapper" style="background: #f7f7f7;">
+			<div class="content">
+				<div id="sidebar-tab"> 
+					<ul id="tab-title" class="tab-title2"> 
+						<li ><a href='retreat.html'>退款单</a></li>
+						<li class="selected"><a href='return.html'>退货单</a></li>
+					</ul> 
+					<div id="tab-content"> 
+						<div id="return" class="show voucher-list" content="0"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--wrapper结束-->
+		<script id="returncontent" type="text/html">
+			<div class="order-list3">
+			<% if(data['list'] && data['list'].length>0) {%>
+				<% var datalen = data['list'].length; %>
+				<% for (var i = 0; i < datalen; i++) {%>
+					<% var value = data['list'][i]; %>
+					<div class="myorder2">
+						<div class="myorder2-det">
+							<span class="myorder2-det-span left">退货编号：</span>
+							<p class="myorder2-det-p left"><%= value['return_sn'] %></p>
+							<span class="myorder2-det-span left">申请时间：</span>
+							<p class="myorder2-det-p left"><%= value['dateline'] %></p>
+							<span class="myorder2-det-span left">订单编号：</span>
+							<p class="myorder2-det-p left"><%= value['order_sn'] %></p>
+							<span class="myorder2-det-span left">退货金额：</span>
+							<p class="myorder2-det-p left"><%= value['return_amount'] %></p>
+						</div>
+						<div class="order-num1 order-num2">
+							<span class="audit-state left wordred state-word"><%= value['status_text'] %></span>
+							<a href="./returnproductlist.html?rec_id=<%=value['rec_id'] %>&return_sn=<%= value['return_sn'] %>" class="btn-border1 borderred wordred surebtn3 right">查看</a>
+						</div>
+					</div>
+				<% }; %>
+			<% }else{ %>
+				<div class="img-center">
+					<img src="img/refundImg.png" alt="" class="coupon-null-img"/>
+					<h4 class="coupon-tit">暂无退货</h4>
+				</div>
+			<% }; %>
+			</div>
+		</script>
+		<script type="text/javascript">
+		redirectindex();
+			$(function(){
+				getreturnlist();
+				/* 头部回退按纽 */
+				$('.goback-header').find('.back-icon').unbind('click').click(function() {
+					window.location.href = WapSiteUrl + '/member.html';
+				});
+				/* 获取进入哪个选项卡 */
+
+				/* 追加改变样式事件 */
+				$(document).on('click','#tab-title li',function(){ 
+					$(this).addClass("selected").siblings().removeClass();//removeClass就是删除当前其他类；只有当前对象有addClass("selected")；siblings()意思就是当前对象的同级元素，removeClass就是删除； 
+					$("#tab-content > div").hide().eq($('#tab-title li').index(this)).show(); 
+				});
+				/* 自动触发点击事件 */
+			})
+		</script>
+	</body>
+</html>

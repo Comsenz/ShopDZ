@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>个人中心</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type="text/javascript" src="js/tmpl/member.js"></script>
+		<link rel="stylesheet" href="css/common.css" />
+	</head>
+	<body>
+		<!--header开始-->
+			<div id="member_header_has_nav">
+
+			</div>			
+			<!--header结束-->
+		<!--wrapper开始-->
+		<div class="wrapper" style="background: #f0f0f0;">
+			<!--content开始-->
+			<div class="content" style="padding-bottom: 0;">
+				<div class="head-bg">
+					<div  id="member_info">
+					</div>
+					<script type="text/html" id="member_index_template" >
+					<div class="person-det">
+						<img src="<%=member_avatar%>" class="head-img "/>
+						<p class="person-name"><% if(member_truename){ %><%=member_truename%><% } else { %>个人信息<% } %></p>
+						<img onclick="location.href='changemember.html'" src="img/per-jtR.png" alt="" class="per-jtR right"/>
+					</div>
+					</script>
+					<div class="person-list-bg"></div>
+					<ul class="person-list">
+						<li>
+							<a href="mypointslist.html">
+								<p><img src="img/mine-icon1.png" alt="" class="mine-icon"/></p>
+								<p>我的积分</p>
+							</a>
+						</li>
+						<li>
+							
+								<a href="favorites.html">
+								<p><img src="img/mine-icon2.png" alt="" class="mine-icon"/></p>
+								<p>我的收藏</p>
+							</a>
+						</li>
+						<li>
+							<a id="sign" href="javascript:;">
+								
+							</a>
+							<script type="text/html" id="sign_template" >
+							<span>
+								<%if(is_sign) {%>
+									<span class="sign">
+									<p><img src="img/mine-icon3.png" alt="" class="mine-icon"/></p>
+									<p class='text'>每日签到</p>
+									</span>
+								<%} else {%>
+									<p><img src="img/mine-icon3.png" alt="" class="mine-icon"/></p>
+									<p>已签到</p>
+								<%}%>
+							</span>
+							</script>
+						</li>
+					</ul>
+				</div>
+				
+			
+				
+				<ul class="modular-box">
+					<li class="modular-li">
+						<a href="myorder.html">
+							<img src="img/module1.jpg" class="modular-img"/>
+							<p class="modular-word">我的订单</p>
+						</a>
+					</li>
+					<li class="modular-li">
+						<a href="address.html">
+							<img src="img/module2.jpg" class="modular-img"/>
+							<p class="modular-word">地址管理</p>
+						</a>
+					</li>
+					<li class="modular-li">
+						<a href="coupon-all.html">
+							<img src="img/module3.jpg" class="modular-img"/>
+							<p class="modular-word">优惠券</p>
+						</a>
+					</li>
+					<!--<li class="modular-li">
+						<a href="mypointslist.html">
+							<img src="img/integral.png" class="modular-img"/>
+							<p class="modular-word">我的积分</p>
+						</a>
+					</li>-->
+					<li class="modular-li">
+						<a href="retreat.html">
+							<img src="img/refundImg.png" class="modular-img"/>
+							<p class="modular-word">退款退货</p>
+						</a>
+					</li>
+					<li class="modular-li">
+						<a href="footprint.html">
+							<img src="img/footprient.png" class="modular-img"/>
+							<p class="modular-word">我的足迹</p>
+						</a>
+					</li>
+					<li class="modular-li">
+						<a href="generalize.html">
+							<img src="img/spread.png" class="modular-img"/>
+							<p class="modular-word">推广有礼</p>
+						</a>
+					</li>
+					<li class="modular-li">
+						<a href="feedback.html">
+							<img src="img/module4.jpg" class="modular-img"/>
+							<p class="modular-word">意见反馈</p>
+						</a>
+					</li>
+					<li class="modular-li">
+						<a href="help.html">
+							<img src="img/module5.jpg" class="modular-img"/>
+							<p class="modular-word">帮助中心</p>
+						</a>
+					</li>
+					<li class="modular-li">
+						<a href="javascript:;" id="callphone">
+							<img src="img/module6.png" class="modular-img"/>
+							<p class="modular-word">联系客服</p>
+						</a>
+					</li>
+				</ul>
+				<div class="mine-foot" id="logout">退出登录</div>
+			</div>
+			<!--content结束-->
+			
+			<div id="footer"></div>
+		</div>
+		<!--wrapper结束-->
+		<div class="cover"></div>
+		<div class="alertbox dele-sure none">
+			<p class="alert-p">确定退出吗？</p>
+			<div class="btnbox1">
+				<span class="cancelbtn1">取消</span>
+				<span class="surebtn1">确定</span>
+			</div>
+		</div>
+		<div class="alertbox show-phone none">
+			<p class="alert-p" style="padding-top: 40px;line-height: 1;">客服电话</p>
+			<p class="alert-p phonetext" style="line-height: 4;margin-bottom: 10px;"></p>
+			<div class="btnbox1">
+				<span class="sure-phone" style="width: 100%;">确定</span>
+			</div>
+		</div>
+		<div class="sign-alert">
+			<div class="sign-close-box">
+				<img src="img/signcolse.png" alt="" class="sign-close-btn"/>
+			</div>
+			<div class="sign-alert-con">
+				<p class="add-integral"><span class="add-integral-num"></span>积分</p>
+				<img src="img/signIcon.png" alt="" class="sign-alert-icon"/>
+				<input type="button" name="" id="" onclick="window.location.href='./mypointslist.html'" value="查看详情" class="sign-alert-codebtn">
+			</div>
+		</div>
+		<script type="text/javascript">
+	        category();  
+	        redirectindex();
+			$(function(){
+				initPage();
+				$('.navmember').parent('li').remove();
+				$('.sign-close-btn').bind('click',function(){
+					$('.sign-alert').hide();
+					$('.cover').hide();
+				});
+				$('.cover').on('click',function(){
+					$('.alertbox').hide();
+					$('.sign-alert').hide();
+				});
+			})
+	    </script> 
+	    <script type="text/javascript" src="js/tmpl/footer.js"></script>
+		<script type="text/javascript" src="js/tmpl/category.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixinshare.js"></script>
+	</body>
+</html>

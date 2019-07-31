@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>拼团详情</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="../public/css/reset.css" />
+		<link rel="stylesheet" href="../public/css/style.css" />
+		<link rel="stylesheet" href="../../../wap/css/common.css" />
+	</head>
+	<body>
+		<div id="plugins_header_has_nav"></div>
+		<div id="groupgoodsdetail">
+		<script id="groupgoodsdetailcontent" type="text/html">
+		
+		<div class="wrapper bgfa">
+			<div class="content-top content-bot" id="">
+			
+				
+				<div class="group-commodity group-commodityDet">
+					<div class="commodityImg-box">
+						<img src="<%=data['group']['group_image']%>" alt="拼团商品图片"  class="commodityImg"/>
+						<div class="groupIntroduce">
+							<div class="introduceCover"></div>
+							<div class="introduceCon">
+								<span class="groupPerson-num"><%=data['group']['group_person_num']%>人团</span>
+								<% if(data['group']['head_welfare_text']) {%>
+								<img src="../public/images/groupH.png" alt="指示团长图标" class="groupHead"/>
+								<p class="groupHead-welfare">团长福利：<span><%=data['group']['head_welfare_text']%></span></p>
+								<%}%>
+							</div>
+						</div>
+					</div>
+					<div class="group-comDet groupDet-det">
+						<div class="group-comName"><%=data['group']['goods_name']%></div>
+						<p  class="group-comDescribe">
+						<%=data['group']['group_content']%></p>
+						<div class="groupDet-spec">
+							<p class="group-comSpec"><span><%=data['goods']['spec_name']%></span></p>
+							<div class="timeLimit"><img src="../public/images/time.png" alt="限时图标" class="time-icon"/>组团时限：<span><%=data['group']['group_hour']%></span>小时</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="playGroup-way">
+					<div class="playGroup">
+						<a href="./groupplay.html">
+							<span class="playGroup-tit">拼团玩法</span>
+							<img src="../public/images/jtr.png" alt="" class="playGroup-point"/>
+						</a>
+					</div>
+					<ul class="groupStep-list">
+						<li><span class="groupStep-num">1</span>选择商品</li>
+						<li><span class="groupStep-num">2</span>支付开团</li>
+						<li><span class="groupStep-num">3</span>邀请好友</li>
+						<li><span class="groupStep-num">3</span>拼团成功</li>
+					</ul>
+					<p class="playGroup-remind">支付开团并邀请<%=data['group']['group_person_num']%>人参团，人数不足自动退款，详情点击上方拼团玩法</p>
+				</div>
+				<!--商品详情-->
+					<div class="commodity-details">
+						<h1 class="commodityDet-tit">商品详情</h1>
+						<div id="goods_detail" class="img-box1"></div>
+					</div>
+				<!--商品详情-->
+			</div>
+			<div class='cover'></div>
+			<div class="foot-fixed foot-btnbox">
+				<a href="/wap/goods_detail.html?id=<%=data['goods']['goods_common_id']%>" class="foot-combtn foot-leftBtn"><span class="btn-price" id="group_price">¥<%=data['goods']['goods_price']%></span>正价购买</a>
+				<a  href="javascript:void(0)" class="foot-combtn foot-rightBtn gogroup" ><span class="btn-price" id="old_price">¥<%=data['group']['group_price']%></span>支付开团</a>
+			</div>
+		</div>
+		</script>
+		</div>
+		
+				<!--弹框-->
+		<div class="comAlert-box">
+			<div class="comAlert-tit">
+				<span class="comAlert-close"><img src="../public/images/close.png" alt="关闭按钮图片" class="comAlert-closeIcon"/></span>
+			</div>
+			<div class="comAlert-con">
+				<p class="comAlert-word">对不起，您来晚了！</p>
+			</div>
+			<div class="comAlert-btnBox">
+				<a href="" ><input type="button" value="去支付" class="alert-onlyBtn"/></a>
+			</div>
+		</div>
+		<script type="text/javascript" src="../../../wap/js/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="../../../wap/js/common.js"></script>
+		<script type="text/javascript" src="../public/js/group.js"></script>
+		<script type="text/javascript" src="../../../wap/js/template.js"></script>
+		<script language="javascript"> 
+		initPage();
+			$(function(){
+				getgroupgoodsdetail();
+				$(document).on('click','.gogroup',function() {
+					creatgroup();
+				})
+			});
+		</script>
+	</body>
+
+</html>

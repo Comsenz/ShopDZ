@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>领取优惠券</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+	</head>
+	<body>
+	<div id="header_has_nav">
+		</div>
+	<div class="cover"></div>
+	<img src="img/wxbg.png" alt="" class="wx-alert"/>
+		<!--wrapper开始-->
+		<div class="wrapper wrapper-bg" style="margin-top: 14px;">
+			<div class="content">
+			<div class="coupon-list">
+				<ul id="tab-content" class="coupon-list">
+					<script type="text/html"  id="data_list">
+						<li class="sc-coupon scCoupon-color coupon-li">
+
+								<div class="coupon-box-det coupon-det">
+									<div class="coupon-box-top">
+										<div class="coupon-top-con">
+											<div class="zoom">
+												<p class="coupon-subtit left"><%=data['info']['rpacket_t_title']%></p>
+												<p class="count-limit right">每人限领<span><%=data['info']['rpacket_t_eachlimit']%></span>张</p>
+											</div>
+
+											<div class="zoom couponMoney-box">
+												<div class="left">
+													<span class="money-unit">¥</span>
+													<span class="money-num"><%=data['info']['rpacket_t_price']%></span>
+												</div>
+												<div class="right">
+													<input type="submit" value="<%if(data['info']['rpacket_t_points'] == 0){%>免费领取<%}else{%><%=data['info']['rpacket_t_points']%>积分兑换<%}%>" class="coupon-share" onclick="sendCoup(<%=data['info']['rpacket_t_id']%>)" />
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="coupon-box-bottom">
+										<p class="coupon-bottom-tit">订单满<%=data['info']['rpacket_t_limit']%>元（含运费）</p>
+										<p class="coupon-remind2">有效期：<%=data['info']['start']%>-<%=data['info']['end']%></p>
+									</div>
+								</div>
+								<span class="left-circles coupon-circles"></span>
+								<span class="right-circles coupon-circles"></span>
+
+						</li>
+
+					</script>
+				</ul>
+			</div>
+
+			</div>
+		</div>
+		<!--wrapper结束-->
+	</body>
+	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	<!-- <script type="text/javascript" src="js/config.js"></script> -->
+	<script type="text/javascript" src="js/template.js"></script>
+	<script type="text/javascript">
+		$(function(){
+
+			/* 点击遮罩层收起分享 */
+			$(document).on('click','.cover,.wx-alert,.share-cancel',function(){
+				$('.cover').hide();//遮罩层隐藏
+				$('.cover').css('z-index','887');//设置遮罩层层级(降级)
+				$('.details-share-box').slideUp();//分享收起
+				$('.wx-alert').hide();//微信分享提示收起
+
+			});
+			/* 点击微信分享弹出 */
+			$(document).on('click','.wx-code',function(){
+				if(isWeiXin()){
+					$('.cover').show();//遮罩层显示
+					$('.wx-alert').show();//微信分享提示弹出
+					$('.details-share-box').slideUp();//分享收起
+					$('.cover').css('z-index','889');//设置遮罩层层级(升级)
+					//$('.wrapper').css('overflow-y','hidden');//禁止滚动
+				}else{
+					shopdz_alert('请在微信登陆！');
+				}
+			});
+
+			initPage();
+
+		})
+	</script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+	<script type="text/javascript" src="js/tmpl/coupon-receive.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			initPage();
+		})
+	</script>
+
+
+	
+</html>

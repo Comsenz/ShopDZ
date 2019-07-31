@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>商品评价</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/swiper.min.css">
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type="text/javascript" src="js/swiper.min.js"></script>
+		<script type="text/javascript" src="js/comment.js"></script>
+		<style type="text/css">
+			.swiper-pagination-bullet{
+				background: #fff;
+				opacity: .6;
+			}
+			.swiper-pagination-bullet-active{
+				background: #AB2B2B !important;
+			}
+		</style>
+	</head>
+	<body>
+		<!--header开始-->
+		<div id="header_has_nav">
+		</div>
+		<!--wrapper开始-->
+		<div class="wrapper">
+			<div id="commentdiv">
+			</div>
+			<!--header结束-->
+			<!--商品评价列表开始-->
+			<script id="commentlist" type="text/html">
+			<div class="content comment-list">
+				<%if (data['orderlist'] && data['orderlist'].length > 0) {%>
+				<%var datalen = data['orderlist'].length;%>
+				<%for (var i = 0; i < datalen; i++) {%>
+					<%var value = data['orderlist'][i];%>
+					<div class="comment-con">
+						<div class="name-time">
+							<div class="name1">
+								<img src="<%=value['member_avatar']%>" class="person-head"/>
+								<span class="comment-limit"><%=value['geval_frommembername']%></span>
+							</div>
+							<div class="time1"><%=value['geval_addtime_text']%></div></div>
+						<p class="comment-word"><%=value['geval_content']%></p>
+						<p class="comment-spec"><%=value['goods_spec']%></p>
+						<ul class="con-img-list comment-img-list">
+						<% if (value['geval_image']) {%>
+							<%for (var o = 0; o < value['geval_image'].length; o++) {%>
+								<li class="liW imgW"><img src="<%=value['geval_image'][o]%>" img-id="<%=o%>" class="comment-img"/></li>
+							<%};%>
+						<%}%>
+						</ul>
+					</div>
+				<%};%>
+				<%} else {%>
+					<div class="img-center">
+						<img data-src="img/detail-comment.png" alt="" class="coupon-null-img swiper-lazy"/>
+						<h4 class="coupon-tit">暂无评价</h4>
+					</div>
+				<%};%>
+			</div>
+			</script>
+			<!--商品评价列表结束-->
+			<!--返回顶部-->
+	    	<div style="display:none;" class="gotobtn" id="goTopBtn"><img border=0 src="img/goToTop.png"></div>	
+		</div>
+		<!--wrapper结束-->
+		<script type="text/javascript">
+			//调用返回顶部的函数
+    		goTopEx();
+    		$(function(){
+    			getcomment();
+    		});
+		</script>
+		<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixinshare.js"></script>
+	</body>
+</html>

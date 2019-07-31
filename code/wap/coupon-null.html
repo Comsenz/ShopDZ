@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>	
+		<title>优惠券为空时</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		
+	</head>
+	<body>
+		<div class="wrapper">
+			<div class="content">
+				<div id="sidebar-tab"> 
+					<ul id="tab-title"> 
+						<li class="selected">未使用</li>
+						<li>已使用</li>
+						<li>已失效</li>
+						<li>全部</li>
+					</ul> 
+					<div id="tab-content"> 
+						<div class="show voucher-list img-center">
+							<img src="img/coupon-null.png" alt="" class="coupon-null-img"/>
+							<h4 class="coupon-tit">暂无优惠券</h4>
+						</div> 
+						
+						<div class="voucher-list img-center">
+							<img src="img/coupon-null.png" alt="" class="coupon-null-img"/>
+							<h4 class="coupon-tit">暂无优惠券2</h4>
+						</div> 
+						<div class="voucher-list img-center">
+							<img src="img/coupon-null.png" alt="" class="coupon-null-img"/>
+							<h4 class="coupon-tit">暂无优惠券3</h4>
+						</div> 
+						<div class="voucher-list img-center">
+							<img src="img/coupon-null.png" alt="" class="coupon-null-img"/>
+							<h4 class="coupon-tit">暂无优惠券4</h4>
+						</div> 
+					</div> 
+				
+				</div>
+			</div>	
+		</div>
+		
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		
+		<script language="javascript"> 
+			$('#tab-title li').click(function(){ 
+				$(this).addClass("selected").siblings().removeClass();//removeClass就是删除当前其他类；只有当前对象有addClass("selected")；siblings()意思就是当前对象的同级元素，removeClass就是删除； 
+				$("#tab-content > div").hide().eq($('#tab-title li').index(this)).show(); 
+			}); 
+		</script>
+
+	</body>
+</html>

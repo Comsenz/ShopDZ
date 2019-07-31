@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!--添加到主屏时的标题-->
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<!--是否启用 WebAPP 全屏模式-->
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<!--状态条颜色-->
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<!--宽高，是否允许缩放等-->
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<title>商品评价</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/swiper.min.css">
+		<link rel="stylesheet" href="css/common.css" />
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type="text/javascript" src="js/swiper.min.js"></script>
+		<script type="text/javascript" src="js/tmpl/myorders.js"></script>
+		<script type='text/javascript' src='js/upload/LocalResizeIMG.js'></script>
+		<script type='text/javascript' src='js/upload/mobileBUGFix.mini.js'></script>
+		<style type="text/css">
+			.swiper-pagination-bullet{
+				background: #fff;
+				opacity: .6;
+			}
+			.swiper-pagination-bullet-active{
+				background: #AB2B2B !important;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="header_has_nav">
+		</div>
+		<div id="gooddetails" class="wrapper">
+		</div>
+		<!--wrapper开始-->
+		<script id="goodscontent" type="text/html">
+		<div class="content">
+			<dl class="evaluate-dl">
+				<dt class="left"><img src="<%=data['goods_image']%>" class="evalutate-img img-bg"/></dt>
+				<dd class="left">
+					<div class="evaluate-dd-left left">
+						<p class="dd-p1 margin-t1"><%= data['goods_name'] %></p>
+						<p class="dd-p3 spec-name"><%=data['goods_spec']%></p>
+					</div>
+					<div class="evaluate-dd-right right">
+						<input type="button" id="submit" value="提交" class="submit-btn1 wordred borderred"/>
+					</div>
+				</dd>
+			</dl>
+			<div class="textarea-box">
+				<p class="textcount">剩余<span id="textCount">300</span>个字</p> 
+				<textarea name="textarea" id="TextArea1" placeholder="期待您的意见" class="options" onkeyup="words_deal();" onfocus="if(this.placeholder=='期待您的意见') {this.placeholder='';}this.style.color='#333';" onblur="if(this.placeholder=='') {this.placeholder='期待您的意见';this.style.color='#333';}"maxlength="500"></textarea> 
+			</div>
+			<ul class="upLoad-imgbox reason-upload">
+				<li class="liW">
+					<input type="file" id="uploadphoto" name="refund_images" value="请点击上传图片" class="upload-inp" /> 
+					<img src="img/add-code.png" id="upload-images" class="upload-cover"/>
+				</li>
+			</ul>
+		</div>
+		</script>
+		
+		<!--wrapper结束-->
+		<div class="cover"></div>
+		<div class="inner">
+		    <div class="load-container loading"> 
+		      	<div class="loader">Loading...</div> 
+		     </div>
+		</div>
+		<script type="text/javascript">
+			var imglen = 4;
+			var submit = true;
+			$(function(){
+				redirectindex();
+				$('.goback-header').find('.back-icon').unbind('click').click(function() {
+					window.location.href = WapSiteUrl + '/orderevaluate.html?order_sn=' + get('order_sn');
+				});
+				var rec_id = get('rec_id');
+				getgoods(rec_id);
+				$('#gooddetails').on('click','#submit',function(){
+					var str = '';
+					if(parseInt($("#textCount").text()) < 300){
+						if(submit){
+							submit = false;
+							var message = $('#TextArea1').val();
+							var images = {
+											0:$('.upload-cover:eq(0)').attr('src'),
+											1:$('.upload-cover:eq(1)').attr('src'),
+											2:$('.upload-cover:eq(2)').attr('src'),
+											3:$('.upload-cover:eq(3)').attr('src')
+										}
+							submitcomment(rec_id, message, images);
+							return true;
+						} else {
+							str = '您已评价，请勿重复评价！';
+						}
+					}else{
+						str = '请输入评论！';
+					}
+					shopdz_alert(str);
+				})
+				/* 上传图片限制 */
+				$('#gooddetails').on('click','.upload-inp',function(){
+					var lilen = $('.upload-inp').parent().siblings('li').length;
+					if(lilen>=imglen){
+						shopdz_alert('最多上传四张图片！');
+						return false;
+					}
+				})
+				
+			})
+
+			//限制文本域只能输入300字，并提示可输入的剩余字数
+			function words_deal(){ 
+				var curLength=$("#TextArea1").val().length; 
+				if(curLength>300){ 
+					var num=$("#TextArea1").val().substr(0,300);
+					$("#TextArea1").val(num); 
+					//alert("超过字数限制，多出的字将被截断！" ); 
+				} 
+				else{ 
+					$("#textCount").text(300-$("#TextArea1").val().length); 
+				} 
+			} 
+		</script>
+		<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixinshare.js"></script>
+	</body>
+</html>

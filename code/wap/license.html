@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta charset="UTF-8">
+		<!--添加到主屏时的标题-->
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<!--是否启用 WebAPP 全屏模式-->
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<!--状态条颜色-->
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<!--宽高，是否允许缩放等-->
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<meta name="keywords" content="SHOPDZ" />
+	    <title>授权提示</title>
+	    <link rel="stylesheet" type="text/css" href="css/reset.css"/>
+	    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+	</head>
+	<body>
+		<div class="remindBox">
+			<div class="sqRemind">
+				<div class="logoBox">
+					<img src="img/sqlogo.png" alt="logo" class="sqLogo"/>
+					<p class="sqRemind-tit">授权信息提示</p>
+				</div>
+				<div class="sqAlert-box">
+					<p class="maybe">未检测到产品的授权信息，您可以：</p>
+					<div class="sqBtn-box">
+						<input type="button" v_type=1 value="在线激活试用" class="sqBtn tryoutBtn send"/>
+						<input type="button" v_type=2 value="在线激活授权" class="sqBtn empowerBtn send"/>
+						<a  href="http://www.shopdz.cn/index.php/OrderPay/index.html" class="sqBtn buyEmpowerBtn">在线购买授权</a>
+						<input type="button"   value="联系在线客服" class="sqBtn onlineServiceBtn"/>
+					</div>
+				</div>
+				<div class="shadowBox">
+					<img src="img/shadow.png" alt="" class="shadow-img"/>
+				</div>
+				<div class="recordBox">@2001-2016 Powered By ShopDZ</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" >
+		(function() {
+			/* 设置商城网址的全局变量 */
+			var m = /^(https?:\/\/.+)\/wap/i.exec(location.href);
+			if (m && m.length > 1) {
+				SiteUrl = m[1] + '/index.php';
+				ApiUrl = m[1] + '/api.php';
+				WapSiteUrl = m[1] + '/wap';
+				LogoUrl = m[1] + '/data/Attach/';
+				baseUrl = m[1];
+			}
+		})();
+		var btn = false;
+		$('.send').click(function() {
+			var url = ApiUrl+"/Authorize/license";
+			var v_type = $(this).attr('v_type');
+			if(btn) return;
+			btn = true;
+			$.ajax({
+					url:url,
+					jsonp: "jsonp_callback",
+					dataType: "jsonp",
+					data:{v_type:v_type},
+					success:function(data) {
+						alert(data.msg);
+						btn = false;
+					}
+					});
+		})
+		$.ajax({
+				url:ApiUrl+"/Authorize/select",
+				jsonp: "jsonp_callback",
+				dataType: "jsonp",
+				success:function(data) {
+					if(data.code =='0'){
+						$('.maybe').html(data.msg);
+					}else{
+						alert(data.msg);
+					}
+				}
+		});
+	</script>
+	</body>
+</html>

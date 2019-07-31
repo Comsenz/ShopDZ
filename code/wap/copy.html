@@ -1,0 +1,116 @@
+<html>
+<head>
+<script type="text/javascript" src="js/ZeroClipboard.js"></script>
+</head>
+<body>
+<div  id="copy-botton" > 点击复制 </div>
+<script>
+ZeroClipboard.setMoviePath( "js/flash/ZeroClipboard.swf" ); 
+var clip = new ZeroClipboard.Client(); // 新建一个对象
+clip.setHandCursor( true ); // 设置鼠标为手型
+clip.setText("哈哈"); // 设置要复制的文本。
+// 注册一个 button，参数为 id。点击这个 button 就会复制。
+//这个 button 不一定要求是一个 input 按钮，也可以是其他 DOM 元素。
+clip.glue("copy-botton"); // 和上一句位置不可调换 
+
+
+
+var BROWSER = {};
+var CLIPBOARDSWFDATA = '';
+var USERAGENT = navigator.userAgent.toLowerCase();
+browserVersion({'ie':'msie','firefox':'','chrome':'','opera':'','safari':'','mozilla':'','webkit':'','maxthon':'','qq':'qqbrowser','rv':'rv'});
+function browserVersion(types) {
+	var other = 1;
+	for(i in types) {
+		var v = types[i] ? types[i] : i;
+		if(USERAGENT.indexOf(v) != -1) {
+			var re = new RegExp(v + '(\\/|\\s|:)([\\d\\.]+)', 'ig');
+			var matches = re.exec(USERAGENT);
+			var ver = matches != null ? matches[2] : 0;
+			other = ver !== 0 && v != 'mozilla' ? 0 : other;
+		}else {
+			var ver = 0;
+		}
+		eval('BROWSER.' + i + '= ver');
+	}
+	BROWSER.other = other;
+}
+
+function _setCopy(text, msg){
+text = 'dddddddddddddd';
+	if(BROWSER.ie) {
+	alert(1);
+		var r = clipboardData.setData('Text', text);
+		if(r) {
+			if(msg) {
+				showPrompt(null, null, '<span>' + msg + '</span>', 1500);
+			}
+		} else {
+			showDialog('<div class="c"><div style="width: 200px; text-align: center;">复制失败，请选择“允许访问”</div></div>', 'alert');
+		}
+	} else {
+
+		var msg = '<div class="c"><div style="width: 200px; text-align: center; text-decoration:underline;">点此复制到剪贴板</div>' +
+		AC_FL_RunContent('id', 'clipboardswf', 'name', 'clipboardswf', 'devicefont', 'false', 'width', '200', 'height', '40', 'src', './js/flash/clipboard.swf', 'menu', 'false',  'allowScriptAccess', 'sameDomain', 'swLiveConnect', 'true', 'wmode', 'transparent', 'style' , 'margin-top:-20px') + '</div>';
+		alert(msg);
+		document.getElementById('test').innerHTML = msg;
+	//	showDialog(msg, 'info');
+		//text = text.replace(/[\xA0]/g, ' ');
+		CLIPBOARDSWFDATA = text;
+	}
+}
+function AC_FL_RunContent() {
+	var str = '';
+	var ret = AC_GetArgs(arguments, "clsid:d27cdb6e-ae6d-11cf-96b8-444553540000", "application/x-shockwave-flash");
+	if(BROWSER.ie && !BROWSER.opera) {
+		str += '<object ';
+		for (var i in ret.objAttrs) {
+			str += i + '="' + ret.objAttrs[i] + '" ';
+		}
+		str += '>';
+		for (var i in ret.params) {
+			str += '<param name="' + i + '" value="' + ret.params[i] + '" /> ';
+		}
+		str += '</object>';
+	} else {
+		str += '<embed ';
+		for (var i in ret.embedAttrs) {
+			str += i + '="' + ret.embedAttrs[i] + '" ';
+		}
+		str += '></embed>';
+	}
+	return str;
+}
+function AC_GetArgs(args, classid, mimeType) {
+	var ret = new Object();
+	ret.embedAttrs = new Object();
+	ret.params = new Object();
+	ret.objAttrs = new Object();
+	for (var i = 0; i < args.length; i = i + 2){
+		var currArg = args[i].toLowerCase();
+		switch (currArg){
+			case "classid":break;
+			case "pluginspage":ret.embedAttrs[args[i]] = 'http://www.macromedia.com/go/getflashplayer';break;
+			case "src":ret.embedAttrs[args[i]] = args[i+1];ret.params["movie"] = args[i+1];break;
+			case "codebase":ret.objAttrs[args[i]] = 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0';break;
+			case "onafterupdate":case "onbeforeupdate":case "onblur":case "oncellchange":case "onclick":case "ondblclick":case "ondrag":case "ondragend":
+			case "ondragenter":case "ondragleave":case "ondragover":case "ondrop":case "onfinish":case "onfocus":case "onhelp":case "onmousedown":
+			case "onmouseup":case "onmouseover":case "onmousemove":case "onmouseout":case "onkeypress":case "onkeydown":case "onkeyup":case "onload":
+			case "onlosecapture":case "onpropertychange":case "onreadystatechange":case "onrowsdelete":case "onrowenter":case "onrowexit":case "onrowsinserted":case "onstart":
+			case "onscroll":case "onbeforeeditfocus":case "onactivate":case "onbeforedeactivate":case "ondeactivate":case "type":
+			case "id":ret.objAttrs[args[i]] = args[i+1];break;
+			case "width":case "height":case "align":case "vspace": case "hspace":case "class":case "title":case "accesskey":case "name":
+			case "tabindex":ret.embedAttrs[args[i]] = ret.objAttrs[args[i]] = args[i+1];break;
+			default:ret.embedAttrs[args[i]] = ret.params[args[i]] = args[i+1];
+		}
+	}
+	ret.objAttrs["classid"] = classid;
+	if(mimeType) {
+		ret.embedAttrs["type"] = mimeType;
+	}
+	return ret;
+}
+
+</script>
+</body>
+</html>

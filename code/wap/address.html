@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>地址管理</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<style type="text/css">
+			.address-choice{display: block;}
+			.none{ display: none; }
+			.setdefault{ color: #66ff66; }
+		</style>
+	</head>
+	<body>
+		<div id="header_has_nav">
+    	</div>
+		<!--收货地址列表开始-->
+		<div class="content outer wrapper">
+			<div class="address-choice" style="background: #f7f7f7;">
+				<div class="address-bg"></div>
+				<ul class="choice-ul2" id="address_list"></ul>
+				<script type="text/html" id="address_list_template" >
+				<% if (address_list && address_list.length > 0 ) { %>
+					<% for(i in address_list){ %>
+					<li class="liclass_<%=address_list[i].address_id%><% if(address_list[i].is_default==-1){ %><%= 'border-redleft' %><% }  %>">
+						<div class="address-box border-bot marginB-no" id="address">
+							<div class="address-name" style="text-align:center">
+								<p class="name2"><%=address_list[i].true_name%></p>
+								<% if(address_list[i].is_default==1){ %>
+									<span class="default" addressid="<%= address_list[i].address_id %>">默认</span>
+								<% } else{ %>
+									<!--<span class="address-word setdefault" addressid="<%= address_list[i].address_id %>" memberid="<%= address_list[i].member_id %>">设为默认</span>-->
+								<% } %>
+								<input type="hidden" name="address_id" value="<%= address_list[i].address_id %>"/>
+								<input type="hidden" name='province' value="<%=address_list[i].province_id%>"/>
+								<input type="hidden" name='city' value="<%=address_list[i].city_id%>"/>
+								<input type="hidden" name='area' value="<%=address_list[i].area_id%>"/>
+							</div>
+							<div class="address-describe address-describe-list" style="width: 63%;">
+								<p class="phone1"><%=address_list[i].tel_phone%></p>
+								<p style="display:none;"class="address-word_hide"><%=address_list[i].address%></p>
+								<p class="address-word"><%=address_list[i].area_info%><%=address_list[i].address%></p>
+							</div>
+							<div class="jt-r2" style="right: 5rem;"><img src="img/address-edit.png" class="address-edit" addressid="<%= address_list[i].address_id %>"/></div>
+							<div class="jt-r2" style="right: 2rem;"><img src="img/dele2.png" class="address-dele" addressid="<%= address_list[i].address_id %>"/></div>
+							
+						</div>
+						<div class="alertbox dele-sure none">
+							<p class="alert-p">要删除此地址？</p>
+							<div class="btnbox1">
+								<span class="cancelbtn1">取消</span>
+								<span class="surebtn1">确定</span>
+							</div>
+						</div>
+					</li>
+					<% } %>
+				<% } else { %>
+					<div class="img-center">
+						<img src="img/addressnull.png" alt="" class="coupon-null-img"/>
+						<h4 class="coupon-tit">没有收货地址，赶快添加一个吧~</h4>
+					</div>
+				
+				<% } %>
+				</script>
+
+				<div class="new-build foot-fixed foot-btn">新建</div>
+				
+			</div>
+			<!--收货地址列表结束-->	
+			<!--收货地址编辑开始-->
+			<script id="areacontent" type="text/html">
+				<% var datalen = data.length %>
+				<% for (var i = 0; i < datalen; i++) {%>
+					<option value="<%= data[i]['area_id'] %>"><%= data[i]['area_name'] %></option>
+				<% }; %>
+			</script>
+			<div class="address-edit-page">
+				<ul class="address-edit-ul">
+					<input type="hidden" id="editaddress_id" name="address_id" value=""/>
+					<li><input type="text" placeholder="收件人姓名" class="input-com1" id="address-name" value=""/></li>
+					<li><input type="number" placeholder="手机号码" class="input-com1" id="address-phone" value=""/></li>
+					<li class="posi1">
+						<select class="area1" id="province" name="province_id">
+							<option value="0">请选择省</option>
+						</select>
+						<img src="img/jt-r.png" class="area-choice"/>
+					</li>
+					<li class="posi1">
+						<select class="area1" id="city" name="city_id">
+							<option value="0">请选择市</option>
+						</select>
+						<img src="img/jt-r.png" class="area-choice"/>
+					</li>
+					<li class="posi1">
+						<select class="area1" id="area" name="area_id">
+							<option value="0">请选择区</option>
+						</select>
+						<img src="img/jt-r.png" class="area-choice"/>
+					</li>
+					<li><input type="text" placeholder="详细地址" class="input-com1" id="address-word" value=""/></li>
+				</ul>
+				<div class="address-default">
+					<div class="check-box address-check">
+	    				<!--<input type="checkbox" checked="checked" class="check-ps"/>
+	    				<span class="check-bg"></span>-->
+	    				<input type="checkbox" class="input_check" checked="" id="default" name="is_default">
+	    				<label for=""></label>
+	    			</div>
+					<span class="remind4">设为默认地址</span>
+				</div>
+				<div class="address-foot foot-fixed foot-btn">
+					<span class="cancelbtn2 left">取消</span>
+					<span class="surebtn2 left">保存</span>
+				</div>
+			</div>
+			<!--收货地址编辑结束-->	
+			<div class="cover"></div>
+		</div>
+		
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>	
+		<script type="text/javascript" src="js/template.js"></script>	
+		<script type="text/javascript" src="js/tmpl/address.js"></script>
+		
+		<script type="text/javascript">
+			redirectindex();
+			var del = true;
+			$(function(){
+				
+				getaddress();
+				/* 头部返回按纽事件 */
+				$('.goback-header').find('.back-icon').unbind('click').click(function() {
+					if($('.address-choice').css('display') != 'none'){
+						goBack();
+					} else if ($('.address-edit-page').css('display') != 'none'){
+						$('.address-edit-page').hide();
+						$('.address-choice').show();
+						$('#head_tit').html($('title').text());
+					}
+				});
+				initPage();
+			})
+			
+		</script>
+	</body>
+</html>

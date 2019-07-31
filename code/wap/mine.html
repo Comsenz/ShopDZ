@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>个人中心</title>
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!--<style type="text/css">
+			.sign-alert {
+				position: fixed;
+				top: 20%;
+				left: 10%;
+				width: 80%;
+				min-height: 26rem;
+				z-index: 888;
+				display: none;
+			}
+			.sign-alert img.sign-close-btn {
+				display: inline-block;
+				width: 2.5rem;
+				cursor: pointer;
+				margin-right: 14%;
+			}
+			.sign-alert div.sign-close-box {
+				text-align: right;
+				padding-bottom: 2rem;
+			}
+			.sign-alert div.sign-alert-con {
+				background: url(img/signbg.png) repeat;
+				background-size:100% 100%;
+				min-height: 22rem;
+				width: 90%;
+				margin-left: 5%;
+				text-align: center;
+			}
+			.sign-alert div.sign-alert-con p.add-integral {
+				color: #666;
+				font-size: 1.6rem;
+				padding: 5rem 0 1rem 0;
+				text-align: center;
+			}
+			.sign-alert div.sign-alert-con p.add-integral span.add-integral-num {
+				color: #ab2b2b;
+				font-size: 2.8rem;
+				padding-right: .3rem;
+				font-weight: bold;
+			}
+			.sign-alert div.sign-alert-con img.sign-alert-icon {
+				display: block;
+				margin: 0 auto;
+				width: 8rem;
+			}
+			.sign-alert-codebtn {
+				width: 40%;
+			    margin: 1rem auto;
+			    background: #b8011a;
+			    height: 2.6rem;
+			    font-size: 1.4rem;
+			    color: #fff;
+			    border-radius: 3px !important;
+			}
+		</style>-->
+	</head>
+	<body>
+		<!--wrapper开始-->
+		<div class="wrapper" style="background: #f0f0f0;">
+			<!--header开始-->
+			<div class="header-box">
+				<div class="index-header">
+					<img src="img/logo.png" class="logo"/>
+					<span class="mine-span"><img src="img/mine.png" class="mine-img"/></span>
+					<a href="shopCart.html" class="shop-cart"><img src="img/cart.png" class="shop-cart-img"/><img src="img/redPoint.png" class="shop-cart-have"/></a>
+				</div>
+			</div>
+			<!--header结束-->
+			<!--content开始-->
+			<div class="content">
+				<!--更改-->
+				<div class="head-bg">
+					<div class="person-det">
+						<img src="img/head-img.png" class="head-img"/>
+						<p class="person-name">jdskhfjkkh</p>
+						<img src="img/per-jtR.png" alt="" class="per-jtR right"/>
+					</div>
+					<div class="person-list-bg"></div>
+					<ul class="person-list">
+						<li>
+							<a href="#">
+								<p><img src="img/mine-icon1.png" alt="" class="mine-icon"/></p>
+								<p>我的收藏</p>
+							</a>
+							
+						</li>
+						<li>
+							<a href="#">
+								<p><img src="img/mine-icon2.png" alt="" class="mine-icon"/></p>
+								<p>我的积分</p>
+							</a>
+						</li>
+						<li class="sign-icon-click">
+							<a href="#">
+								<p><img src="img/mine-icon3.png" alt="" class="mine-icon"/></p>
+								<p>每日签到</p>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<!--更改-->
+				<ul class="modular-box">
+					<li class="modular-li">
+						<a href="myOrder.html">
+							<img src="img/module1.jpg" class="modular-img"/>
+							<p class="modular-word">我的订单</p>
+						</a>
+					</li>
+					<li class="modular-li">
+						<a href="address.html">
+							<img src="img/module2.jpg" class="modular-img"/>
+							<p class="modular-word">地址管理</p>
+						</a>
+					</li>
+					<li class="modular-li">
+						<a href="coupon-page.html">
+							<img src="img/module3.jpg" class="modular-img"/>
+							<p class="modular-word">优惠券</p>
+						</a>
+					</li>
+					<li class="modular-li">
+						<a href="feedback.html">
+							<img src="img/module4.jpg" class="modular-img"/>
+							<p class="modular-word">意见反馈</p>
+						</a>
+					</li>
+					<li class="modular-li">
+						<a href="#">
+							<img src="img/module5.jpg" class="modular-img"/>
+							<p class="modular-word">帮助中心</p>
+						</a>
+					</li>
+					<li class="modular-li">
+						<a href="#">
+							<img src="img/module6.png" class="modular-img"/>
+							<p class="modular-word">联系客服</p>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<!--content结束-->
+			<div class="mine-foot">退出登录</div>
+		</div>
+		<!--wrapper结束-->
+		<div class="sign-alert">
+			<div class="sign-close-box">
+				<img src="img/signcolse.png" alt="" class="sign-close-btn"/>
+			</div>
+			<div class="sign-alert-con">
+				<p class="add-integral"><span class="add-integral-num">+10</span>积分</p>
+				<img src="img/signIcon.png" alt="" class="sign-alert-icon"/>
+				<input type="button" name="" id="" value="查看详情" class="sign-alert-codebtn">
+			</div>
+		</div>
+		<div class="cover"></div>
+		
+		<script type="text/javascript">
+		$(function(){
+			$('.sign-close-btn').bind('click',function(){
+				$('.sign-alert').hide();
+				$('.cover').hide();
+			});
+			$('.sign-icon-click').bind('click',function(){
+				$('.sign-alert').show();
+				$('.cover').show();
+			});
+		})
+			
+		</script>
+	</body>
+</html>

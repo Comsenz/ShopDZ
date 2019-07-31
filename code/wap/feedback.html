@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>意见反馈</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+	</head>
+	<body>
+		<div id="header_has_nav">
+		</div>
+		<!--wrapper开始-->
+		<div class="wrapper">
+			<div class="content">
+				<div class="textarea-box">
+					<p class="textcount">剩余<span id="textCount">500</span>个字</p> 
+					<textarea name="textarea" placeholder="期待您的意见" id="TextArea1" class="options" onkeyup="words_deal();" onfocus="if(this.placeholder=='期待您的意见') {this.placeholder='';}this.style.color='#333';" onblur="if(this.placeholder=='') {this.placeholder='期待您的意见';this.style.color='#333';}"maxlength="500"></textarea> 
+				</div>
+				<input type="text" placeholder="请输入手机号，方便我们联系您" class="phone2" id="phone"/>
+				<div class="new-build foot-fixed foot-btn" id="submit">提交</div>
+			</div>
+		</div>
+		<div id="remind" class="address-remind"></div>
+		<!--wrapper结束-->
+		
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript">
+			
+			//限制文本域只能输入500字，并提示可输入的剩余字数
+			function words_deal(){ 
+				var curLength=$("#TextArea1").val().length; 
+				if(curLength>500){ 
+					var num=$("#TextArea1").val().substr(0,500); 
+					$("#TextArea1").val(num); 
+					//alert("超过字数限制，多出的字将被截断！" ); 
+				} 
+				else{ 
+					$("#textCount").text(500-$("#TextArea1").val().length); 
+				} 
+			} 
+			
+			
+			$(function(){
+				var on_off = true;
+				//判断收货信息编辑页面手机号输入是否正确
+				$('#submit').click(function(){
+					var verify = judge($("#phone"),$("#textCount"),$('#remind'));
+					if(on_off && verify){
+						on_off = false;
+						$.ajax({
+							url:ApiUrl+'/FeedBack/feedback',
+							data:{
+								key:key,
+								phone:$('#phone').val(),
+								message:$('#TextArea1').val()
+							},
+							type:'post',
+							dataType:'json',
+							success:function(info){
+								if(info){
+									shopdz_alert("意见反馈成功！",0,function(){
+										window.location.href = 'member.html';
+									});
+								}
+							}
+						});
+					}
+				});
+				//判断手机号和验证码信息是否有误
+				function judge(name,code,error){
+					var phone1 = name.val();
+					var pword1 = parseInt(code.text());
+					var regexName=/^(13[0-9]|14[5|7]|15[0-9]|17[0-9]|18[0-9])\d{8}$/;
+					if(pword1>=500){
+						shopdz_alert("请输入内容！");
+						return false;
+					}
+					if(phone1==""){
+						shopdz_alert("请输入手机号！");
+						return false;
+					}else if(!regexName.test(phone1)){
+						 shopdz_alert("手机号不正确！");
+						 return false;
+					} 
+					return true;
+				}
+				
+				initPage();
+				
+				
+			})
+			
+			
+			
+			
+		</script>
+		<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixinshare.js"></script>
+	</body>
+</html>

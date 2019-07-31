@@ -1,0 +1,209 @@
+@charset UTF-8;
+body select {
+	border-radius: 3px;
+	height: 28px;
+	/*margin-right: 20px;*/
+	min-width: 100px;
+	color: #666;
+	border: 1px solid #e0e0e0;
+	background: #fafafa;
+    padding-right: 14px;
+}
+body select:hover {
+	border: 1px solid #05ccb1;
+	background: #f6fcff !important;
+	padding-right: 14px;
+}
+body select>option {
+	padding: 0;
+	margin:0;
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    color:#6d6d6d;
+    -webkit-appearance:none; 
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);  
+    outline: none; 
+}
+body input[type="text"]{
+	 color: #999;
+}
+body input[type="text"]:-webkit-input-placeholder{
+	 color: #999;
+}
+body input[type="text"]:-moz-input-placeholder{
+	 color: #999;
+}
+body input[type="text"] {
+	border: 1px solid #e0e0e0;
+	background: #fafafa;
+	height: 28px;
+	line-height: 28px;
+	width: 150px;
+	padding: 0 5px;
+	font-size: 12px;
+	color: #333;
+	border-radius: 3px;
+	box-sizing: border-box;
+}
+body input[type="text"]:-webkit-autofill {
+	-webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+body input[type="text"]:hover {
+	border: 1px solid #00d4b7 !important;
+}
+.search-submit {
+	border: none;
+    background: #05ccb1;
+    width: 50px;
+    height: 28px;
+    line-height: 28px;
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-left: 5px;
+}
+    
+.flexigrid{font-family:Arial, Helvetica, sans-serif;font-size:11px;position:relative;border:0 solid #eee;overflow:hidden;color:#000}
+.flexigrid.hideBody{height:26px!important;border-bottom:1px solid #ccc}
+.ie6fullwidthbug{border-right:0 solid #ccc;padding-right:2px}
+.flexigrid div.nDiv{background:#eee url(../images/line.gif) repeat-y -1px top;border:1px solid #ccc;border-top:0;overflow:auto;left:0;position:absolute;z-index:999;float:left}
+.flexigrid div.nDiv table{margin:2px}
+.flexigrid div.hDivBox{float:left;padding-right:40px}
+.flexigrid div.bDiv table{margin-bottom:10px;/*border-bottom:1px solid #e0e0e0*/border-right: 1px solid #e0e0e0;}
+/*.flexigrid div.bDiv table>tbody tr {border-bottom: 1px solid #e0e0e0;}*/
+.flexigrid div.bDiv table.autoht{border-bottom:0;margin-bottom:0}
+.flexigrid div.nDiv td{border:1px solid #eee;cursor:default;padding:2px 3px}
+.flexigrid div.nDiv tr:hover td,.flexigrid div.nDiv tr.ndcolover td{background:#d5effc url(../images/hl.png) repeat-x top;border:1px solid #a8d8eb}
+.flexigrid div.nDiv td.ndcol1{border-right:1px solid #ccc}
+.flexigrid div.nDiv td.ndcol2{border-left:1px solid #fff;padding-right:10px}
+.flexigrid div.nDiv tr:hover td.ndcol1,.flexigrid div.nDiv tr.ndcolover td.ndcol1{border-right:1px solid #d2e3ec}
+.flexigrid div.nDiv tr:hover td.ndcol2,.flexigrid div.nDiv tr.ndcolover td.ndcol2{border-left:1px solid #eef8ff}
+.flexigrid div.nBtn{position:absolute;height:24px;width:14px;z-index:900;background:#fafafa url(../images/fhbg.gif) repeat-x bottom;border:0 solid #ccc;border-left:1px solid #ccc;top:0;left:0;margin-top:1px;cursor:pointer;display:none;}
+.flexigrid div.nBtn div{height:24px;width:12px;border-left:1px solid #fff;float:left;background:url(../images/ddn.png) no-repeat center}
+.flexigrid div.nBtn.srtd{background:url(../images/wbg.gif) repeat-x 0 -1px}
+.flexigrid div.mDiv{/*background:url(../images/wbg.gif) repeat-x top;border:1px solid #ccc;*/text-align:center;border-bottom:0;border-top:0;font-weight:700;display:inline-block;overflow:hidden;min-width: 100px;box-sizing: border-box;padding:0 22px;height:50px;white-space:nowrap;position:relative;float: left;font-size:14px;}
+.flexigrid div.mDiv div{white-space:nowrap;line-height: 50px;font-size: 14px;}
+.flexigrid div.mDiv div.ptogtitle{position:absolute;top:4px;right:3px;height:16px;width:16px;overflow:hidden;border:1px solid #ccc;cursor:pointer;padding:0}
+.flexigrid div.mDiv div.ptogtitle:hover{background-position:left -2px;border-color:#bbb}
+.flexigrid div.mDiv div.ptogtitle span{display:block;border-left:1px solid #eee;border-top:1px solid #fff;border-bottom:1px solid #ddd;width:14px;height:14px;background:url(images/uup.png) no-repeat center}
+.flexigrid div.mDiv div.ptogtitle.vsble span{background:url(../images/ddn.png) no-repeat center}
+.flexigrid div.tDiv /*toolbar*/{background:#ffff;position:relative;/*border:1px solid #ccc;*/border-bottom:0;overflow:hidden;height: 50px;float: left;}
+.flexigrid div.tDiv2{float:left;clear:both;padding:1px}
+.flexigrid div.sDiv /*toolbar*/{/*background:#fafafa url(images/bg.gif) repeat-x top;*/margin-right: 15px;position:relative;top: 4px;/*border:1px solid #ccc;*/border-top:0;overflow:hidden;float: right;}
+.flexigrid div.sDiv2{/*float:left;*/clear:both;/*width:1024px;*/padding:5px}
+.flexigrid div.sDiv2 input,.flexigrid div.sDiv2 select{vertical-align:middle}
+.flexigrid div.btnseparator{float:left;height:22px;/*border-left:1px solid #ccc;border-right:1px solid #fff;*/margin:1px}
+.flexigrid div.fbutton{float:left;display:block;cursor:pointer;/*padding:1px*/}
+.flexigrid div.fbutton div{float:left;height: 20px;width: 50px;text-align: center;margin: 15px 0;}
+.flexigrid div.fbutton span{display:block;width: 20px;height: 20px;background: url(../images/sidebar-icon.png) no-repeat;margin: 0 auto;}
+.flexigrid div.fbutton span.add {
+	background-position: -203px -445px;
+}
+.flexigrid div.fbutton:hover span.add {
+	background-position: -392px -62px;
+}
+.flexigrid div.fbutton span.reload {
+	background-position: -203px -420px;
+}
+.flexigrid div.fbutton:hover span.reload {
+	background-position: -392px -91px;
+}
+.flexigrid div.fbutton span.delete {
+	background-position: -237px -235px;
+}
+.flexigrid div.fbutton:hover span.delete {
+	background-position: -391px -122px;
+}
+.flexigrid div.fbutton:hover,.flexigrid div.fbutton.fbOver{/*border:1px solid #ccc;padding:0*/}
+.flexigrid div.fbutton:hover div,.flexigrid div.fbutton.fbOver div{/*border-left:1px solid #fff;border-top:1px solid #fff;*//*border-right:1px solid #eee;border-bottom:1px solid #eee;padding:0 2px*/}
+.flexigrid div.hDiv{/*background:#fafafa url(images/fhbg.gif) repeat-x bottom;*/margin: 0 15px;background: #fbfbfb;position:relative;border:1px solid #e0e0e0;border-bottom:0;overflow:hidden;clear:both;}
+.flexigrid div.hDiv table{border-right:1px solid #e0e0e0;/*border-left: 1px solid #fff;*/}
+.flexigrid div.cDrag{float:left;position:absolute;z-index:2;overflow:visible}
+.flexigrid div.cDrag div{float:left;background:none;display:block;position:absolute;height:24px;width:5px;cursor:col-resize}
+.flexigrid div.cDrag div:hover,.flexigrid div.cDrag div.dragging{background:url(../images/line.gif) repeat-y 2px center}
+.flexigrid div.iDiv{border:1px solid #316ac5;position:absolute;overflow:visible;background:none}
+.flexigrid div.iDiv input,.flexigrid div.iDiv select,.flexigrid div.iDiv textarea{font-family:Arial, Helvetica, sans-serif;font-size:11px}
+.flexigrid div.iDiv input.tb{border:0;width:100%;height:100%;background:none;padding:0}
+.flexigrid div.bDiv{border:1px solid #e0e0e0;background:#fff;overflow:auto;position:relative;margin: 0 15px 20px 15px;}
+.flexigrid div.hGrip{position:absolute;top:0;right:0;height:5px;width:5px;background:url(../images/line.gif) repeat-x center;margin-right:1px;cursor:col-resize}
+.flexigrid div.hGrip:hover,.flexigrid div.hGrip.hgOver{border-right:1px solid #999;margin-right:0}
+.flexigrid div.vGrip{height:5px;overflow:hidden;position:relative;background:#fafafa url(../images/wbg.gif) repeat-x 0 -1px;border:1px solid #e0e0e0;border-top:0;text-align:center;cursor:row-resize}
+.flexigrid div.vGrip span{display:block;width:20px;height:1px;overflow:hidden;border-top:1px solid #aaa;border-bottom:1px solid #aaa;background:none;margin:1px auto}
+.flexigrid div.hDiv th,.flexigrid div.bDiv td
+/* common cell properties*/{text-align:left;/*border-right:1px solid #ddd;border-left:1px solid #fff;*/overflow:hidden;vertical-align:top!important;padding-left:0;padding-right:0}
+.flexigrid div.hDiv th div,.flexigrid div.bDiv td div,div.colCopy div
+/* common inner cell properties*/{border-left:0 solid #fff;padding:0 5px;}
+.flexigrid div.hDiv th,div.colCopy{font-weight:400;height:38px;line-height:38px;cursor:default;white-space:nowrap;overflow:hidden;font-size: 14px;}
+div.colCopy{font-family:Arial, Helvetica, sans-serif;font-size:11px;background:#fafafa url(../images/fhbg.gif) repeat-x bottom;border:1px solid #ccc;border-bottom:0;overflow:hidden}
+.flexigrid div.hDiv th.sorted{background:url(../images/wbg.gif) repeat-x 0 -1px;border-bottom:0 solid #ccc}
+.flexigrid div.hDiv th.thOver div,.flexigrid div.hDiv th.sorted.thOver div{border-bottom:1px solid #05ccb1;height:37px;}
+.flexigrid div.hDiv th.sorted div{border-bottom:0 solid #e0e0e0;/*padding-bottom:5px*/}
+.flexigrid div.hDiv th.thMove{background:#fff;color:#fff}
+.flexigrid div.hDiv th.sorted.thMove div{border-bottom:1px solid #fff;padding-bottom:4px}
+.flexigrid div.hDiv th.thMove div{background:#fff!important}
+.flexigrid div.hDiv th div.sdesc{background:url(../images/dn.png) no-repeat center top}
+.flexigrid div.hDiv th div.sasc{background:url(../images/up.png) no-repeat center top}
+.flexigrid div.bDiv td{border-bottom:1px solid #e0e0e0;vertical-align:top;white-space:nowrap;height: 30px;line-height: 30px;}
+.flexigrid span.cdropleft{display:block;background:url(../images/prev.gif) no-repeat -4px center;width:24px;height:24px;position:relative;top:-24px;margin-bottom:-24px;z-index:3}
+.flexigrid div.hDiv span.cdropright{display:block;background:url(../images/next.gif) no-repeat 12px center;width:24px;height:24px;float:right;position:relative;top:-24px;margin-bottom:-24px}
+.flexigrid div.bDiv td div{border-top:0 solid #fff;/*padding-bottom:4px;*/color: #999;}
+.flexigrid tr td.sorted{background:#f3f3f3;/*border-right:1px solid #ddd;*/border-bottom:1px solid #f3f3f3}
+.flexigrid tr.erow td{/*background:#f7f7f7;*//*border-bottom:1px solid #f7f7f7*/}
+.flexigrid tr.erow td.sorted{background:#e3e3e3;border-bottom:1px solid #e3e3e3}
+.flexigrid div.bDiv tr:hover td,.flexigrid div.bDiv tr:hover td.sorted,.flexigrid div.bDiv tr.trOver td.sorted,.flexigrid div.bDiv tr.trOver td{background: #f4f7f9;/*border-left:1px solid #eef8ff;border-bottom:1px dotted #a8d8eb;*/}
+.flexigrid div.bDiv tr.trSelected:hover td,.flexigrid div.bDiv tr.trSelected:hover td.sorted,.flexigrid div.bDiv tr.trOver.trSelected td.sorted,.flexigrid div.bDiv tr.trOver.trSelected td,.flexigrid tr.trSelected td.sorted,.flexigrid tr.trSelected td{background:#d5effc url(../images/hl.png) repeat-x top;/*border-right:1px solid #d2e3ec;border-left:1px solid #eef8ff;*/border-bottom:1px solid #a8d8eb}
+.flexigrid.novstripe .bDiv table{border-bottom:1px solid #ccc;border-right:1px solid #ccc}
+.flexigrid.novstripe div.bDiv td{border-right-color:#fff}
+.flexigrid.novstripe div.bDiv tr.erow td.sorted{border-right-color:#e3e3e3}
+.flexigrid.novstripe div.bDiv tr td.sorted{border-right-color:#f3f3f3}
+.flexigrid.novstripe div.bDiv tr.erow td{border-right-color:#f7f7f7;border-left-color:#f7f7f7}
+.flexigrid.novstripe div.bDiv tr.trSelected:hover td,.flexigrid.novstripe div.bDiv tr.trSelected:hover td.sorted,.flexigrid.novstripe div.bDiv tr.trOver.trSelected td.sorted,.flexigrid.novstripe div.bDiv tr.trOver.trSelected td,.flexigrid.novstripe tr.trSelected td.sorted,.flexigrid.novstripe tr.trSelected td{/*border-right:1px solid #06F;border-left:1px solid #06F*/}
+.flexigrid.novstripe div.bDiv tr.trOver td,.flexigrid.novstripe div.bDiv tr:hover td{border-left-color:#d9ebf5;border-right-color:#d9ebf5}
+.flexigrid div.pDiv{/*background:url(images/wbg.gif) repeat-x 0 -1px;border:1px solid #ccc;border-top:0;*/border-left:1px solid #e0e0e0;border-right:1px solid #e0e0e0;overflow:hidden;white-space:nowrap;position:relative;height: 50px;}
+.flexigrid div.pDiv div.pDiv2{/*float:left;*//*width:1024px;*/margin:8px 3px 2px -2px;overflow: hidden;zoom: 1;height: 40px;text-align: center;}
+div.pGroup{float:left;background:none;height:24px;margin:0 10px;}
+div.pGroup>select {
+	width: 60px;
+	min-width: 40px;
+}
+.pDiv2 div {background:  url(../images/sidebar-icon.png) no-repeat;}
+.flexigrid div.pDiv .pPageStat,.flexigrid div.pDiv .pcontrol{position:relative;top:5px;overflow:visible}
+.flexigrid div.pDiv input{vertical-align:text-top;position:relative;top:-2px;width: 18px;height: 18px;line-height: 18px;margin: 0 3px;padding:0;text-align: center;}
+.flexigrid div.pDiv div.pButton{float:left;width:22px;height:22px;cursor:pointer;overflow:hidden}
+.flexigrid div.pDiv div.pButton:hover,.flexigrid div.pDiv div.pButton.pBtnOver{width:22px;height:22px;cursor:pointer}
+.flexigrid div.pDiv div.pButton span{width:22px;height:22px;display:block;float:left}
+.flexigrid div.pDiv div.pButton:hover span,.flexigrid div.pDiv div.pButton.pBtnOver span{width:22px;height:22px;}
+.flexigrid .pSearch{background:url(../images/magnifier.png) no-repeat center}
+.flexigrid .pFirst{/*background:url(images/first.gif) no-repeat center*/background-position: -201px -286px;}
+.flexigrid .pPrev{/*background:url(images/prev.gif) no-repeat center*/background-position: -201px -365px;}
+.flexigrid .pNext{/*background:url(images/next.gif) no-repeat center*/background-position: -201px -338px;}
+.flexigrid .pLast{/*background:url(images/last.gif) no-repeat center*/background-position: -201px -313px;}
+/*.flexigrid .pReload{background:url(images/load.png) no-repeat center;width:22px;height:22px;}
+.flexigrid .pReload.loading{background:url(images/load.gif) no-repeat center}
+*/
+.flexigrid .show-row{width:22px;height:22px;background:#ccc;}
+
+.flexigrid.ie div.hDiv th div,.flexigrid.ie div.bDiv td div,div.colCopy.ie div
+/* common inner cell properties*/{overflow:hidden}
+.table-paging {
+	overflow: hidden;
+	zoom: 1;
+	display: inline-block;
+}
+.regular-radio {
+	position: relative;
+	top: 3px;
+}
+.flexigrid div.bDiv tr:hover td,.flexigrid div.bDiv tr:hover td,.flexigrid div.bDiv tr:hover td,.flexigrid div.bDiv tr:hover div {
+	color: #000;
+}
+.table-edit-icon {
+	border: 1px solid #c9c9c9 !important;
+	margin: auto;
+	display: inline-block;
+}
+.table-edit-icon:hover {
+	border: 1px solid #05ccb1 !important;
+}

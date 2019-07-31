@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+	    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<link rel="stylesheet" href="css/common.css" />
+	    <style type="text/css">
+		    .bgfa {
+		    	background: #fafafa;
+		    }
+	    	.wxpay-tit {
+	    		background: #fff;
+	    		border-bottom: 1px solid #ccc;
+	    		height: 70px;
+	    	}
+	    	.wxPaytit {
+	    		font-size: 18px;
+	    		line-height: 70px;
+	    		width: 1000px;
+	    		margin: 0 auto;
+	    	}
+	    	.wxPay-con {
+	    		width: 1000px;
+	    		height: 600px;
+	    		box-sizing: border-box;
+	    		background: #fff;
+	    		border: 1px solid #e5e5e5;
+	    		border-radius: 5px;
+	    		margin: 0 auto;
+	    		text-align: center;
+	    	}
+	    	.wxPay-orderNum {
+	    		padding-top: 72px;
+	    		padding-bottom: 20px;
+	    		color: #666;
+	    		font-size: 16px;
+	    		width: 1000px;
+	    		margin: 0 auto;
+	    		box-sizing: border-box;
+	    		padding-left: 5px;
+	    	}
+	    	.wxPay-orderNum .pay-orderNum {
+	    		color: #eb6100;
+	    	}
+	    	.wx-img2 {
+	    		display: inline-block;
+	    		height: 40px;
+	    		vertical-align: middle;
+	    		margin-right: 15px;
+	    		position: relative;
+	    		top: -2px;
+	    	}
+	    	.payee {
+	    		margin-left: 65px;
+	    	}
+	    	.wxPayTit {
+	    		padding-top: 46px;
+	    		font-size: 16px;
+	    		font-weight: normal;
+	    		color: #333;
+	    		padding-bottom: 10px;
+	    		text-align: center;
+	    	}
+	    	.wxPayNum {
+	    		font-size: 20px;
+	    		text-align: center;
+	    		padding-bottom: 24px;
+	    	}
+	    	.wxPayNum>span {
+	    		color: #EB6100;
+	    		font-size: 36px;
+	    		padding-right: 5px;
+	    	}
+	    	.wxPay-codeBox {
+	    		width: 310px;
+	    		height: 360px;
+	    		box-sizing: border-box;
+	    		border: 1px solid #ccc;
+	    		border-radius: 5px;
+	    		display: inline-block;
+	    	}
+	    	.wxPay-codeImg {
+	    		display: block;
+	    		width: 100%;
+	    	}
+	    	.codeRemind {
+	    		text-align: center;
+	    		padding:0 0 10px 0;
+	    		font-size: 16px;
+	    		color: #333;
+	    		line-height: 30px;
+	    	}
+	    	.codeRemind .wxPoint-img {
+	    		display: inline-block;
+	    		height: 30px;
+	    		vertical-align: middle;
+	    		margin-right: 10px;
+	    	}
+	    	.wxPay-over {
+	    		font-size: 14px;
+	    		color: #18bb33;
+	    		text-align: center;
+	    		padding-top: 25px;
+	    	}
+	    	.point-img {
+	    		display: inline-block;
+	    		height: 10px;
+	    		vertical-align: middle;
+	    		margin-left: 6px;
+	    		position: relative;
+	    		top: -1px;
+	    	}
+	    </style>
+	    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<script src="js/common.js"></script>
+	</head>
+	<body class="bgfa">
+		<div class="wrapper">
+			<div class="wxpay-tit ">
+				<div class="wxPaytit">
+					<div><img src="../wap/img/wx.png" alt="" class="wx-img2"/>微信支付</div>
+				</div>
+				<div class="wxPay-orderNum">商品订单编号：<span class="pay-orderNum" id="pay_sn"></span><span class="payee">收款方：<span id="pay_name"></span></span></div>
+				<div class="wxPay-con">
+					<h3 class="wxPayTit">扫一扫，微信安全支付</h3>
+					<p class="wxPayNum"><span id="order_amount"></span>元</p>
+					<div class="wxPay-codeBox">
+						<div id="qrcodeCanvas"></div>
+						<!-- <img src="" alt="" class="wxPay-codeImg" id="wx_code"/> -->
+						<div class="codeRemind"><img src="../wap/img/wxPoint.png" alt="" class="wxPoint-img"/>打开微信&nbsp;扫码付款</div>
+					</div>
+					<div class="wxPay-over" id="pay_over">支付完成，查看订单详情<img src="../wap/img/point.png" alt="" class="point-img"/></div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/qrcode/utf.js"></script>
+	<script type="text/javascript" src="js/qrcode/jquery.qrcode.js"></script>
+	<script>
+		redirectindex();
+		$(function(){
+			$.ajax({
+				url:ApiUrl+'/Payment/selectPay',
+				data:{pay_sn:get('order_sn')},
+				dataType:'json',
+				type:'get',
+				success:function(info){
+					$('#order_amount').html(info.data.order_amount);
+				},
+				async:false
+			});
+			// 收款公司名
+			$('#pay_name').html(getwebConf('shop_name'));
+			// 订单编号
+			$('#pay_sn').html(get('order_sn'));
+
+			$('#pay_over').click(function(){
+				window.location.href = WapSiteUrl + '/orderdetails.html?order_sn=' + get('order_sn');
+			});
+			$.ajax({
+				url: ApiUrl + '/Payment/routepay?payment_code=wx&pay_sn=' + get('order_sn'),
+				data: {
+					payment_code: 'wx',
+					pay_sn: get('order_sn'),
+				},
+				type: 'post',
+				dataType:'json',
+				success: function(info){
+					$("#qrcodeCanvas").qrcode({
+			            render : "canvas",    //设置渲染方式，有table和canvas，使用canvas方式渲染性能相对来说比较好
+			            text : info['data']['code_url'],    //扫描二维码后显示的内容,可以直接填一个网址，扫描二维码后自动跳向该链接
+			            width : "310",               //二维码的宽度
+			            height : "310",              //二维码的高度
+			            background : "#ffffff",       //二维码的后景色
+			            foreground : "#000000",        //二维码的前景色
+			            src: ""             //二维码中间的图片
+			        });
+			        var selOnOff = true;
+					var sel = setInterval(function(){
+						if(selOnOff){
+							selOnOff = false;
+							var url = ApiUrl + '/Payment/selectPay?pay_sn='+get('order_sn');
+							$.ajax({
+								url: url,
+								data: {pay_sn:get('order_sn')},
+								type: 'post',
+								dataType:'json',
+								success: function(info){
+									selOnOff = true;
+									if(info['code'] == 1){
+										clearInterval(sel);
+										window.location.href = WapSiteUrl + '/orderdetails.html?order_sn=' + get('order_sn');
+									}
+								}
+							});
+						}
+						},3000);
+				}
+			});
+
+		})
+	</script>
+</html>

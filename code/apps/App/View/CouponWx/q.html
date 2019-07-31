@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <title>领取优惠券</title>
+    <link rel="shortcut icon" href="favicon.ico">
+
+</head>
+<body>
+<div class="wrapper wrapper-bg" style="margin-top: 14px;">
+    <input type="submit" value="立即领取" class="immediately-recive"/>
+</div>
+</body>
+<script type="text/javascript" src="/wap/js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="/wap/js/tmpl/weixin.js"></script>
+<script type="text/javascript">
+    window.onload=function(){
+        wx.config({
+                    debug: false,
+                    appId: "{$wap.appId}",
+                timestamp: "{$wap.timestamp}",
+        nonceStr: "{$wap.nonceStr}",
+        signature: "{$wap.signature}",
+        jsApiList: ['onMenuShareAppMessage','onMenuShareTimeline','addCard']
+    });
+    }
+
+
+    document.querySelector('.immediately-recive').onclick = function () {
+        alert(1);
+
+        wx.ready(function () {
+            wx.addCard({
+                cardList: [{
+                    cardId:"{$card_id}",
+                    cardExt:'{$ext}'
+                }],
+                success: function (res) {
+                    alert('已添加卡券：' + JSON.stringify(res.cardList));
+                }
+            })
+
+        })
+
+    };
+
+
+
+</script>
+
+
+
+</html>

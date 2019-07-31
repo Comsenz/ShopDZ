@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<meta charset="UTF-8">
+		<title>商品评价</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/swiper.min.css">
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type="text/javascript" src="js/tmpl/myorders.js"></script>
+		<script type="text/javascript" src="js/tmpl/retreat.js"></script>
+		<script type="text/javascript" src="js/swiper.min.js"></script>
+		<style>
+			.overf{
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				width:60%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="header_has_nav">
+		</div>
+		<div id="orderdetails" class="wrapper" style="background: #f5f5f5;">
+		</div>
+		<!--wrapper开始-->
+		<script id="orderdetailscontent" type="text/html">
+		<div class="content" style="background: #f5f5f5;">
+			
+			<div class="myorder1" osn="<%= data['order_sn'] %>">
+			</div>
+			
+	    	<%if(data['gooddetails'] && data['gooddetails'].length>0){%>
+	    		<% var datalen = data['gooddetails'].length; %>
+				<% for (var i = 0; i < datalen; i++) { %>
+				<% var value = data['gooddetails'][i]; %>
+			    	<div class="myorder1 value-myorder1">
+						<dl class="order-dl1 order-dl1padding borderbot-none">
+							<dt class="left" onclick="window.location.href='./goods_detail.html?id=<%= value['goods_common_id'] %>'"><img class="img-bg" src="<%= value['goods_image'] %>"></dt>
+							<dd class="right" style="margin-top:-0.8rem">
+								<p class="tit-p1">
+									<span onclick="window.location.href='./goods_detail.html?id=<%= value['goods_common_id'] %>'" class="left tit-name overf"><%= value['goods_name'] %></span>
+									<%if (value['evaluate_state'] == 1) {%>
+										<span class="right wordred" style="width:35%;text-align:center">
+											已评价
+										</span>
+									<% } else {%>
+										<span class="right wordred" style="width:35%;text-align:center">
+											未评价
+										</span>
+									<% } %>
+								</p>
+								<p class="tit-p1">
+									<span class="left spec-name overf"> <%=value['goods_spec']%></span>
+									<%if (value['evaluate_state'] == 1) {%>
+										<a order_sn="<%=data['order_sn']%>" rec_id="<%=value['rec_id']%>"  class="look-eval btn-border1 right" style="width:35%;padding:0;margin-top:0;">
+											查看评价
+										</a>
+									<% } else {%>
+										<a href="evaluate.html?order_sn=<%=data['order_sn']%>&rec_id=<%=value['rec_id']%>" class="btn-border1 right" style="width:35%;padding:0;margin-top:0;">
+											评价商品
+										</a>
+									<% } %>
+								</p>
+							</dd>
+						</dl>
+						<div class="commont" style="display:none;"></div>
+			    	</div>
+
+		    	<% } %>
+			<% } %>
+		</div>
+		</script>
+		<!--wrapper结束-->
+	</body>
+		<script id="comment" type="text/html">
+			<% var comment = data['comment']; %>
+			<div class="comment-con  comment-constyle">
+				<div class="name-time">
+					<!--<div class="name1">
+						<img src="<%=comment['member_avatar']%>" class="person-head"/>
+						<span class="comment-limit"><%=comment['geval_frommembername']%></span>
+
+					</div>-->
+					
+				<p class="comment-word"><%=comment['geval_content']%></p>
+				<ul class="con-img-list comment-img-list">
+				<% if (comment['geval_image']) {%>
+					<%for (var o = 0; o < comment['geval_image'].length; o++) {%>
+						<li class="liW"><img src="<%=comment['geval_image'][o]%>" img-id="<%=o%>" class="comment-img"/></li>
+					<%};%>
+				<%}%>
+				</ul>
+				<div class="time1"><%=comment['geval_addtime_text']%></div></div>
+			</div>
+		</script>
+	<script type="text/javascript">
+		redirectindex();
+		$(function(){
+			$('.goback-header').find('.back-icon').unbind('click').click(function(){
+				window.location.href = WapSiteUrl + '/orderdetails.html?order_sn=' + get('order_sn');
+			});
+			redirectindex();
+			var osn = get('order_sn');
+			getorderdetails(osn);
+			/* 查看商品评论 */
+			$(document).on('click','.look-eval',function(){
+				var this_ = $(this);
+				var common = $(this).parents('.myorder1').find('.commont');
+				var rec_id = $(this).attr('rec_id');
+				var order_sn = $(this).attr('order_sn');
+				/* 判断是展开还是隐藏 */
+				if(common.css('display') == 'none'){
+					common.show();
+					this_.text('收起评价');
+				} else {
+					common.hide();
+					this_.text('查看评价');
+				}
+				/* 判断发送过请求的不触发 */
+				if(this_.attr('sub') != '1'){
+					/* 回调方法 */
+					var commontcall = function(info){
+						if(info['code']){
+							shopdz_alert(info['msg']);
+							return;
+						}
+						this_.attr('sub','1');
+						var html = template('comment', info);
+						common.html(html);
+						initPage();
+						SizeLimit($(".comment-img"));
+						viewimg();
+					};
+					/* 发送请求 */
+					getcomment(rec_id, order_sn, commontcall);
+				}
+			});
+			
+		})
+	</script>
+</html>

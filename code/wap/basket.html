@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>购物车</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type="text/javascript" src="js/tmpl/AddSubstract.js"></script>
+		<script type="text/javascript" src="js/tmpl/basket.js"></script>
+	<style>
+		.bg{ background-color: #ccc;}
+		.namewh{ width: 100%; height: 2rem; overflow: hidden; text-overflow: ellipsis; -o-text-overflow:ellipsis; white-space: nowrap ; }
+	</style>
+	</head>
+	<body>
+		<div id="header_has_nav">
+		</div>
+		<!--wrapper开始-->
+		<div id="shopcart" class="wrapper">
+		</div>
+			<!--header开始-->
+
+	 	<script id="shopcartcontent" type="text/html">
+			<!--header结束-->
+			<!--content开始-->
+			<div class="content">
+				<!--<div class="details-r-box" style="background: #f7f7f7;">
+		    		<div class="details-remind">
+			    		<div class="dotted-con f-fl" data-reactid=".0.0.0.1.1.0">
+			    			<div class="m-dottedList" data-reactid=".0.0.0.1.1.0.0">
+			    				<i data-reactid=".0.0.0.1.1.0.0.0"></i>
+			    				<i data-reactid=".0.0.0.1.1.0.0.1"></i>
+			    				<i data-reactid=".0.0.0.1.1.0.0.2"></i>
+			    				<i data-reactid=".0.0.0.1.1.0.0.3"></i>
+			    				<i data-reactid=".0.0.0.1.1.0.0.4"></i>
+			    			</div>
+			    		</div>
+			    		<div class="det-remind-tit">满149元免运费</div>
+			    		<div class="dotted-con f-fl" data-reactid=".0.0.0.1.1.0">
+			    			<div class="m-dottedList" data-reactid=".0.0.0.1.1.0.0">
+			    				<i data-reactid=".0.0.0.1.1.0.0.0"></i>
+			    				<i data-reactid=".0.0.0.1.1.0.0.1"></i>
+			    				<i data-reactid=".0.0.0.1.1.0.0.2"></i>
+			    				<i data-reactid=".0.0.0.1.1.0.0.3"></i>
+			    				<i data-reactid=".0.0.0.1.1.0.0.4"></i>
+			    			</div>
+			    		</div>
+		    		</div>
+		    	</div>-->
+		    	<% if (data && data.length > 0) {%>
+		    	<!--购物车商品列表开始-->
+		    		<ul class="cart-list">
+						<li class='firstli' style="display:none">
+			    			<div class="img-center">
+								<img src="img/cart.png" alt="" class="coupon-null-img"/>
+								<h4 class="coupon-tit">购物车里空空如也，赶快去选购吧~</h4>
+								<a href="index.html" style="font-size:1.5rem;color:#ab2b2b">继续购物</a>
+							</div>
+						</li>
+		    			<% for (var i = 0; i < data.length; i++) {%>
+		    				<% var value = data[i]; %>
+				    	<li>
+				    		<div class="cart-list-l">
+				    		<%	if (value['status'] > 1) {%>
+				    			<div class="checkReplace"></div>
+				    		<% } else {%>
+				    			<!--<div class="check-box">-->
+				    				<!--<input type="checkbox" checked="checked" class="check-ps"/>
+				    				<span class="check-bg"></span>-->
+				    				<!--<input type="checkbox" name="id" class="input_check checkid" value="<%=value['id']%>"<%	if (value['status'] == 1) {%>goodnum="1"<%}else{%>checked=""<%}%>><label for="check1"></label>-->
+				    			<!--</div>-->
+				    			<div class="check-box">
+							         <input type="checkbox" name="id" class="input_check checkid" value="<%=value['id']%>"<%	if (value['status'] == 1) {%>goodnum="1"<%}else{%>checked=""<%}%>>
+							         <label></label>
+							    </div>
+				    		<% } %>
+				    		</div>
+				    		<div class="cart-list-r <%if(value['status'] > 1){%>basket<%}%>">
+				    			<input type="hidden" name="id" value="<%=value['goods_id']%>"/>
+				    			<dl class="cart-list-rl cart-list-dl">
+				    				<dt class="cart-list-dt posi1"><img src="<%=value['goods_image']%>" class="cart-list-img"/><a href="./goods_detail.html?id=<%=value.goods_common_id%>" class="a-none"></a><p class="soldOut"<%if(value['status'] > 0){%>style="display:block;"<%}%>>
+				    				<%if (value['status'] == 1) {%>
+				    					库存不足
+				    				<%} else if (value['status'] == 2) {%>
+				    					已下架
+				    				<%} else if (value['status'] == 3) {%>
+				    					已售罄
+				    				<%}%>
+				    				</p></dt>
+				    				<dd class="cart-list-dd">
+				    					<h1 class="cart-dd-tit namewh" onclick="window.location.href='./goods_detail.html?id=<%=value.goods_common_id%>'"><%=value['goods_name']%></h1>
+				    					<p class="cart-spec namewh"><%=value['spec_name']%></p>
+				    					<div class="size1">
+											<div class="m-selnum jia-jian" data-reactid=".0.1.0.1.1.1.1.0">
+												<span id="min" class="jian less z-dis" style="border-right: none;" data-reactid=".0.1.0.1.1.1.1.0.0">
+													<i class="hx" data-reactid=".0.1.0.1.1.1.1.0.0.0"></i>
+												</span>
+												<div class="textWrap" data-reactid=".0.1.0.1.1.1.1.0.1">
+													<input type="number" class="num-input text_box" num="<%=value['goods_num']%>" value="<%=value['goods_num']%>" data-reactid=".0.1.0.1.1.1.1.0.1.0">
+												</div>
+												<span id="add" class="more jia" data-reactid=".0.1.0.1.1.1.1.0.2">
+													<i class="hx" data-reactid=".0.1.0.1.1.1.1.0.2.0"></i>
+													<i class="sx" data-reactid=".0.1.0.1.1.1.1.0.2.1"></i>
+												</span>
+											</div>
+										</div>
+				    				</dd>
+				    			</dl>
+				    			<div class="cart-list-rr">
+					    			<img src="img/dele2.png" class="cart-dele" id="<%=value['id']%>" mid="<%=value['member_uid']%>"/>
+					    			<input type="text" value="<%=value['goods_price']%>" name="goods_price" class="price" style=" display:none"/>
+					    			<!--单价-->
+					    			<p class="cart-proprice">
+					    			<% if (value['status'] <= 1) {%>
+					    				¥<span class="sumber"><%=(parseFloat(value['goods_price'])*100)*parseInt(value['goods_num'])/100%></span>
+					    			<%}%>
+					    			</p>
+					    		</div>
+				    		</div>
+				    	</li>
+				    	<%}%>
+				    </ul>
+				    <!--foot开始-->
+					<div class="shopcart-foot foot-fixed foot-btn auto">
+						<div class="check-all-box">
+							<div class="check-box foot-float" style="margin:1.25rem 1rem;">
+			    				<!--<input type="checkbox" checked="checked" class="check-ps"/>
+			    				<span class="check-bg"></span>-->
+			    				<input type="checkbox" class="input_check" id="check-all" checked="checked"><label for="check-all"></label>
+			    				
+			    			</div>
+			    			<p class="all-remind foot-float">全选</p>
+			    			<div class="cart-price-all text-right">
+			    				<p class="text-r" style="padding-right: 1rem;">
+			    					<span class="yuan1">¥</span>
+			    					<span id="sumprice" class="price-num1">0.00</span>
+			    					<!-- <span>00</span> -->
+			    				</p>
+			    				
+			    				<p class="remind3" style="padding-left:0;padding-right: 1rem;width: 5rem;display:inline-block;">不含运费<p>
+			    				
+			    			</div>
+						</div>
+						<div class="settlement pointer" id="submit" rel-href="./settlement.html">结算</div>
+					</div>
+					<!--foot结束-->
+				<%} else {%>
+					<ul>
+		    			<li>
+			    			<div class="img-center">
+								<img src="img/cart.png" alt="" class="coupon-null-img"/>
+								<h4 class="coupon-tit">购物车里空空如也，赶快去选购吧~</h4>
+								<a href="index.html" style="font-size:1.5rem;color:#ab2b2b">继续购物</a>
+							</div>
+						</li>
+					</ul>
+		    	<%}%>
+		    
+		    <!--购物车商品列表结束-->
+			</div>
+			
+		</script>
+			<!--content结束-->
+			
+			<!--返回顶部-->
+	    	<div style="display:none;" class="gotobtn" id="goTopBtn"><img border="0" src="img/goToTop.png">
+	    	</div> 
+    	
+		<!--wrapper结束-->
+		<div class="cover" style="display:none;"></div>
+		<div class="alertbox dele-sure" style="display:none;">
+			<p class="alert-p">要删除这些商品？</p>
+			<div class="btnbox1">
+				<span class="cancelbtn1">取消</span>
+				<span class="cancelbtn1 cancel surebtn1">确定</span>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+		var login = null;
+		var ajaxdel = true;
+		$(function() {
+			var shop_name = getwebConf('shop_name');
+			if(shop_name !== false){
+				$('title').html('购物车-'+shop_name);
+			}
+			getbasket();
+			//结算事件
+			 $(document).on("click",'#submit',function(){
+				if(ajaxsubmit){
+					ajaxsubmit = false;
+					if(login == 'nologin'){
+						shopdz_alert('请填写收货地址！',0,function(){
+							window.location.href = WapSiteUrl + '/ordernow.html?totype=basket';
+						});
+						return false;
+					}
+					var basketid = new Array();
+					var url = $(this).attr('rel-href');
+					$('#shopcart input:checked').each(function(){
+						basketid.push($(this).val());
+					});
+					var data = {
+						key:key,
+						id:basketid
+					}
+					window.location.href=url+'?id='+basketid.join(',');
+				}
+			})
+            //全选/全不选
+	        $(document).on("click",'#check-all',function () { 
+	        	var ach = $("input[name='id']");
+	            for ( var i = 0; i < ach.length; i++) 
+	            { 
+	            	if($(ach[i]).attr('goodnum')){
+	            		continue;
+	            	}
+	                ach[i].checked=$(this).attr('checked');
+	            }
+	            sumprice()
+	        });
+	        $(document).on("click",'.checkid',function () {
+	        	if($(this).attr('goodnum')){
+	        		return false;
+	        	}
+	            var flag = true; 
+	            var ach = $('.checkid');
+	            for (var i = 0; i < ach.length; i++) {
+	            	if(!$(ach[i]).attr('checked')){
+	            		flag = false; 
+	            		break;
+	            	}
+	            };
+                $('#check-all').attr('checked', flag); 
+                sumprice()
+	        }); 
+            //删除购物车商品
+            $(document).on('click','.cart-dele',function(){
+            	if(ajaxdel){
+            		ajaxdel = false;
+	            	$('.cover').css('display','block');
+	            	$('.dele-sure').css('display','block');
+	            	var that=$(this);
+	            	$('.cancel').unbind('click').click(function(){
+	            		that.parent().parent().parent().remove();
+	            		//删除数据库对应的商品信息
+		            	var id = that.attr('id');
+		            	var member_uid = that.attr('mid');
+		            	delbasket(id, member_uid);
+		            	$('.cover').css('display','none');
+            			$('.dele-sure').css('display','none');
+	            	});
+	            }
+			}); 
+            $('.cancelbtn1').click(function(){
+            	ajaxdel = true;
+            	$('.cover').css('display','none');
+            	$('.dele-sure').css('display','none');
+            });
+            $('.navbasket').parent('li').hide();
+        });
+	 	//调用返回顶部的函数
+	    goTopEx();
+	    //jisuan();
+
+		</script>
+		<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixinshare.js"></script>
+	</body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>我的订单</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type="text/javascript" src="js/tmpl/myorders.js"></script>
+	</head>
+	<body>
+		<div id="header_has_nav">
+		</div>
+		<div class="wrapper" style="background: #f7f7f7;">
+			<div class="content">
+				<div id="myorders" class="order-list2">
+				</div>
+			</div>
+		</div>
+		
+		<script id="myordersdetail" type='text/html'>
+			<ul class="order-list myorder-list">
+				<% if(data['gooddetails'] && data['gooddetails'].length) {%>
+					<%var len = data['gooddetails'].length;%>
+					<%for (var i = 0; i < len; i++) {%>
+						<% var val = data['gooddetails'][i]; %>
+						<li>
+							<dl class="order-dl1 borderbot-none">
+								<dt class="left"><a href="./goods_detail.html?id=<%=val['goods_common_id'];%>"><img class="img-bg" src="<%=val['goods_image'];%>" ></a></dt>
+									<dd class="right">
+										<p class="tit-p1">
+											<span class="left tit-name"><a href="./goods_detail.html?id=<%=val['goods_common_id'];%>"><%=val['goods_name'];%></a></span>
+											<span class="right">
+											<span>x</span>
+											<span><%=val['goods_num'];%></span>
+											</span>
+										</p>
+										<p class="tit-p1 total-price">
+											<span class="left spec-name"><%=val['goods_spec'];%></span>
+											<span>¥</span>
+											<span class="goodsum">
+											<%= returnFloat((parseFloat(val['goods_price'])*100)*parseInt(val['goods_num'])/100)%>
+											</span>
+										</p>
+									</dd>
+							</dl>
+						</li>
+					<%};%>
+				<%};%>
+			</ul>
+		</script>
+		
+		<script id="myorderscontent" type='text/html'>
+			<%if (data['orderlist'] && data['orderlist'].length>0) {%>
+				<%var datalen = data['orderlist'].length;%>
+				<%for (var i = 0; i < datalen; i++) {%>
+					<%var value = data['orderlist'][i];%>
+					<div class="myorder1" style="margin-bottom: 1rem;" osn="<%=value['order_sn']%>">
+						<h2 class="order-num1 order-tit-line">订单号：
+						<span><%=value['order_sn']%></span>
+						<%if (value['order_state']==10 && value['ordertime'] > 0) {%>
+						<span class="right ordertime">付款剩余：<%=value['ordertime']%>分</span>
+						<%};%>
+						</h2>
+						
+							<dl class="order-dl2">
+								<dt class="left"><a href="orderdetails.html?order_sn=<%=value['order_sn']%>"><img src="<%=value['gooddetails']['goods_image']%>" class="order-img1 img-bg"/></a></dt>
+								<dd>
+									<div class="dd-left left">
+										<a href="orderdetails.html?order_sn=<%=value['order_sn']%>">
+											<p class="dd-p1 margin-t1" style="width:150px;height:21px;overflow:hidden;"><%=value['gooddetails']['goods_name']%></p>
+										</a>
+										<p class="dd-p2"><span>共</span><span><%=value['goodcount']%></span><span>种商品</span></p>
+									</div>
+									<div class="dd-right left">
+										<p class="dd-p1 margin-t1"></p>
+										<p class="dd-p2 wordred state_text">
+										<% if(value['refund_state'] == 0 && value['order_state'] <20 && value['ordertime'] < 1) {%>
+											付款超时
+										<%} else {%>
+											<%=value['order_state_text']%>
+										<%}%>
+										</p>
+										<span class="detailstate detail-open"></span>
+									</div>
+								</dd>
+							</dl>
+						<span class='goodslist'></span>
+
+						<div class="order-btn1">
+							
+								<%if (value['refund_state'] == 1){%>
+									<span class="canceled left myorder-margin">审核中</span>
+								<%} else if(value['refund_state'] == 2){%>
+									<span class="canceled left myorder-margin">退款中</span>
+								<%} else if(value['refund_state'] == 3){%>
+									<span class="canceled left myorder-margin">已退款</span>
+								<%} else if(value['refund_state'] == 4){%>
+									<span class="canceled left myorder-margin">拒绝退款</span>
+								<%} else if(value['order_state'] == 0 || (value['order_state'] <20 && value['ordertime'] < 1)) {%>
+									<span class="canceled left myorder-margin">已取消</span>
+								<%}%>
+							<% if(value['order_state'] == 0 || (value['order_state'] <20 && value['ordertime'] < 1)) {%>
+								<span class="delebtn1 borderred wordred right myorder-margin" >删除订单</span>
+								<% if (value['return_state'] == 0 && value['refund_state'] != 0) {%>
+									<a href="refundproductlist.html?refund_sn=<%=value['refund_sn']%>" class="btn-border1 right myorder-margin">查看退款</a>
+								<%};%>
+							<%} else if(value['order_state'] == 10 && value['ordertime'] > 0){%>
+								<span class="dd-p2 order_amount">应付：¥<%=value['order_amount']%></span>
+								<a class="btn-border1 borderred wordred right myorder-margin" href="./pay.html?order_sn=<%=value['order_sn']%>">付款</a>
+								<span class="btn-border1 right cancel myorder-margin">取消订单</span>
+							<%} else if(value['order_state'] == 20){%>
+								<%if (value['lock_state'] != 1 && value['return_state'] == 0 && value['refund_state'] == 0) {%>
+									<a href="refund.html?order_sn=<%=value['order_sn']%>" class="btn-border1 right myorder-margin">申请退款</a>
+								<%} else if (value['return_state'] == 0 && value['refund_state'] != 0) {%>
+									<a href="refundproductlist.html?refund_sn=<%=value['refund_sn']%>" class="btn-border1 right myorder-margin">查看退款</a>
+								<%};%>
+							<%} else if(value['order_state'] == 30){%>
+								<span class="btn-border1 borderred wordred surebtn3 right myorder-margin">确认收货</span>
+								<a href="express_detail.html?order_sn=<%=value['order_sn']%>" class="btn-border1 right myorder-margin">查看物流</a>
+							<%} else if(value['order_state'] == 40){%>
+								<a href="javascript:;" class="rubbish btn-border1 borderred wordred right myorder-margin">
+									删除订单
+								</a>
+								 
+								<a href="orderevaluate.html?order_sn=<%= value['order_sn'] %>" class="btn-border1 borderred wordred right myorder-margin">
+									商品评价
+								</a>
+								<a href="express_detail.html?order_sn=<%=value['order_sn']%>" class="btn-border1 right myorder-margin">查看物流</a>	
+								
+							<%};%>
+							<div style="width:100%;clear:both;">
+							</div>
+						</div>
+					
+							<!--当点击确认收货时提示-->
+							<div class="alertbox order-remind order-take" style="display:none">
+								<p class="alert-p">请确认您已收到了商品</p>
+								<div class="btnbox1">
+									<span class="cancelbtn1 order-cancel1">取消</span>
+									<span class="surebtn1 order-sure1 o-take">确定</span>
+								</div>
+							</div>
+							<!--当点击取消订单时提示-->
+							<div class="alertbox order-remind order-cancel" style="display:none">
+								<p class="alert-p">要取消此订单？</p>
+								<div class="btnbox1">
+									<span class="cancelbtn1 order-cancel1">取消</span>
+									<span class="surebtn1 order-sure1 cancel-y">确定</span>
+								</div>
+							</div>
+							<!--当点击删除订单时提示-->
+							<div class="alertbox order-remind order-dele" style="display:none">
+								<p class="alert-p">要删除此订单？</p>
+								<div class="btnbox1">
+									<span class="cancelbtn1 order-cancel1">取消</span>
+									<span class="surebtn1 order-sure1 o-dele">确定</span>
+								</div>
+							</div>
+							
+							<!--当点击删除订单时提示-->
+							<div class="alertbox order-remind order-rubbish" style="display:none">
+								<p class="alert-p">要删除此订单？</p>
+								<div class="btnbox1">
+									<span class="cancelbtn1 order-cancel1">取消</span>
+									<span class="surebtn1 order-sure1 o-rubbish">确定</span>
+								</div>
+							</div>
+					</div>
+				<%};%>
+			<%} else {%>
+				<div class="img-center">
+					<img src="img/module1.jpg" alt="" class="coupon-null-img"/>
+					<h4 class="coupon-tit">暂无订单</h4>
+				</div>
+			<%};%>
+		</script>
+		<!--遮罩层-->
+		<div class="cover"  style="display:none"></div>
+		<script type="text/javascript">
+			redirectindex();
+			$(function(){
+				$('.goback-header').find('.back-icon').unbind('click').click(function() {
+					window.location.href = WapSiteUrl + '/member.html';
+				});
+				getmyorders();
+				/*确认收货提示*/
+				$(document).on('click','.surebtn3',function(){
+        			$('.cover').css('display','block');
+        			$(this).parent().siblings('.order-take').css('display','block');
+           		});
+           		/*确认收货操作*/
+           		$(document).on('click','.o-take',function(){
+       				var this_ = $(this);
+	            	var osn = this_.parents('.myorder1').attr('osn');
+	            	var takecallback = function (info){
+						if(info['code']){
+							shopdz_alert(info['msg'],1,function(){ window.location.reload();});
+						}else{
+							shopdz_alert('确认收货成功！',0,function(){
+								this_.parents('.myorder1').find('.state_text').html('已收货');
+								this_.parent().parent().prev().prepend('								<a href="javascript:;" class="rubbish btn-border1 borderred wordred right myorder-margin">删除订单</a><a href="orderevaluate.html?order_sn=' + osn + '" class="btn-border1 borderred wordred right myorder-margin">商品评价</a>');
+	            				this_.parent().parent().prev().find('.surebtn3').remove();
+							});
+						}
+					};
+	            	takeorders(osn, takecallback);
+	            });
+	            /*删除订单提示*/
+	            $(document).on('click','.delebtn1',function(){
+            		$('.cover').css('display','block');
+            		$(this).parent().siblings('.order-dele').css('display','block');
+            	}); 
+            	/*移除此订单*/
+	            $(document).on('click','.o-dele',function(){
+            		var this_ = $(this);
+	            	var osn = this_.parents('.myorder1').attr('osn');
+	            	var delcallback = function (info) {
+						if(info['code']){
+							shopdz_alert(info['msg'],1,function(){ window.location.reload();});
+						}else{
+							shopdz_alert('删除成功！',0,function(){
+								this_.parents('.myorder1').remove();
+							});
+						}
+					};
+	            	delorders(osn, delcallback);
+	            });
+				
+				$(document).on('click','.rubbish',function(){
+					var this_ = $(this);
+					$('.cover').css('display','block');
+					$(this).parent().siblings('.order-rubbish').css('display','block');
+					$('.o-rubbish').on('click',function() {
+					var osn = this_.parents('.myorder1').attr('osn');
+					
+	        		var callback = function (info) {
+						if(info['code']){
+							shopdz_alert(info['msg'],1,function(){ window.location.reload();});
+						}else{
+							shopdz_alert('删除成功！',0,function(){
+								this_.parents('.myorder1').remove();
+							});
+						}
+					};
+	        			rubbishorder(osn, callback);
+					})
+				}
+				);
+	            /*取消订单*/
+            	$(document).on('click','.cancel',function(){
+        			var this_ = $(this);
+        			var osn = this_.parents('.myorder1').attr('osn');
+        			$('.cover').css('display','block');
+					$(this).parent().siblings('.order-cancel').css('display','block');
+					$(this).parent().siblings('.order-cancel').find('.cancel-y').click(function(){
+	        			var cancelcallback = function (info){
+							if(info['code']){
+								shopdz_alert(info['msg'],1,function(){//window.location.reload();
+								});
+							}else{
+								shopdz_alert('取消成功！',0,function(){
+									var del = $('<span class="delebtn1 borderred wordred right myorder-margin">删除订单</span>');
+			            			this_.after(del);
+			            			this_.parents('.myorder1').find('.state_text').html('已取消');
+			            			this_.parents('.myorder1').find('.order_amount').remove();
+			            			this_.parents('.myorder1').find('.ordertime').remove();
+			            			this_.prev().remove();
+			            			this_.remove();
+								});
+							}
+						};
+	        			cancelorders(osn, cancelcallback);
+	        		});
+            	});
+	            /*关闭弹出的提示框*/
+           		$(document).on('click','.cancelbtn1,.surebtn1',function(){
+	            	$('.cover').css('display','none');
+	            	$('.order-remind').css('display','none');
+	            });
+	            $(document).on('click','.detailstate',function(){
+					_this = this;
+	            	if($(this).hasClass('detail-open')){
+	            		$(this).removeClass('detail-open').addClass('detail-stop');
+						osn = $(this).parents('.myorder1').attr('osn');
+						var myorderdetailscallback = function (info){
+							if(info['code']){
+								shopdz_alert(info['msg'],1,function(){//window.location.reload();
+								});
+							}else{
+								var html = template('myordersdetail',info);
+								$(_this).parents('.myorder1').find('.goodslist').html(html);
+								$(_this).parents('.order-dl2').next().slideDown();
+							}
+						};
+						var isnone = $(_this).parents('.myorder1').find('.goodslist').html();
+						
+						if(isnone ==''){
+							getorderdetails(osn,myorderdetailscallback);
+						}else{
+							$(this).parents('.order-dl2').next().slideDown();
+						}
+	            	}else{
+	            		$(this).removeClass('detail-stop').addClass('detail-open');
+	            		$(this).parents('.order-dl2').next().slideUp();
+	            	}
+	            })
+			})
+		</script>
+		<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixinshare.js"></script>
+	</body>
+</html>

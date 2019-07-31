@@ -1,0 +1,1122 @@
+﻿/*首页样式index.html开始*/
+
+body, button, input, keygen, legend, select, textarea{
+    color: #333;
+    outline: 0;
+    font-family:"microsoft yahei", helvetica,PingFangSC-Regular,'Heiti SC';
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+html,body{
+	width: 100%;
+	font-family:"microsoft yahei", helvetica,PingFangSC-Regular,'Heiti SC';
+	min-height: 100%;
+}
+body {
+	height: 100%;
+}
+
+
+/*媒体查询*/
+@media screen and (min-width:319px) and (max-width:360px){
+	html,body {
+		font-size: 60%;
+	}
+	.basket .cart-list-dd {
+		padding-top: 1.5rem !important;
+	}
+	.shop-cart-have{
+		position: absolute;
+		top:0 ;
+		right: -3px;
+		background: #AB2B2B;
+		border-radius: 50%;
+		-webkit-border-radius: 50%;
+		-moz-border-radius: 50%;
+		-o-border-radius: 50%;
+		-ms-border-radius: 50%;
+		color: #fff;
+		text-align: center;
+		font-size: 1rem;
+		width: 1.4rem;
+		height:1.4rem;
+		line-height: 1.7rem;
+		display: none;
+		z-index: 33;
+	}
+	
+}
+@media screen and (min-width:361px) and (max-width:400px){
+	html,body {
+		font-size:62.5%;
+	}
+	.basket .cart-list-dd {
+		padding-top: 1.8rem !important;
+	}
+	.shop-cart-have{
+		position: absolute;
+		top:0 ;
+		right: -3px;
+		background: #AB2B2B;
+		border-radius: 50%;
+		-webkit-border-radius: 50%;
+		-moz-border-radius: 50%;
+		-o-border-radius: 50%;
+		-ms-border-radius: 50%;
+		color: #fff;
+		text-align: center;
+		font-size: 1rem;
+		width: 1.4rem;
+		height:1.4rem;
+		line-height: 1.7rem;
+		display: none;
+		z-index: 33;
+	}
+}
+
+
+@media screen and (min-width:401px) and (max-width:450px){
+	html,body {
+		font-size: 65%;
+	}
+	.basket .cart-list-dd {
+		padding-top: 1.2rem !important;
+	}
+	.order-dl2 .margin-t1 {
+		margin-top: 1.5rem;
+	}
+	.shop-cart-have{
+		position: absolute;
+		top:0 ;
+		right: -3px;
+		background: #AB2B2B;
+		border-radius: 50%;
+		-webkit-border-radius: 50%;
+		-moz-border-radius: 50%;
+		-o-border-radius: 50%;
+		-ms-border-radius: 50%;
+		color: #fff;
+		text-align: center;
+		font-size: 1rem;
+		width: 1.4rem;
+		height:1.4rem;
+		line-height: 1.7rem;
+		display: none;
+		z-index: 33;
+	}
+}
+@media screen and (min-width:451px){
+	html,body {
+		font-size: 65%;
+	}
+	.basket .cart-list-dd {
+		padding-top: 1.8rem !important;
+	}
+	.order-dl2 .margin-t1 {
+		margin-top: 2.5rem;
+	}
+	.shop-cart-have{
+		position: absolute;
+		top:0 ;
+		right: -3px;
+		background: #AB2B2B;
+		border-radius: 50%;
+		-webkit-border-radius: 50%;
+		-moz-border-radius: 50%;
+		-o-border-radius: 50%;
+		-ms-border-radius: 50%;
+		color: #fff;
+		text-align: center;
+		font-size: 1rem;
+		width: 1.4rem;
+		height:1.4rem;
+		line-height: 1.4rem;
+		display: none;
+		z-index: 33;
+	}
+	
+}
+
+*{margin: 0;padding: 0;border: 0;}
+input[type="text"]:-webkit-autofill,input[type="number"]:-webkit-autofill,input[type="password"]:-webkit-autofill { 
+-webkit-box-shadow: 0 0 0px 1000px white inset !important; 
+-moz-box-shadow: 0 0 0px 1000px white inset !important;
+box-shadow: 0 0 0px 1000px white inset !important;
+outline: none;
+/*border: 1px solid #CCC!important;*/  
+}
+/*input[type="button"],input[type="submit"],input[type="date"],input[type="text"],input[type="reset"] {
+ -webkit-appearance: none;
+ -webkit-tap-highlight-color:rgba(0,0,0,0);
+ border-radius: 0;
+ }*/
+input[type="number"] {
+	-webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+/*input[type="checkbox"] {
+	-webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}*/
+input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+}
+input::-webkit-outer-spin-button {
+-webkit-appearance: none;
+} 
+ textarea {  -webkit-appearance: none;}   
+/*.button{ border-radius: 0; } 
+*/
+input[type="button"]{
+	cursor: pointer;
+}
+.marginT0 {
+	margin-top: 0 !important;
+}
+.swiper-container{
+	cursor: pointer;
+}
+.radius3{
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-o-border-radius: 3px;
+	-ms-border-radius: 3px;
+}
+.radius5{
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	-ms-border-radius: 5px;
+}
+.radius10{
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	-ms-border-radius: 10px;
+}
+.pointer{
+	cursor: pointer;
+}
+.auto{
+	cursor: auto !important;
+}
+.text-right{
+	text-align: right;
+}
+.icon-span-opacity{
+	opacity: 0;
+}
+.content-top {
+	margin-top: 4rem !important;
+}
+.contentT {
+	padding-top: 4rem;
+	padding-bottom: 0 !important;
+}
+.content-bot {
+	margin-bottom: 4.5rem !important;
+}
+.content-mar {
+	padding-top: 4rem;
+	padding-bottom:2rem !important;
+} 
+.marginB {
+	margin-bottom: 4.5rem !important;
+}
+.wrapper{
+	width: 100%;
+	min-height: 100%;
+}
+.bgfa {
+	background: #fafafa;
+}
+.redbg {
+	background: #ab2b2b;
+}
+.foot-fixed{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	height: 4.5rem;
+	width: 100%;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	background: #f9f9f9;
+	z-index: 23;
+	cursor: pointer;
+}
+.cover{
+	width: 100%;
+	height: 100%;
+	background: #000;
+	opacity: .3;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 887;
+	display: none;
+	cursor: pointer;
+}
+.comCover {
+	width: 100%;
+	height: 100%;
+	background: #000;
+	opacity: .3;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 24;
+	display: none;
+	cursor: pointer;
+}
+.none{display: none;}
+.borderred{
+	border:1px solid #AB2B2B !important;
+	cursor: pointer;
+}
+.marginB-no{margin-bottom: 0 !important;}
+.left{float: left;}
+.right{float: right;}
+.font-red {
+	color: #ab2b2b !important;
+}
+
+
+/*头部样式开始*/
+.header-box{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 886;
+	border-bottom: 1px solid #f0f0f0;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+}
+.index-header{
+	height: 4rem;
+	background: #fff;
+	position: relative;
+}
+.logo{
+	display: inline-block;
+	position: absolute;
+	top:1.2rem;
+	left:50%;
+	width: 10rem;
+	margin-left: -5rem;
+	max-height:2.5rem;
+}
+.img-none{
+	position: absolute;
+	width:3.5rem;
+	/*display: inline-block;*/
+	top:0;
+	right: 1.2rem;
+	background: #fff;
+	display: none;
+}
+.head-cartimg{
+	display: inline-block;
+	position: absolute;
+	top:.5rem;
+	right:1.5rem;
+	width: 3rem;
+	height: auto;
+}
+.head-more {
+	display: inline-block;
+	position: absolute;
+	top:.5rem;
+	right:1.5rem;
+	width: 2rem;
+	height:2rem;
+}
+.head-moreimg {
+	background: url(../img/more_b.png);
+	background-size: 100% 100%;
+}
+.head-moreimgred {
+	background: url(../img/more_r.png);
+	background-size: 100% 100%;
+}
+.back-icon{
+	display: inline-block;
+	position: absolute;
+	top:.8rem;
+	left:1.5rem;
+	width: 1.3rem;
+	height: auto;
+	cursor: pointer;
+}
+.head-tit{
+	text-align: center;
+	font-size: 1.6rem;
+	color: #777;
+	font-weight: normal;
+	line-height:2.5;
+	width: 50%;
+    margin: 0 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.toggle-icon{
+	position: absolute;
+	top:0;
+	left: 1.5rem;
+	width: 3.5rem;
+	height: 3.5rem;
+	display: inline-block;
+}
+.toggle-img{
+	width:3.5rem;
+	display: inline-block;
+}
+.toggle-div{
+	position: absolute;
+	top: 4.1rem;
+	left: 0;
+	height: 6rem;
+	background: #fff;
+	width: 100%;
+	display: none;
+}
+.toggle-div>li{
+	float: left;
+	width: 25%;
+}
+/*头部样式结束*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*增加的样式*/
+.foot-btnbox {
+	overflow: hidden;
+	zoom: 1;
+	background: #fff;
+}
+.foot-combtn {
+	display: inline-block;
+	box-sizing: border-box;
+	height: 100%;
+	width: 50%;
+	float: left;
+	font-size: 1.4rem;
+	text-align: center;
+	line-height: 4.5rem;
+}
+.foot-combtn .btn-price {
+	padding-right: 0.5rem;
+}
+.foot-leftBtn {
+	color: #666;
+	background: #fff;
+	border-top: 1px solid #e5e5e5;
+}
+.foot-rightBtn {
+	color: #fff;
+	background: #ab2b2b;
+	border-top: 1px solid #e5e5e5;
+}
+
+
+
+
+
+
+
+/*拼团首页页面Group.html样式开始*/
+.tab-titleBox {
+	width: 100%;
+	position: fixed;
+	top: 4.5rem;
+	left: 0;
+	text-align: center;
+	width: 100%;
+	z-index: 10;
+	height: 4rem;
+	background: #fff;
+}
+.tab-title {
+	display: inline-block;
+	text-align: center;
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	zoom: 1;
+	height: 100%;
+}
+.tab-title:after {
+    content: "";
+    clear: both;
+    display: block;
+    height: 0;
+    overflow: hidden;
+}
+.tab-title li {
+	float: left;
+	height: 3.8rem;
+	margin: 0 14%;
+	font-size: 1.4rem;
+	line-height: 3.8rem;
+	width: 22%;
+	text-align: center;
+}
+.tab-content {
+	padding-top: 4.2rem;
+}
+.groupBor {
+	position: absolute;
+	z-index: 5;
+	height: 0.25rem;
+	width: 22%;
+	background: #ab2b2b;
+	bottom: -1px;
+	left: 14%;
+    overflow: hidden;
+    text-align: center;
+}
+.groupActive {
+	display: block;
+	-webkit-transition: left 1s ease-in-out;
+	-moz-transition: left 1s ease-in-out;
+	-o-transition: left 1s ease-in-out;
+	-ms-transition: left 1s ease-in-out;
+	left: 6rem;
+}
+.group-list {
+	width: 100%;
+	display: none;
+	border-top: 1px solid #e5e5e5;
+	margin-top: 4px;
+}
+.show {
+	display: block;
+}
+.groupBan {
+	display: block;
+	width: 100%;
+}
+.playGroup {
+	width: 92%;
+	padding: 1.4rem 4% 1rem 4%;
+	color: #666;
+	overflow: hidden;
+	zoom: 1;
+	border-bottom: 1px solid #e6e6e6;
+}
+.playGroup a {
+	display: block;
+	height: 100%;
+	width: 100%;
+}
+.playGroup .playGroup-tit {
+	font-size: 1.4rem;
+	line-height: 1.8rem;
+	float: left;
+	margin-right: 1rem;
+}
+.playGroup .playGroup-point {
+	display: inline-block;
+	vertical-align: middle;
+	height: 1.4rem;
+	margin: 0 0 0.3rem 0;
+	float: right;
+}
+.groupStep-list {
+	overflow: hidden;
+	zoom: 1;
+	padding: 0.5rem 4%;
+}
+.groupStep-list li {
+	float: left;
+	font-size: 1.2rem;	
+	line-height: 1.8rem;
+	width: 25%;
+}
+.groupStep-list .groupStep-num {
+	display: inline-block;
+	width: 1.4rem;
+	height: 1.4rem;
+	line-height: 1.5rem;
+	text-align: center;
+	background: #ccc;
+	border-radius: 50%;
+	margin: 0 0.5rem;
+	position: relative;
+	top: 0.25rem;
+	overflow: hidden;
+}
+.commodityImg-box {
+	padding-top: 1rem;
+	border-top: 1px solid #e6e6e6;
+	position: relative;
+	background: #fafafa;
+}
+.commodityImg {
+	display: block;
+	width: 100%;
+}
+.groupIntroduce {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 3.2rem;
+	width: 100%;
+}
+.introduceCover {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: #fff;
+	opacity: 0.5;
+	z-index: 2;
+	width: 100%;
+	height: 100%;
+}
+.introduceCon {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 3;
+	padding: 0.7rem 4%;
+	width: 92%;
+	height: 1.8rem;
+	overflow: hidden;
+	zoom: 1;
+}
+.groupPerson-num {
+	background: #ab2b2b;
+	color: #fff;
+	font-size: 1.2rem;
+	display: inline-block;
+	height: 1.8rem;
+	line-height: 1.8rem;
+	padding: 0 0.6rem;
+	border-radius: 2px;
+	float: left;
+}
+.groupHead {
+	display: inline-block;
+	height: 1.5rem;
+	float: left;
+	margin: 0.15rem 0.3rem 0.15rem 1rem;
+}
+.groupHead-welfare {
+	float: left;
+	font-size: 1.2rem;
+	line-height: 1.8rem;
+	color: #ab2b2b;
+}
+.group-comDet {
+	padding: 0 4%;
+	background: #fff;
+}
+.group-comDet .group-comName {
+	font-size: 1.4rem;
+	color: #333;
+	line-height: 2.2rem;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	padding: 0.8rem 0 0.1rem 0;
+}
+.group-comDet .group-comDescribe {
+	font-size: 1.2rem;
+	color: #808080;
+	line-height: 1.4rem;
+	padding: 0.4rem 0;
+}
+.groupOpen {
+	overflow: hidden;
+	zoom: 1;
+	padding: 0.5rem 0 1rem 0;
+}
+.group-comPrice {
+	float: left;
+	line-height: 3rem;
+}
+.group-newPrice {
+	color: #ab2b2b;
+	font-size: 2rem;
+	padding-right: .8rem;
+	/*font-weight: 600;*/
+}
+.group-oldPrice {
+	color: #999;
+	font-size: 1.2rem;
+	text-decoration: line-through;
+}
+.groupOpen-btn {
+	float: right;
+	display: inline-block;
+	height: 3rem;
+	line-height: 3rem;
+	border: none;
+	border-radius: 3px;
+	font-size: 1.4rem;
+	padding:  0 2.8rem;
+	color: #fff;
+	background: #ab2b2b;
+}
+
+/*拼团首页页面Group.html样式结束*/
+
+
+
+/*拼团详情页groupDet.html页面样式开始*/
+.groupDet-det .group-comName {
+	font-size: 1.6rem;
+	padding: 1rem 0 0.4rem 0;
+}
+.groupDet-det .group-comDescribe {
+	font-size: 1.3rem;
+}
+.groupDet-spec {
+	padding: 1rem 0 1.5rem 0;
+}
+.group-comSpec {
+	display: inline-block;
+	padding: 0.3rem 0.6rem;
+	background: #f0f0f0;
+	color: #666;
+	font-size: 1.2rem;
+	border-radius: 2px;
+}
+.group-comSpec span {
+	padding: 0 0.2rem;
+}
+.timeLimit {
+	display: inline-block;
+	margin-left: 1rem;
+	font-size: 1.2rem;
+	color: #ab2b2b;
+}
+.timeLimit .time-icon {
+	display: inline-block;
+	height: 1.2rem;
+	vertical-align: middle;
+	margin-right: 0.5rem;
+	margin-top: -0.1rem;
+}
+.group-commodityDet {
+	border-bottom: 1px solid #e5e5e5;
+}
+.group-commodityDet .commodityImg-box {
+	padding-top: 0;
+}
+.playGroup-way {
+	margin: 1rem 0;
+	border-top: 1px solid #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
+	background: #fff;
+}
+.playGroup-way .playGroup-remind {
+	color: #ab2b2b;
+	font-size: 1.2rem;
+	padding: 0.5rem 0;
+	margin: 0 4%;
+	border-top: 1px solid #e5e5e5;
+	line-height: 1.8rem;
+}
+.commodity-details {
+	width: 96%;
+	padding: 0 2%;
+	border-top: 1px solid #e5e5e5;
+	background: #fff;
+}
+.commodityDet-tit {
+	font-size: 1.5rem;
+	font-weight: normal;
+	color: #666;
+	padding: 0.5rem 0 0.5rem 2%;
+}
+/*拼团详情页groupDet.html页面样式结束*/
+
+
+/*我的拼团页面Group.html样式开始*/
+.myGroup-box {
+	margin: 1rem 0;
+	background: #fff;
+}
+.myGroup-commodity {
+	overflow: hidden;
+	zoom: 1;
+	padding: 1rem 4%;
+	width: 92%;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.myGroup-commodity .myGroup-comDt {
+	float: left;
+	width: 30%;
+}
+.myGroup-comDt .myGroup-comImg {
+	display: block;
+	width: 100%;
+}
+.myGroup-commodity .myGroup-comDd {
+	float: left;
+	box-sizing: border-box;
+	padding-left: 0.5rem;
+	width: 70%;
+}
+.myGroup-statu {
+	padding-bottom: 0.8rem;
+	overflow: hidden;
+	zoom: 1;
+}
+.myGroup-statuBtn {
+	float: left;
+    font-size: 1.2rem;
+    display: inline-block;
+    height: 1.8rem;
+    line-height: 1.8rem;
+    width: 6rem;
+    border-radius: 2px;
+    text-align: center;
+    margin-left: 0.5rem;
+}
+.myGroup-progressBtn {
+	background: #ff9000;
+	color: #fff;
+}
+.myGroup-failedBtn {
+	background: #ededed;
+	color: #666;
+}
+.myGroup-successBtn {
+	background: #ab2b2b;
+	color: #fff;
+}
+.myGroup-comName {
+	width: 100%;
+	font-size: 1.3rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	padding-bottom: 0.5rem;
+}
+.myGroup-comSpec {
+	color: #999;
+	font-size: 1.2rem;
+}
+.myGroup-comSpec>span {
+	padding-right: 0.3rem;
+}
+.myGroup-comDet {
+	padding-top: 0.5rem;
+}
+.myGroup-btnBox {
+	overflow: hidden;
+	zoom: 1;
+	padding: 1rem 4%;
+	text-align: center;
+}
+.myGroup-btn {
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	font-size: 1.4rem;
+	text-align: center;
+	padding: 0.5rem 0;
+	width: 48%;
+	color: #666;
+	float: left;
+	box-sizing: border-box;
+}
+.marR4 {
+	margin-right: 4%;
+}
+.myGroup-progressWord {
+	text-align: left;
+	font-size: 1.4rem;
+	color: #ab2b2b;
+	float: left;
+	display: inline-block;
+	width: 48%;
+	padding: 0.5rem 0;
+}
+.mustPay {
+	background: #ab2b2b;
+	color: #fff;
+	border: none;
+}
+/*我的拼团页面Group.html样式结束*/
+
+/*团邀请页面groupInvitation.html样式开始*/
+.mine-group-limit {
+	display: inline-block;
+	overflow: hidden;
+	zoom: 1;
+	padding-left: 0.8rem;
+	padding-bottom: 0.1rem;
+}
+.mine-group-limit .limit-word {
+	width: 3rem;
+	text-align: center;
+	font-size: 1rem;
+	color: #999;
+	line-height: 1rem;
+	float: left;
+}
+.mine-group-limit .count-down {
+	font-size: 1.6rem;
+	float: left;
+}
+.mine-group-limit .count-down span.count-down-num {
+	border-radius: 2px;
+	border: 1px solid #ccc;
+	font-size: 1.4rem;
+	width: 2rem;
+	height: 2rem;
+	line-height: 2rem;
+	box-sizing: border-box;
+	display: inline-block;
+	text-align: center;
+	background: #ededed;
+}
+.groupInvi-btnBox {
+	text-align: center;
+	padding: 1rem 4% 1.8rem 4%;
+	background: #fff;
+}
+.groupInvi-btnBox .invite-btn {
+	background: #ab2b2b;
+	width: 40%;
+	height: 3.2rem;
+	font-size: 1.3rem;
+	line-height: 3.2rem;
+	border-radius: 3px;
+	color: #fff;
+	display: inline-block;
+	text-align: center;
+}
+.poor-per {
+	padding-bottom: .5rem;
+	font-size: 1.5rem;
+	font-weight: 600;
+}
+.poor-per .poor-per-num {
+	color: #ab2b2b;
+	font-size: 2.4rem;
+	font-weight: normal;
+}
+.poor-remind {
+	color: #999;
+	padding-bottom: 1.5rem;
+	font-size: 1.2rem;
+}
+.group-member-box {
+	width: 100%;
+	padding-bottom: 1.5rem;
+	border-top: 1px solid #ededed;
+	border-bottom: 1px solid #ededed;
+	background: #fafafa;
+}
+.group-member-list {
+	width: 100%;
+	padding: 1rem 20%;
+	box-sizing: border-box;
+}
+.group-member-list>li {
+	width: 100%;
+	padding-bottom: 1rem;
+	display: -moz-box;
+	display: -webkit-box;
+	display: box;
+	-moz-box-orient: horizontal;
+	-webkit-box-orient: horizontal;
+	box-orient: horizontal;
+	-moz-box-align: center;
+	-webkit-box-align: center;
+	box-align: center;
+	-moz-box-pack: center;
+	-webkit-box-pack: center;
+	box-pack: center;
+}
+.group-member-list>li div.group-portrait {
+	width: 3.6rem;
+	height: 3.6rem;
+	margin: 0 0.2rem;
+	border-radius: 50%;
+	/*float: left;*/
+}
+.group-member-list>li div.group-portrait img.protrait-img {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.group-member-list>li div.head-portrait {
+	width: 4rem;
+	height: 4rem;
+	position: relative;
+	margin: 0;
+}
+/*.group-member-list>li.group-head {
+	position: relative;
+}*/
+.group-member-list>li.group-head p.group-member-time {
+	color: #666;
+}
+.group-member-list>li.group-head p.group-member-time span.member-action {
+	color: #666;
+}
+.group-member-list>li div.head-portrait img.head-img-remind {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 3rem;
+	display: inline-block;
+}
+.group-member-time {
+	font-size: 1.3rem;
+	line-height: 3.5rem;
+	color: #666;
+	border-bottom: 1px solid #ddd;
+	margin-left: 0.5rem;
+}
+.group-member-time span.member-action {
+	color: #999;
+	padding-left: 1rem;
+}
+.group-member-more {
+	width: 100%;
+	display: box;
+	display: -webkit-box;
+	display: -moz-box;
+	-moz-box-orient: horizontal;
+	-webkit-box-orient: horizontal;
+	box-orient: horizontal;
+	-moz-box-pack: center;
+	-webkit-box-pack: center;
+	box-pack: center;
+	-moz-box-align: center;
+	-webkit-box-align: center;
+	box-align: center;
+}
+.group-member-more p.memebr-more-word {
+	color: #666;
+	font-size: 1.2rem;
+}
+.group-member-more img.member-more-jtr {
+	display: block;
+	height: 1.2rem;
+	margin-left: .6rem;
+}
+.protrait-head {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	display: inline-block;
+	width: 4rem;
+}
+.groupInvite-way {
+	margin: 0;
+	border-top: none;
+}
+.groupInvite-box {
+	margin: 1rem 0 0 0;
+}
+.btnBorderL {
+	border-right: 1px solid #e5e5e5;
+}
+/*团邀请页面groupInvitation.html样式结束*/
+
+/*弹框*/
+.comAlert-box {
+	width: 60%;
+	background: #fff;
+	position: fixed;
+	top: 34%;
+	left: 20%;
+	z-index: 25;
+	background: #fff;
+	border-radius: 3px;
+	display: none;
+}
+.comAlert-tit {
+	padding: 0.8rem 0;
+	text-align: right;
+}
+.comAlert-close {
+	display: inline-block;
+	padding: 0.5rem 0.3rem 0.5rem 0.8rem;
+	margin-right: 1rem;
+}
+.comAlert-closeIcon {
+	display: inline-block;
+	height: 1rem;
+}
+.comAlert-con {
+	text-align: center;
+	padding: 0 0 1.8rem 0;
+}
+.comAlert-word {
+	text-align: center;
+	font-size: 1.4rem;
+}
+.comAlert-btnBox {
+	text-align: center;
+	padding: 1rem 0;
+}
+.alert-onlyBtn {
+	display: inline-block;
+	width: 90%;
+	height: 3.8rem;
+	background: #ab2b2b;
+	border: none;
+	color: #fff;
+	font-size: 1.4rem;
+	text-align: center;
+	line-height: 3.8rem;
+	border-radius: 3px;
+}
+/*拼团成功或失败页面样式*/
+
+
+.groupStatu-icon {
+	position: absolute;
+	display: inline-block;
+	width: 7rem;
+	top: 20%;
+	right: 2rem;
+}
+.groupSuccess-btnBox {
+	padding: 1.5rem 4% 1.8rem 4%;
+}
+
+
+
+/*拼团成功或失败页面样式*/

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>	
+		<title>提现记录</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+	</head>
+	<body>
+		<div id="header_has_nav">
+		</div>
+		<!--wrapper开始-->
+		<div id="retreat" class="wrapper" style="background: #f7f7f7;">
+			<div class="content">
+				<div id="withdraw" class="show voucher-list" content="0"></div>
+			</div>
+		</div>
+		<!--wrapper结束-->
+		<script id="withdraw_content" type="text/html">
+			<div class="order-list3">
+			<% if(data['list'] && data['list'].length>0) {%>
+				<% var datalen = data['list'].length; %>
+				<% for (var i = 0; i < datalen; i++) {%>
+					<% var value = data['list'][i]; %>
+					<div class="myorder2">
+						<div class="myorder2-det">
+							<span class="myorder2-det-span left">申请单号：</span>
+							<p class="myorder2-det-p left"><%= value['cash_sn'] %></p>
+							<span class="myorder2-det-span left">申请时间：</span>
+							<p class="myorder2-det-p left"><%= value['add_time_text'] %></p>
+							
+							<span class="myorder2-det-span left">提现金额：</span>
+							<p class="myorder2-det-p left"><%= value['cash_amount'] %></p>
+						</div>
+						<div class="order-num1 order-num2">
+							<span class="audit-state left wordred state-word"><%= value['status_text'] %></span>
+							<a href="./withdrawproductlist.html?sn=<%= value['cash_sn'] %>" class="btn-border1 borderred wordred surebtn3 right">查看</a>
+						</div>
+					</div>
+				<% }; %>
+			<% }else{ %>
+				<div class="img-center">
+					<img src="img/refundImg.png" alt="" class="coupon-null-img"/>
+					<h4 class="coupon-tit">暂无提现记录</h4>
+				</div>
+			<% }; %>
+			</div>
+		</script>
+		<script type="text/javascript">
+		redirectindex();
+		var page_on_off = true;
+			$(function(){
+				/* 头部回退按纽 */
+				//$('.goback-header').find('.back-icon').unbind('click').click(function() {
+				//	window.location.href = WapSiteUrl + '/member.html';
+				//});
+				var url = ApiUrl + '/Spread/getwithdraw';
+				getdata(url,{key:key},function(info){
+					console.log(info);
+					if(info['code']){
+						shopdz_alert(info['msg']);
+					}else{
+						var html = template('withdraw_content', info);
+						$('#withdraw').html(html);
+						scrollgetdata(url, {key:key,page:1}, scrollgetdatacallback);
+					}
+				});
+				initPage();
+			})
+			function scrollgetdatacallback(info){
+				if(info['code']){
+					shopdz_alert(info['msg']);
+					$(window).scroll(function(){});
+					return ;
+				}
+				var html = template('withdraw_content', info);
+				$('#withdraw').append(html);
+				page_on_off = true;
+				initPage();
+			}
+		</script>
+		<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixinshare.js"></script>
+	</body>
+</html>

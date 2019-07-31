@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>登录</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<style type="text/css">
+			@media screen and (min-width:320px) and (max-width:340px){
+				.weixin-login{
+					margin: 2rem auto 1rem auto;
+				}
+			}
+			@media screen and (min-width:341px) and (max-width:360px){
+				.weixin-login{
+					margin: 8rem auto 1rem auto;
+				}
+			}
+			@media screen and (min-width:361px) and (max-width:380px){
+				.weixin-login{
+					margin: 11rem auto 1rem auto;
+				}
+			}
+			@media screen and (min-width:381px) and (max-width:400px){
+				.weixin-login{
+					margin: 11rem auto 1rem auto;
+				}
+			}
+			@media screen and (min-width:401px) and (max-width:450px){
+				.weixin-login{
+					margin: 13rem auto 1rem auto;
+				}
+			}
+			@media screen and (min-width:451px) and (max-width:540px){
+				.weixin-login{
+					margin: 16rem auto 1rem auto;
+				}
+			}
+			@media screen and (min-width:541px){
+				.weixin-login{
+					margin: 17rem auto 1rem auto;
+				}
+			}
+		</style>
+	</head>
+	<body style="min-height: 100%;">
+		<div class="wrapper">
+			<div class="content1">
+				<a href="index.html"><img class="sign-img1"/></a>
+				<div class="signbox">
+					<div class="signIn-box account">
+						<img src="img/accunt.png"/ class="sign-icon">
+						<input type="text" placeholder="请输入账号" id="sign-phone" class="sign-inp phone"/>
+						<span class="dele"></span>
+					</div>
+					<div class="signIn-box passW">
+						<img src="img/pwd.png" class="sign-icon"/>
+						<input type="password" style="ime-mode:disabled;" placeholder="请输入密码" id="sign-pword" class="sign-inp pword"/>
+					</div>
+					
+					<div class="sign-btn1">
+						<input type="button" value="登录" class="signbtn radius5" id="sign-btn1"/>
+						<div class="forget-box">
+							<p class="register right" id="register1">注册账号</p>
+							<p class="left"><a class="register" href="passwd-find.html">找回密码</a></p>
+						</div>
+
+					</div>
+					<div class="weixin-login">
+						<span class="other-remind">其他登录方式</span>
+						<div id="towxlogin">
+							<span class="wx-img" id="wxlogin" style="display:none"></span>
+							<span class="dx-img" id="tomlogin" style="display:none"></span>
+							<!--<p class="wx-word">微信登录</p>-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../static/js/jquery.md5.js" type="text/javascript"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/tmpl/login.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixinshare.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				var shop_name = getwebConf('shop_name');
+				if(shop_name !== false){
+					$('title').html('登录-'+shop_name);
+				}
+				initPage();
+			})
+		</script>
+	</body>
+</html>

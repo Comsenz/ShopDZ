@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>商品详情</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/swiper.min.css">
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/tmpl/AddSubstract.js"></script>
+	</head>
+	<body>
+		<!--wrapper开始-->
+		<div class="wrapper">
+			<!--header开始-->
+			<div class="header-box">
+				<div class="index-header">
+					<img src="img/logo.png" class="logo"/>
+					<a href="shopCart.html" class="shop-cart"><img src="img/cart.png" class="shop-cart-img"/><img src="img/redPoint.png" class="shop-cart-have"/></a>
+					<a href="signIn.html" class="sign-in">登录</a>
+				</div>
+			</div>
+			<!--header结束-->
+			<div class="content" style="background-color: #f7f7f7;">
+				<!--收藏/分享-->
+				
+				<!--焦点图轮播开始<-->
+				<div class="posi1">
+					<div class="details-icon-box">
+						<p class="details-icon"><span class="details-icon-span collect-icon collect-icon-cover"></span><!--<img src="img/collecticon2.png" alt="" class="details-icon-img"/>--></p>
+						<p class="details-icon"><span class="details-icon-span share-icon"><!--<img src="img/shareicon.png" alt=""  class="details-icon-img"/>--></p>
+					</div>
+					<div class="swiper-container">
+				        <div class="swiper-wrapper">
+				            <div class="swiper-slide"><img src="img/img-d1.jpg"/></div>
+				            <div class="swiper-slide"><img src="img/img-d2.jpg"/></div>
+				            <div class="swiper-slide"><img src="img/img-d3.jpg"/></div>
+				        </div>
+			        	<!-- Add Pagination -->
+			        	<div class="swiper-pagination"></div>
+			    	</div>
+				</div>
+				
+		    	<div class="details1">
+		    		<p class="details-tit1">精梳棉运动女袜（五双入）</p>
+		    		<p class="details-subtit1">色彩生动，彰显经典运动风</p>
+		    		<p class="details-price"><span>¥</span>49.00</p>
+		    	</div>
+		    	<div class="specbox">
+		    		<p class="spec-con"><span>蓝色、紫色、绿色、玫红、深灰</span><span>x</span><span>1</span><span class="jt-r"></span></p>
+		    	</div>
+		    	<div class="pro-parameter">
+		    		<p class="para-tit">商品参数</p>
+		    		<div class="para-con specification">
+		    			<span class="spec-span1">规格</span>
+		    			<span class="spec-span2">26-28cm</span>
+		    		</div><div class="para-con specification">
+		    			<span class="spec-span1">成分</span>
+		    			<span class="spec-span2">棉66.8%、锦纶30.5%、氨纶2.7%</span>
+		    		</div>
+		    		<div class="para-con specification">
+		    			<span class="spec-span1">颜色</span>
+		    			<span class="spec-span2">特白、深灰、藏青、黑色、浅灰</span>
+		    		</div>
+		    	</div>
+		    	<div class="img-box1">
+		    		<img src="img/img-d4.jpg" />
+		    		<img src="img/img-d5.jpg" />
+		    		<img src="img/img-d6.jpg" />
+		    	</div>
+		    	<div class="choice-foot foot-fixed foot-btn">
+					<a href="comment.html" class="choice-back"><img src="img/detail-comment.png" class="choice-back-img"/></a>
+					<input type="button" value="立即购买"  class="choice-com-btn now-buy" onclick="jumpPage1()"/>
+					<input type="button" value="加入购物车" class="choice-com-btn add-shopcart"/>
+				</div>
+			</div>
+	    	<!--规格选择开始-->
+	    	<div class="spec-none">
+				<dl class="spec-dl1">
+					<dt class="spec-dl1-dt"><img src="img/dl1.png"/></dt>
+					<dd class="spec-dl1-dd">
+						<p class="spec-dd-price">¥59.00</p>
+						<p class="spec-none-tit"><span>蓝色、紫色、绿色、玫红、深灰</span><span>x</span><span>1</span></p>
+					</dd>
+				</dl>
+				<div class="spec-choice-box">
+					<div class="spec-choice">
+						<p class="choice-tit">颜色</p>
+						<div class="choice-box1">
+							<ul class="choice-ul">
+								<li class="active-bor">蓝色、紫色、绿色、玫红、深灰<span class="active-bg"></span></li>
+								<li>绿色、玫红、<span></span></li>
+								<li>蓝色、紫色、绿色、玫红、深灰<span></span></li>
+								<li>蓝色、紫色、玫红、深灰<span></span></li>
+								<li>蓝色、紫色、、深灰<span></span></li>
+								
+							</ul>
+						</div>
+						<div class="size1">
+							<p class="choice-tit">数量</p>
+							<div class="jia-jian">
+								<span class="jian">-</span>
+								<input type="number" value="1" class="num-input"/>
+								<span class="jia">+</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="choice-foot foot-fixed foot-btn">
+							<span class="choice-back"><img src="img/detail-back.png" class="choice-back-img"/></span>
+							<!--<input type="button" value="立即购买"  class="choice-com-btn now-buy"/>-->
+							<input type="button" value="确定" class="choice-com-btn add-shopcart choice-sure"/>
+						</div>
+			</div>
+	    	<!--规格选择结束-->
+	    	<!--遮罩层-->
+	    	<div class="cover"></div>
+	    	<!--分享弹层-->
+	    	<div class="details-share-box">
+	    		<h1 class="share-tit">分享</h1>
+	    		<ul class="modular-box spread-list share-list">
+					<li class="modular-li wx-code">
+						<a href="#">
+							<img src="img/spread1.png" class="modular-img"/>
+							<p class="modular-word">微信分享</p>
+						</a>
+					</li>
+					<li class="modular-li code-li">
+						<a href="#">
+							<img src="img/spread2.png" class="modular-img"/>
+							<p class="modular-word">二维码</p>
+						</a>
+					</li>
+					<li class="modular-li">
+						<a href="#">
+							<img src="img/spread3.png" class="modular-img"/>
+							<p class="modular-word">复制链接</p>
+						</a>
+					</li>
+				</ul>
+				<h1 class="share-cancel">取消</h1>
+	    	</div>
+	    	<div id="address-remind" class="address-remind">加入成功</div>
+	    	<!--返回顶部-->
+    	<div style="display:none;" class="gotobtn" id="goTopBtn"><img border=0 src="img/goToTop.png"></div> 
+		</div>
+		<!--wrapper结束-->
+		
+	<script src="js/swiper.min.js"></script>
+	<script>
+	//焦点图
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        paginationClickable: true,
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: 2500,
+        autoplayDisableOnInteraction: false
+    });
+    
+    
+    //调用返回顶部的函数
+    goTopEx();
+ 
+    $(function(){
+    	$('.spec-con').on('click',function(){
+    		alert("0000");
+			$(".cover").css("display","block")
+			$('.spec-none').slideDown();
+		});
+		$(".choice-back,.cover").on('click',function(){
+			alert("1111");
+			$('.spec-none').slideUp();
+			$(".cover").css("display","none");
+		});
+		
+		//如果是点击加入购物车确定试弹出提示框
+		$('.choice-sure').on('click',function(){
+			$('.address-remind').fadeIn().delay(2000).fadeOut(0);
+		})
+    })
+    function jumpPage1(){
+    	self.location='settlement.html';
+    }
+     function Size2(){
+    	var specH=$(".spec-dl1").height();
+    	$(".spec-dl1-dt").height(specH);
+    	$(".spec-dl1-dt").width(specH);
+    	$(".spec-dl1-dd").css("padding-left",(specH+5)+'px');
+    }
+    Size2();
+	
+		$('.share-icon').bind('click',function(){
+			$('.cover').show();
+			$('.details-share-box').slideDown();
+		});
+		$('.share-cancel').bind('click',function(){
+			$('.cover').hide();
+			$('.details-share-box').slideUp();
+		})
+		
+		
+		$('.collect-icon').click(function(){
+			$(this).toggleClass('collect-icon-cover');
+		})
+    </script>
+	</body>
+</html>

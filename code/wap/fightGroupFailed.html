@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>组团失败</title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type="text/javascript" src="js/tmpl/fightgroup.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+		<script type="text/javascript" src="js/swiper.min.js"></script>
+	</head>
+	<body>
+		<div id="header_has_nav">
+		</div>
+		<!--wrapper开始-->
+		<div class="wrapper wrapper-bg">
+			<!--content开始-->
+			<div class="content contentT">
+			<div id="groupdetail"></div>
+			<script id="groupdetailcontent" type="text/html">
+				<!--拼团详情-->
+				<div class="fight-status-box">
+					<ul class="mine-group">
+						<li class="mine-list group-box-list">
+							<div class="mine-list-box">
+								<div class="group-img-box">
+									<img src="<%=data['group']['group_image']%>" alt="" class="group-img group-list-img"/>
+								</div>
+								<div class="group-con">
+									<div class="group-name">
+										<span class="group-new"><%=data['group']['group_name']%></span>
+										<p class="mine-group-name"><%=data['group']['goods_name']%></p>
+									</div>
+									<div class="fight-groups-det">
+										<img src="img/group2.png" class="fight-groups-icon" />
+										<p class="fight-det fight-per"><span class="fight-per-num"><%=data['group']['group_person_num']%>人团</span><span>￥</span><span class="fight-money"><%=data['group']['group_price']%></span></p>
+										<p class="fight-det fight-pointer"><img src="img/jt-r2.png" alt="" class="step-jtr"/></p>
+									</div>
+									<!--<div class="mine-group-limit">
+										<p class="limit-word">距离结束</p>
+										<p class="count-down"><span class="count-down-num t_h" id="t_h">00</span>：<span class="count-down-num t_m" id="t_m">00</span>：<span class="count-down-num t_s" id="t_s">00</span></p>
+									</div>-->
+								</div>
+							</div>
+							<div class="mine-group-btnbox2">
+								<p class="poor-per"><span class="poor-per-num fight-group-failed">组团失败</span></p>
+								<p class="poor-remind">我们会尽快为您退款，请耐心等待！</p>
+								<a href="fightGroupDet.html?active_id=<%=data['group']['id']%>" class="invite-btn">我要开团</a>
+							</div>
+						</li>
+					</ul>
+					<div class="group-member-box">
+						<ul class="group-member-list" style="padding-bottom:0px">
+						 <%for(var i = 0;i<3;i++){%>
+						 <%if(data['groupjoin'][i]){%>
+						 	<%var v = data['groupjoin'][i];%>
+							<li class="group-head">
+								<div class="group-portrait head-portrait">
+									<img src="<%=v['member_avatar']%>" alt="" class="protrait-img head-protrait-img"/>
+									<%if(data['groupinfo']['buyer_id'] == v['buyer_id']){%><p class="protrait-head">团长</p><%};%>
+								</div>
+								<p class="group-member-time"><%=v['add_time_text']%><span class="member-action"><%if(data['groupinfo']['buyer_id'] == v['buyer_id']){%>开团<%}else{%>参团<%};%></span></p>
+							</li>
+						<%};%>
+						<%};%>
+						</ul>
+						<ul class="group-member-list" style="padding-top:0px;display:none;">
+						 <%for(var i = 3;i<data['groupjoin'].length;i++){%>
+						 	<%var v = data['groupjoin'][i];%>
+							<li class="group-head">
+								<div class="group-portrait head-portrait">
+									<img src="<%=v['member_avatar']%>" alt="" class="protrait-img head-protrait-img"/>
+									<%if(data['groupinfo']['buyer_id'] == v['buyer_id']){%><p class="protrait-head">团长</p><%};%>
+								</div>
+								<p class="group-member-time"><%=v['add_time_text']%><span class="member-action"><%if(data['groupinfo']['buyer_id'] == v['buyer_id']){%>开团<%}else{%>参团<%};%></span></p>
+							</li>
+						<%};%>
+						</ul>
+						<%if(data['groupjoin'].length > 3){%>
+							<div class="group-member-more">
+								<p class="memebr-more-word">查看更多</p>
+								<img src="img/jiantouR.png" alt="" class="member-more-jtr"/>
+							</div>
+						<%};%>
+					</div>
+					<img src="img/groupF.png" alt="" class="group-status-img"/>
+				</div>
+				<!--拼团步骤-->
+				<div class="fight-step">
+					<img src="img/group1.png" alt="" class="step-img"/>
+					<div class="step-btn-box">
+						<a href="#">
+							查看详情
+							<img src="img/jt-r2.png" alt="" class="step-jtr"/>
+						</a>
+					</div>
+				</div>
+				<div class="fight-group-btnbox">
+					<a href="fightGroupList.html" class="group-btn">拼团首页</a>
+					<a href="mineGroup.html" class="group-btn">我的拼团</a>
+				</div>
+			</script>
+				
+			</div>
+			<!--content结束-->
+		</div>
+		<!--wrapper结束-->
+		<script type="text/javascript">
+			 function getRTime(EndTime){
+		        
+		    }
+		    $(function(){
+		    	redirectindex();
+		    	var wx = isWeiXin();
+				if(wx){
+			    	/* 展开收起拼团成员列表开始 */
+			    	groupjoinlist(".group-member-more",3);
+			    	initPage();
+			    	getgroupdetail();
+			    }else{
+			    	shopdz_alert('请在微信登陆！',1,function(){goBack();});
+			    }
+		    })
+    	
+		</script>
+	</body>
+</html>

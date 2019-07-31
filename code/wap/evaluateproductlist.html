@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>	
+		<title>评论详情</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/swiper.min.css">
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type="text/javascript" src="js/swiper.min.js"></script>
+		<script type="text/javascript" src="js/tmpl/retreat.js"></script>
+		<style type="text/css">
+			.swiper-pagination-bullet{
+				background: #fff;
+				opacity: .6;
+			}
+			.swiper-pagination-bullet-active{
+				background: #AB2B2B !important;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="header_has_nav">
+		</div>
+		<!--wrapper开始-->
+		<div id="details" class="wrapper" style="background: #f7f7f7;">
+		</div>
+		<script id="comment" type="text/html">
+			<div  class="content"> 
+				<div class="myorder2">
+					<% var comment = data['comment']; %>
+					<div class="comment-con">
+						<div class="name-time">
+							<div class="name1">
+								<img src="<%=comment['member_avatar']%>" class="person-head"/>
+								<span class="comment-limit"><%=comment['geval_frommembername']%></span>
+							</div>
+							<div class="time1"><%=comment['geval_addtime_text']%></div></div>
+						<p class="comment-word"><%=comment['geval_content']%></p>
+						<ul class="con-img-list comment-img-list">
+						<% if (comment['geval_image']) {%>
+							<%for (var o = 0; o < comment['geval_image'].length; o++) {%>
+								<li class="liW  imgW"><img src="<%=comment['geval_image'][o]%>" img-id="<%=o%>" class="comment-img"/></li>
+							<%};%>
+						<%}%>
+						</ul>
+					</div>
+				</div>
+				<div class="myorder2">
+					<h2 class="refund-product-tit">商品信息</h2>
+					<% var good = data['order']; %>
+					<a href="goods_detail.html?id=<%= good.goods_common_id %>">
+						<dl class="order-dl3" style="border-bottom: none;">
+							<dt class="left"><img src="<%= good['goods_image'] %>" class="order-img1 img-bg"/></dt>
+							<dd>
+								<div class="dd-left left">
+									<p class="dd-p1 margin-t1"><%= good['goods_name'] %></p>
+									<p class="dd-p3 comment-spec"><%=good['goods_spec']%></p>
+								</div>
+								<div class="dd-right left">
+									<p class="dd-p1 margin-t1">x&nbsp;<%= good['goods_num'] %></p>
+									<p class="dd-p3">¥&nbsp;<%= parseFloat(good['goods_price'])*parseInt(good['goods_num']) %></p>
+								</div>
+							</dd>
+						</dl>
+					</a>
+				</div>
+			</div>
+		</script>
+		<!--wrapper结束-->
+		<script type="text/javascript">
+		redirectindex();
+			$(function(){
+
+				var rec_id = get('rec_id');
+				var order_sn = get('order_sn');
+				getcomment(rec_id, order_sn);
+
+			})
+		</script>
+		<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixinshare.js"></script>
+	</body>
+</html>

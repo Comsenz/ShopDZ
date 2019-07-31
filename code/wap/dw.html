@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+     	<meta charset="utf-8">
+        <title>H5地理位置Demo</title>
+        
+    </head>
+    <body>
+        <div id="map" style="width:600px; height:400px">
+        </div>
+        <span id="demo"></span>
+    </body>
+    <script type="text/javascript">
+     	
+        if (navigator.geolocation) {
+            var options = {
+                // 指示浏览器获取高精度的位置，默认为false
+		        enableHighAccuracy: true,
+		        // 指定获取地理位置的超时时间，默认不限时，单位为毫秒
+		        timeout: 5000,
+		        // 最长有效期，在重复获取地理位置时，此参数指定多久再次获取位置。
+		        maximumAge: 3000
+            };
+            navigator.geolocation.getCurrentPosition(handleSuccess, handleError, options);
+            navigator.geolocation.watchPosition(showPosition);
+        } else {
+            alert("浏览器不支持html5来获取地理位置信息");
+        }
+        var x=document.getElementById("demo");
+        function showPosition(position) {
+			x.innerHTML="Latitude: " + position.coords.latitude +
+			"<br />Longitude: " + position.coords.longitude;
+		}
+        function handleSuccess(position){
+        	console.log(position);
+             // 获取到当前位置经纬度  本例中是chrome浏览器取到的是google地图中的经纬度
+             var lng = position.coords.longitude;
+            var lat = position.coords.latitude;
+            document.write( "您所在的位置： 经度" + lat + "，纬度" + lng );
+            if(typeof position.address !== "undefined"){
+		        var country = position.address.country;
+		        var province = position.address.region;
+		        var city = position.address.city;
+		        alert(' 您位于 ' + country + province + '省' + city +'市');
+		    }
+             
+        }
+        
+        function handleError(error){
+        	switch(error.code){
+		        case error.TIMEOUT :
+		            alert( " 连接超时，请重试 " );
+		            break;
+		        case error.PERMISSION_DENIED :
+		            alert( " 您拒绝了使用位置共享服务，查询已取消 " );
+		            break;
+		        case error.POSITION_UNAVAILABLE :  
+		            alert( " 亲爱的火星网友，非常抱歉，我们暂时无法为您所在的星球提供位置服务 " );
+		            break;
+		    }
+        }
+    </script>
+</html> 

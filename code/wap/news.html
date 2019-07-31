@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>消息列表</title>
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+	</head>
+	<body>
+		<div id="header_has_nav">
+		</div>
+		<!--wrapper开始-->
+		<div class="wrapper wrapper-bg">
+			<!--content开始-->
+			<div class="content">
+				<ul class="news-list" id="news_list">
+				</ul>
+			</div>
+			<script type="text/html"  id="data_list">
+				<%for(i = 0; i < data.list.length; i++) {%>
+				<li id="notice_li_<%=data['list'][i]['sid']%>">
+					<div class="news-con">
+						<div class="news-tit"><p class="news-tit-con <%if(data['list'][i]['status'] == 1){%> news-gray <%}%>"><%=data['list'][i]['title']%></p><p class="news-tit-time"><%=data['list'][i]['dateline']%></p></div>
+						<p class="news-word <%if(data['list'][i]['status'] == 1){%> news-gray <%}%>"><%=#data['list'][i]['message']%></p>
+					</div>
+					<div class="news-dele" onclick="del_notice(<%=data['list'][i]['sid']%>);">
+						<img src="img/dele2.png" alt="" class="dele-news-icon"/>
+					</div>
+				</li>
+				<%}%>
+			</script>
+			<!--content结束-->
+			<div class="coupon-btn foot-fixed foot-btn redbg" id="clean_notice" onclick="del_notice('all');">清空所有信息</div>
+			<div style="display:none;" class="gotobtn" id="goTopBtn"><img border=0 src="img/goToTop.png"></div>
+		</div>
+		<!--wrapper结束-->
+		<script type="text/javascript" src="js/tmpl/news.js"></script>
+		<script type="text/javascript" src="js/tmpl/footer.js"></script>
+	</body>
+<script type="text/javascript">
+redirectindex();
+$(function(){
+	initPage();
+})
+</script> 
+</html>

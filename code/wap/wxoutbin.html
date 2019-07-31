@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>修改密码</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	</head>
+	<body style="min-height: 100%;">
+		<div class="wrapper">
+
+			<!--点击注册时显示注册内容开始-->
+			<div class="content3">
+
+				<div class="signbox">
+					<div class="signIn-box account">
+						<img src="img/pwd.png"/ class="sign-icon">
+						<input type="password" style="ime-mode:disabled" placeholder="6-18位的数字和字母组合" id="pword-first" class="sign-inp phone"/>
+						<span class="dele"></span>
+					</div>
+					<div class="signIn-box passW">
+						<img src="img/pwd.png" class="sign-icon"/>
+						<input type="password" style="ime-mode:disabled;" placeholder="两次密码输入必须一致" id="pword-second" class="sign-inp pword"/>
+
+					</div>
+					<p class="remind1" id="register-remind2">请完善密码！</p>
+					<div class="sign-btn1">
+						<input type="button" value="修改密码" class="signbtn radius5 send-out-bg" id="register-btn2"/>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<script src="../static/js/jquery.md5.js" type="text/javascript"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<!-- <script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/tmpl/wxoutbin.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				initPage();
+			})
+		</script>
+	</body>
+</html>

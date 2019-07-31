@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>找回密码</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<!-- <script type="text/javascript" src="js/config.js"></script> -->
+
+		<script type="text/javascript">
+
+			if(key){
+				$('body').html('');
+				window.location.href=WapSiteUrl+'/member.html';
+			}
+		</script>
+	</head>
+	<body style="min-height: 100%;">
+		<div class="wrapper">
+		<div class="content1">
+			<a href="index.html"><img class="sign-img1"/></a>
+			<div class="signbox">
+				<div class="signIn-box account">
+					<img src="img/accunt.png"/ class="sign-icon">
+					<input type="number" id="member_mobile" placeholder="请输入手机号"  class="sign-inp phone"/>
+					<span class="dele"></span>
+				</div>
+				<div class="signIn-box account">
+					<img src="img/verification.png" class="sign-icon">
+					<input type="number" style="ime-mode:disabled" placeholder="请输入图形验证码" id="register-verification" class="sign-inp"/>
+					<img id="click_verify" rel-src="" alt="图形验证码" class="verification">
+
+				</div>
+				<div class="signIn-box passW">
+					<img src="img/pwd.png" class="sign-icon"/>
+					<input type="number" placeholder="输入手机验证码" id="mobile_seccode" class="sign-inp pword"/>
+					<p id="send_seccode_btn" class="send-out">获取验证码</p>
+				</div>
+				<p class="remind1" id="sign-remind">请输入正确的手机号</p>
+				<div class="sign-btn1">
+					<input type="button" value="下一步" class="signbtn radius5" id="edit_passwd_next"/>
+					<a class="register" href="login.html" style="float:right;">登录</a>
+				</div>
+			</div>
+		</div>
+		<div class="content2 none">
+			<img class="sign-img1"/>
+			<div class="signbox">
+				<div class="signIn-box account">
+					<img src="img/pwd.png" class="sign-icon">
+					<input type="password" style=" :disabled" placeholder="6-18位的数字和字母组合" id="pword-new" class="sign-inp"/>
+					<span class="dele"></span>
+				</div>
+				<div class="signIn-box passW">
+					<img src="img/pwd.png" class="sign-icon"/>
+					<input type="password" style="ime-mode:disabled" placeholder="两次密码输入必须一致" id="pword-renew" class="sign-inp"/>
+					
+				</div>
+				<p class="remind1" id="register-remind2">请输入正确的手机号</p>
+				<div class="sign-btn1">
+					<input type="button" value="重置密码" class="signbtn radius5 send-out-bg" id="passwd-edit-btn"/>
+				</div>
+			</div>
+			
+		</div>
+		</div>
+		<script type="text/javascript" src="js/tmpl/passwd-find.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixinshare.js"></script>
+	</body>
+</html>

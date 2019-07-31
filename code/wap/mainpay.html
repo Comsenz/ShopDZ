@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="aplus-terminal" content="1"/>
+	<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title></title>
+    <link rel="stylesheet" href="css/reset.css?v=1" />
+	<link rel="stylesheet" href="css/style.css?v=1" />
+	<link rel="stylesheet" href="css/common.css" />
+	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	<script src="js/common.js?v=1"></script>
+	<script type="text/javascript">
+		var pay_sn = get('pay_sn');
+		var pay_code = get('payment_code');
+		var phone = get('phone');
+		var pay_on_off = true;
+		var prompt_word = '';
+		var orderData = null;
+		$.ajax({
+			url:ApiUrl+'/Payment/selectPay',
+			data:{pay_sn:pay_sn},
+			dataType:'json',
+			type:'get',
+			success:function(info){
+				orderData = info['data'];
+			},
+			async:false
+		});
+		
+		if(pay_code == 'wx'){
+			$('title').html('微信支付');
+		}else if(pay_code == 'alipay' || pay_code == 'newalipay'){
+			$('title').html('支付宝支付');
+		}else{
+			prompt_word = '请选择支付方式后再支付！';
+			shopdz_alert(prompt_word);
+			pay_on_off = false;
+		}
+	</script>
+</head>
+<body>
+	<div class="wrapper wrapper-bg">
+		<div class="contentT">
+			<p class="pay-orderNum">订单编号：<span class="order-name"></span></p>
+			<p class="pay-moneyNum">¥<span class="order-amount"></span></p>
+			<div class="payeeBox">
+				<p class="payee">收款方</p>
+				<p class="businessName"></p>
+			</div>
+			<div class="com-btnbox">
+				<input type="button" value="立即支付" class="com-btn pay-submit">
+			</div>
+			
+		</div>
+	</div>
+	
+	
+	<script type="text/javascript">
+		$(function(){
+			// 设置商城
+			$('.businessName').html(getwebConf('shop_name'));
+			
+			$('.order-name').html(orderData['order_sn']);
+			$('.order-amount').html(returnFloat(orderData['order_amount']));
+			/* 确认支付 */
+			$('.pay-submit').click(function(){
+				if(pay_on_off){
+					$(this).addClass('bgd');
+					prompt_word = '已提交支付请求，等待支付！';
+					pay_on_off = false;
+					// 路由支付方式
+					routePay()
+				}else{
+					// 不能支付或者已发起支付
+					shopdz_alert(prompt_word);
+				}
+			});
+			initPage();
+		});
+		function routePay(){
+			var pay_url = ApiUrl;
+			if(pay_code == 'wx'){
+				pay_url += '/Payment/pay';
+				pay_url += '?payment_code=wx';
+				pay_url += '&pay_sn=' +pay_sn;
+				pay_url += '&oid='+get('oid');
+				getdata(pay_url,{payment_code:'wx',pay_sn:pay_sn,oid:get('oid')},function(mes){
+					if(phone){
+						// 手机支付
+						phonePay(mes['data']);
+					}else{
+						// 电脑支付
+						pcPay(mes['data']);
+					}
+				});
+			}else if(pay_code == 'alipay'){
+				pay_url += '/Payment/pay';
+				pay_url += '?payment_code='+pay_code;
+				pay_url += '&pay_sn='+get('pay_sn');
+				window.location.href = pay_url;
+				// var iframe = document.getElementById('iframe');
+				// iframe.src = pay_url;
+			}else{
+				shopdz_alert(info['msg']);
+			}
+		}
+		
+		function phonePay(mes){
+			if (typeof WeixinJSBridge == "undefined"){
+				if( document.addEventListener ){
+					document.addEventListener('WeixinJSBridgeReady', function(){jsApiCall(mes)}, false);
+				}else if (document.attachEvent){
+					document.attachEvent('WeixinJSBridgeReady', function(){jsApiCall(mes)}); 
+					document.attachEvent('onWeixinJSBridgeReady', function(){jsApiCall(mes)});
+				}
+			}else{
+				jsApiCall(mes);
+			}
+		}
+
+		function pcPay(mes){
+			$('.scan-code').append('<img class="wxcode" src="http://paysdk.weixin.qq.com/example/qrcode.php?data='+mes['code_url']+'"/>');
+			var sel = setInterval(function(){
+					var url = ApiUrl + '/Payment/selectPay?pay_sn='+pay_sn;
+					getdata(url,{pay_sn:pay_sn},function(info){
+							if(info['code'] == 1){
+								clearInterval(sel);
+								window.location.href = WapSiteUrl + '/orderdetails.html?order_sn=' + pay_sn;
+							}
+					});
+				},3000);
+		}
+
+		function jsApiCall(mes){
+			WeixinJSBridge.invoke(
+				'getBrandWCPayRequest',
+				{
+		        	"appId":mes['appId'],     //公众号名称，由商户传入     
+		        	"timeStamp":mes['timeStamp'],         //时间戳，自1970年以来的秒数     
+		        	"nonceStr":mes['nonceStr'], //随机串     
+		        	"package":mes['package'],     
+		        	"signType":mes['signType'],         //微信签名方式：     
+		        	"paySign":mes['paySign'] //微信签名 
+		    	},
+				function(res){
+					WeixinJSBridge.log(res.err_msg);
+					if(res.err_msg == "get_brand_wcpay_request:ok"){
+						window.location.href=decodeURIComponent(get('returnSeUrl'))+'?order_sn='+pay_sn;
+					}else{
+						// 支付失败
+						window.location.href=decodeURIComponent(get('returnErUrl'))+'?order_sn='+pay_sn;
+					}
+					pay_on_off = true;
+				}
+			);
+		}
+	</script>
+	
+</body>
+</html>

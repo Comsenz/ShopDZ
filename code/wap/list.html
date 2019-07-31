@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+        <meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title></title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/common.css" />
+	</head>
+	<body>
+        <!--header开始-->
+        <div id="header">
+        </div>
+            <!--header结束-->
+		<!--wrapper开始-->
+		<div class="wrapper" id="wrapper">
+			<div class="content" style="text-align:center;">
+               <!--  <img src="img/listimg1.jpg" class="list-img2"/> -->
+                <div id="con-list" class="con-list" style="background: #fff;">
+                    <div class="con1" id="con1">
+
+                    </div>
+                    <div class="listbox1" id="listbox">
+                    
+                    </div> 
+                    
+                </div>
+
+            </div>
+			
+			<!--返回顶部-->
+    	<div style="display:none;" class="gotobtn" id="goTopBtn"><img border=0 src="img/goToTop.png"></div>
+        <div id="footer"></div>
+                <!-- style="background: url(<%=categorys.gc_image %>) no-repeat left .4rem; background-size: 2.7rem auto;" -->
+		</div>
+		<!--wrapper结束-->
+
+
+    <script type="text/html" id="categorys">
+        <% if (categorys != null) { %>
+            <div class="con-tit2" id="con-tit" style="background: url() no-repeat left .4rem; background-size: 2.7rem auto;">
+                <% if (categorys.desc != '' ) { %>
+                    <%=categorys.desc %>
+                <% } else {%>
+                    <%=categorys.gc_name %>
+                <% }%>
+            </div>
+        <% }else{%>
+            <div class="con-tit2" id="con-tit" style="background: url() no-repeat left .4rem; background-size: 2.7rem auto;height: 1rem;">
+            </div>
+        <% }%> 
+    </script>
+		
+    <script type="text/html" id="goods_list">
+                        
+        <% for(i in goods_list){ %>
+        <a href="goods_detail.html?id=<%=goods_list[i].goods_common_id %>">
+            <dl class="list-dl">
+                <dt class="list-dl-dt"><img src="<%=goods_list[i].goods_image %>"/></dt>
+                <dd>
+                    <p class="dl-tit"><%=goods_list[i].goods_name %></p>
+                    <p class="price1"><span>¥</span><%=goods_list[i].goods_price %></p>
+                </dd>
+            </dl>
+        </a>
+        <% } %>           
+    </script>
+	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript">
+		$(function(){
+			category();  
+		})
+    </script> 
+	<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+	<script type="text/javascript" src="js/config.js"></script> -->
+    <script type="text/javascript" src="js/iscroll.js"></script> 
+	<script type="text/javascript" src="js/template.js"></script>   
+	<script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/tmpl/list.js"></script>
+    <script type="text/javascript" src="js/tmpl/footer.js"></script>
+    <script type="text/javascript" src="js/tmpl/category.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script type="text/javascript" src="js/tmpl/weixin.js"></script>
+    <script type="text/javascript" src="js/tmpl/weixinshare.js"></script>
+	</body>
+</html>

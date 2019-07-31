@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>	
+		<title>优惠券</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		
+	</head>
+
+	<body>
+		<div id="header_has_nav">
+		</div>
+
+
+		<div class="wrapper wrapper-bg">
+			<div id="sidebar-tab" class="content">
+				<div class="integral-box">
+					<span class="current-integral">当前积分</span>
+					<span class="integral-num"></span>
+					<p class="detailbtn-box"><a href="mypointslist.html" class="integral-detailbtn radius3">积分明细</a></p>
+				</div>
+				<div id="tab-content" class="tab-content">
+					<div class="show voucher-list">
+						<ul class="coupon-list" id="tab-contentul">
+						</ul>
+						<a   href="coupon-page.html"><div class="coupon-btn foot-fixed foot-btn redbg" >我的优惠券</div></a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 全部 -->
+		<script type="text/html"  id="data_list_all">
+			<%for(i = 0; i < data.list.length; i++) {%>
+				<li class="<%if(data['list'][i]['rpacket_t_wx'] == 0){%> sc-coupon scCoupon-color <%}else{%>wx-coupon wxCoupon-color <%}%>coupon-li">
+					<a  class="coupon-box" onclick="tocard(<%=data['list'][i]['rpacket_t_id']%>,<%=data['list'][i]['rpacket_t_wx']%>)" >
+						<div class="coupon-box-det coupon-det">
+							<div class="coupon-box-top <%if(data['list'][i]['rpacket_t_wx'] == 1){%> <%=data['list'][i]['rpacket_t_color']%>  <%}%>">
+								<div class="coupon-top-con">
+									<div class="zoom">
+										<p class="coupon-subtit left"><%=data['list'][i]['rpacket_t_title']%></p>
+										<p class="count-limit right">每人限领<span><%=data['list'][i]['rpacket_t_eachlimit']%></span>张</p>
+									</div>
+									<div class="zoom couponMoney-box">
+										<div class="left">
+											<span class="money-unit">¥</span>
+											<span class="money-num"><%=data['list'][i]['rpacket_t_price']%></span>
+										</div>
+										<div class="right">
+											<%if(data['list'][i]['rpacket_t_wx'] == 0){%>
+											<p  class="coupon-share">
+												<%if(data['list'][i]['rpacket_t_points'] == 0){%>
+												<input type="submit" value="免费领取" class="coupon-share" />
+												<%}else{%>
+												<input type="submit" value="<%=data['list'][i]['rpacket_t_points']%>积分兑换" class="coupon-share" />
+												<%}%>
+											</p>
+											<%}else{%>
+											<img src="img/wx_statu.png" alt="" class="coupon-statu sc-statu"/>
+											<%}%>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="coupon-box-bottom">
+
+								<p class="coupon-bottom-tit">订单满<%=data['list'][i]['rpacket_t_limit']%>元（含运费）</p>
+								<p class="coupon-remind2">有效期：<%=data['list'][i]['t_start']%>-<%=data['list'][i]['t_end']%></p>
+							</div>
+						</div>
+					</a>
+				</li>
+
+			<%}%>
+		</script>
+
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/config.js"></script>
+		<script type="text/javascript" src="js/gotoTop.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+		<script type="text/javascript" src="js/tmpl/coupon-all.js"></script>
+
+	</body>
+</html>

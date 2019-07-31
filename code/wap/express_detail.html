@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>物流跟踪</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+	</head>
+	<body>
+		<div id="header_has_nav"></div>
+		<!--wrapper开始-->
+		<div class="wrapper" style="background: #f5f5f5;"  id="express_detail" >
+		</div>
+
+		<script type="text/html" id="express_detail_template" >
+			<div class="content">
+			<div class="logistics-head">
+				<p class="cart-box"><img src="img/wuliu-img1.png" alt="" class="cart-img"/></p>
+				<ul class="logistics-details">
+					<li><p>物流公司：</p><p class="limit-p"><%=express_name%></p></li>
+					<li><p>快递单号：</p><p class="limit-p"><%=express_sn%></p></li>
+				</ul>
+			</div>
+			<ul class="logistics-track" >
+				<% for(i in express_detail){ %>
+				<li>
+					<p><%=express_detail[i].AcceptStation%></p>
+					<p><%=express_detail[i].AcceptTime%></p>
+				</li>
+				<% } %>
+			</ul>
+			</div>
+		</script>
+
+		<!--wrapper开始-->
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="js/config.js"></script>	
+		<script type="text/javascript" src="js/template.js"></script>	
+		<script type="text/javascript" src="js/common.js"></script>	
+		<script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/tmpl/express_detail.js"></script>
+		<script>redirectindex();</script>
+		<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixinshare.js"></script>
+	</body>
+</html>

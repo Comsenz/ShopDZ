@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>提现帐户</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/date.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+		<!-- <script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		
+	</head>
+	<body>
+		<div id="header_has_nav"></div>
+		<div class="wrapper" style="background: #f5f5f5;">
+			<div class="content" style="background: #f5f5f5;">
+				<!--提现帐号开始-->
+				<div id="withdraw_account">
+					<ul class="detail-list2">
+						<li>
+							<div class="signIn-box account">
+								<input type="text" placeholder="输入银行名称" class="sign-inp input-box" id="name" name="name" value=""/>
+								<span class="dele"></span>
+							</div>
+						</li>
+						<li>
+							<div class="signIn-box account">
+								<input type="text" placeholder="输入银行卡卡号" class="sign-inp input-box" id="bank_no" name="bank_no" value=""/>
+								<span class="dele"></span>
+							</div>
+						</li>
+						<li class="posi1">
+							<div class="signIn-box account">
+								<input type="text" placeholder="输入姓名" class="sign-inp input-box" id="bank_name" name="bank_name" value=""/>
+								<span class="dele"></span>
+							</div>
+						</li>
+					</ul>
+					<ul class="detail-list2" id="viterfy_con">
+						<li class="posi1">
+							<div class="signIn-box account">
+								<span class="list-span1 boxsizing left">手机号</span>
+								<span class="list-span1 boxsizing hide_str phone withdraw-right"></span>
+							</div>
+						</li>
+						<li class="posi1">
+							<div class="signIn-box account">
+								<span class="list-span1 boxsizing left">图形验证</span>
+								<input type="number" style="ime-mode:disabled;" placeholder="" id="register-verification"  onkeyup="value=value.replace(/[^A-za-z0-9]+/,'')" class="list-inp1 input-box register-verify withdraw-right"/>
+								<img id="click_verify" rel-src="" alt="图形验证码" class="verification">
+							</div>
+						</li>
+						<li class="posi1 passW">
+							<div class="signIn-box account">
+								<span class="list-span1 boxsizing left">手机验证</span>
+								<input type="number" placeholder="" id="register-pword" class="list-inp1 input-box pword withdraw-right" value=""/>
+								<p id="send_seccode_btn" class="send-out">获取验证码</p>
+							</div>
+						</li>
+					</ul>
+					<div class="new-build foot-fixed foot-btn" id="withdraw_account_submit">保存</div>
+				</div>
+				<!-- 提现帐号结束 -->
+			</div>
+		</div>
+		<!-- 日期列表 -->
+		<div class="cover"></div>
+		
+		<script type="text/javascript">
+		redirectindex();
+			$(function(){
+				
+				SizeLimit($(".head-img"));
+			})
+		</script>
+		<script type="text/javascript" src="js/tmpl/withdrawaccount.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixinshare.js"></script>
+	</body>
+</html>

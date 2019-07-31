@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>订单结算</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/tmpl/order.js?a=7"></script>
+		<script type="text/javascript" src="js/tmpl/address.js"></script>
+		<style type="text/css">
+			.bg{ background-color: #ccc; }
+			.none{ display: none;}
+		</style>
+	</head>
+	<body>
+		<!--header开始-->
+		<div id='header_has_nav'> </div>
+		<!--header结束-->
+		<div id="order" class="wrapper outer content">
+		<div class="img-center no-order" style="display:none">
+			<img src="img/module1.jpg" alt="" class="coupon-null-img"/>
+			<h4 class="coupon-tit">暂无商品</h4>
+		</div>
+		<script id="ordercontent" type="text/html">
+			
+			<div class="list" style="background: #f7f7f7;">
+					<!--收货信息-->
+					<div class="address-bg"></div>
+					<div class="address-box" id="address">
+						<div class="address-name" id="h_name">
+							<input type="hidden" name="address_id" value="<%if(data['address'][0]){%><%=data['address'][0]['address_id']%><%};%>"/>
+							<p class="true_name name2">
+								<% if(data['address'][0]){ %>
+									<%= data['address'][0]['true_name'] %>
+								<% } else { %>
+									添加地址
+								<% }; %>
+							</p>
+							<% if(data['address'][0]){ %>
+								<%if (data['address'][0]['is_default'] == 1){%>
+									<span class="default">默认</span>
+								<%}%>
+							<%}%>
+						</div>
+						<div class="address-describe" id="address-describe">
+							<p class="phone1">
+								<% if(data['address'][0]){ %>
+									<%= data['address'][0]['tel_phone'] %>
+								<% }; %>
+							</p>
+							<p class="address-word">
+								<% if(data['address'][0]){ %>
+									<%= data['address'][0]['area_info'] %><%= data['address'][0]['address'] %>
+								<% }; %>
+							</p>
+						</div>
+						<div class="jt-r2">
+							<img src="img/jt-r.png" class="address-choice-btn"/>
+						</div>
+					</div>
+					<!--优惠券-->
+					<div class="coupon">
+						<input type="hidden" name="coupon_id" value=""/>
+						<p class="left" id="coupon-name">请选择优惠券</p>
+						<p class="right none" style="margin-right:8%;"><span class="right wordred" id="coupon-price">0.00</span><span class="right wordred">¥&nbsp;</span></p>
+
+						<div class="jt-r2"><img src="img/jt-r.png"/></div>
+					</div>
+					<!--合计/运费/优惠-->
+					<div class="order-detail">
+						<ul class="order-ul">
+							<li>
+								<p class="left">商品合计</p>
+								<span class="right wordred" id="sumprice">0.00</span>
+								<span class="right wordred">¥&nbsp;</span>
+							</li>
+							<li>
+								<p class="left">运费<span free="<%= data['shipping_fee']['expense'] %>"></span></p>
+								<span id="freight" class="right wordred">
+								<%if (data['shipping_fee']['shipping_fee']) {%>
+									<%= data['shipping_fee']['shipping_fee'] %>
+								<%} else {%>
+									0
+								<%}%>
+								</span>
+								<span class="right wordred">¥&nbsp;</span>
+							</li>
+							<li style="border-bottom: none;">
+								<p class="left">优惠</p>
+								<span id="discount" class="right wordred">0</span>
+								<span class="right wordred">¥&nbsp;</span>
+							</li>
+							<li style="border-bottom: none;height: 7rem;">
+								<textarea name="" rows="" cols="" placeholder="请输入订单留言" name="order_message" id="order_message" class="order-message"></textarea>
+							</li>
+						</ul>
+					</div>
+					<ul class="order-list">
+					<% for(var i = 0; i < data['goodsinfo'].length; i++) {%>
+						<% var value = data['goodsinfo'][i]; %>
+						<li>
+							<input type="hidden" name="goods_id" value="<%=value['goods_id']%>"/>
+							<input type="hidden" name="member_uid" value="<%=value['member_uid']%>"/>
+							<dl class="order-dl1">
+								<dt class="left"><img src="<%=value['goods_image']%>" class="img-bg"/></dt>
+								<dd class="right">
+								<%if (value['goods_has']){%>
+									<p class="tit-p1">
+										<span class="left tit-name"><%=value['goods_name']%></span>
+										<span class="right" style="display:none">
+											<span>¥&nbsp;</span>
+											<span class="goodsprice" ><%=parseFloat(value['goods_price'])%></span>
+										</span>
+										<span class="right">
+											<span>x</span>
+											<span><%=parseInt(value['goods_num'])%></span>
+										</span>
+									</p>
+									<p class="tit-p1">
+										<span class="left spec-name"><%=value['spec_name']%></span>
+										<!--<span class="right">
+											<span>x</span>
+											<span><%=parseInt(value['goods_num'])%></span>
+										</span>-->
+										<span class="right">
+											<span>总价：¥&nbsp;</span>
+											<span class="goodsum"><%=parseFloat(value['goods_price'])*100*parseInt(value['goods_num'])/100%>
+										</span>
+									</p>
+									<!--<p class="tit-p1 total-price">
+										<span>总价：¥&nbsp;</span>
+										<span class="goodsum"><%=parseFloat(value['goods_price'])*100*parseInt(value['goods_num'])/100%>
+										</span>
+									</p>-->
+								<%}else{%>
+									<p class="tit-p1">
+										<span class="left">
+											<span><%=value['goods_name']%></span>
+										</span>
+										<span class="right wordred">商品库存不足！</span>
+									</p>
+								<%}%>
+								</dd>
+							</dl>
+						</li>
+					<%};%>
+					</ul>
+				
+				<div class="order-foot foot-fixed foot-btn auto">
+					<div class="left order-num" style="width: 75%;">
+						<span style="padding-left: 5%;">实付：</span><span class="wordred">¥&nbsp;</span><span id="realprice" class="wordred"></span>
+					</div>
+					<div id="payment" class="right settlement pointer">付款</div>
+				</div>
+			
+			</div>
+			<!--优惠券列表开始-->
+			
+			<div class="coupon-choice-box voucher-list" style="height:100%;">
+				<!--<div class="address-bg"></div>-->
+				<% if( data['coupon'].length > 0) { %>
+				<ul style="padding-bottom: 4.5rem;" class="coupon-list">
+					<%for (var i = 0; i < data['coupon'].length; i++) {%>
+						<%var cvalue = data['coupon'][i];%>
+
+
+					<li class="<%if(cvalue['rpacket_t_wx_card_id']){%>  wx-coupon wxCoupon-color <%}else{%> sc-coupon scCoupon-color  <%}%> coupon-li">
+						<input type="hidden" name="coupon_id" value="<%=cvalue['rpacket_id']%>"/>
+						<a   href="javascript:;"  class="coupon-box">
+							<div class="coupon-box-det coupon-det">
+								<div class="coupon-box-top <%if(cvalue['rpacket_t_wx_card_id']){%> <%=cvalue['rpacket_color']%>  <%}%>">
+									<div class="coupon-top-con">
+										<div class="zoom">
+											<p class="coupon-subtit left"><%=cvalue['rpacket_title']%></p>
+											<p class="count-limit right"></p>
+										</div>
+										<div class="zoom couponMoney-box">
+											<div class="left">
+												<span class="money-unit">¥</span>
+												<span class="money-num coupon-price"><%=cvalue['rpacket_price']%></span>
+											</div>
+											<div class="right">
+												<%if(cvalue['rpacket_t_wx_card_id']){%>
+												<img src="img/wx_statu.png" alt="" class="coupon-statu sc-statu"/>
+												<%}else{%>
+												<img src="img/sc_statu.png" alt="" class="coupon-statu sc-statu"/>
+												<%}%>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="coupon-box-bottom">
+									<p class="coupon-bottom-tit">订单满<span id="maxcoupon"><%=cvalue['rpacket_limit']%></span>元（含运费）</p>
+									<p class="coupon-remind2">有效期：<%=cvalue['rpacket_start_date']%>-<%=cvalue['rpacket_end_date']%></p>
+								</div>
+							</div>
+						</a>
+					</li>
+					<%};%>
+				</ul>
+				<div class="coupon-btn foot-fixed foot-btn">取消选择的优惠券</div>
+				<% } else {%>
+					<div class="img-center">
+						<img src="img/coupon-null.png" alt="" class="coupon-null-img"/>
+						<h4 class="coupon-tit">暂无优惠券~</h4>
+					</div>
+				<% } %>
+				
+			</div>
+			
+			<!--优惠券列表结束-->
+			<!--收货地址列表开始-->
+			<div class="address-choice" style="background: #f7f7f7;">
+				<div class="address-bg"></div>
+				<ul class="choice-ul2" id="address_list">
+					<% var address_list = data['address']; %>
+					<% if ( address_list.length < 1 ) { %>
+						<div class="img-center">
+							<img src="img/addressnull.png" alt="" class="coupon-null-img"/>
+							<h4 class="coupon-tit">没有收货地址，赶快添加一个吧~</h4>
+						</div>
+					<% } else { %>
+						<%for (var i = 0;i < address_list.length;i++) {%>
+							<li class="liclass_<%=address_list[i].address_id%> <% if(address_list[i].is_default==1){ %><%= 'border-redleft' %><% }  %>" addressid="<%=address_list[i].address_id%>">
+								<div class="address-box border-bot marginB-no">
+									<div class="address-name" style="text-align:center">
+										<p class="true_name name2"><%=address_list[i].true_name%></p>
+										<% if(address_list[i].is_default==1){ %>
+											<span class="default" addressid="<%= address_list[i].address_id %>">默认</span>
+										<% } else{ %>
+											<!--<span class="address-word setdefault" addressid="<%= address_list[i].address_id %>" memberid="<%= address_list[i].member_id %>">设为默认</span>-->
+										<% } %>
+										<input type="hidden" name="address_id" value="<%=address_list[i].address_id%>"/>
+										<input type="hidden" name='province' value="<%=address_list[i].province_id%>"/>
+										<input type="hidden" name='city' value="<%=address_list[i].city_id%>"/>
+										<input type="hidden" name='area' value="<%=address_list[i].area_id%>"/>
+									</div>
+									<div class="address-describe address-describe-list" style="width: 70%;">
+										<p class="phone1"><%=address_list[i].tel_phone%></p>
+										<p style="display:none;"class="address-word_hide"><%=address_list[i].address%></p>
+										<p class="address-word"><%=address_list[i].area_info%><%=address_list[i].address%></p>
+									</div>
+									<div class="jt-r2" style="right: 2rem;"><img src="img/address-edit.png" class="address-edit" addressid="<%= address_list[i].address_id %>"/></div>
+									<!--<div class="jt-r2" style="right: 2.5rem;"><img src="img/dele2.png" class="address-dele" addressid="<%= address_list[i].address_id %>"/></div>-->
+								</div>
+								<!--<div class="alertbox dele-sure none">
+									<p class="alert-p">要删除此地址？</p>
+									<div class="btnbox1">
+										<span class="cancelbtn1">取消</span>
+										<span class="surebtn1">确定</span>
+									</div>
+								</div>-->
+							</li>
+						<% } %>
+					<% } %>
+				</ul>
+				<div class="new-build foot-fixed foot-btn">新建</div>
+			</div>
+			<!--收货地址列表结束-->
+		</script>
+		<!--收货地址编辑开始-->
+		<script id="areacontent" type="text/html">
+			<% var datalen = data.length %>
+			<% for (var i = 0; i < datalen; i++) {%>
+				<option value="<%= data[i]['area_id'] %>"><%= data[i]['area_name'] %></option>
+			<% }; %>
+		</script>
+		<div class="address-edit-page">
+			<ul class="address-edit-ul">
+				<input type="hidden" id="editaddress_id" name="address_id" value=""/>
+				<li><input type="text" placeholder="收件人姓名" class="input-com1" id="address-name"/></li>
+				<li><input type="number" placeholder="手机号码" class="input-com1" id="address-phone"/></li>
+				<li class="posi1">
+					<select class="area1" id="province" name="province_id">
+						<option value="0">请选择省</option>
+					</select>
+					<img src="img/jt-r.png" class="area-choice"/>
+				</li>
+				<li class="posi1">
+					<select class="area1" id="city" name="city_id">
+						<option value="0">请选择市</option>
+					</select>
+					<img src="img/jt-r.png" class="area-choice"/>
+				</li>
+				<li class="posi1">
+					<select class="area1" id="area" name="area_id">
+						<option value="0">请选择区</option>
+					</select>
+					<img src="img/jt-r.png" class="area-choice"/>
+				</li>
+				<li><input type="text" placeholder="详细地址" class="input-com1" id="address-word" value=""/></li>
+			</ul>
+			<div class="address-default">
+				<div class="check-box address-check">
+    				<!--<input type="checkbox" checked="checked" class="check-ps"/>
+    				<span class="check-bg"></span>-->
+    				<input type="checkbox" class="input_check" checked="" id="default" name="is_default">
+    				<label for=""></label>
+    			</div>
+				<span class="remind4">设为默认地址</span>
+			</div>
+			
+			<div class="address-foot foot-fixed foot-btn">
+				<span class="cancelbtn2 left">取消</span>
+				<span class="surebtn2 left">保存</span>
+			</div>
+		</div>
+		<!--收货地址编辑结束-->
+		</div>
+		<div class="cover"></div>
+		
+		<script type="text/javascript">
+		redirectindex();
+			var addressoff = true;
+			var goods = true;
+			var del = false;
+			$(function(){
+				var gid = get('goods_id');
+				var gnum = get('goods_num');
+				if(gid && gnum){
+					buyorder();
+				}else{
+					getorder();
+				}
+				/* 头部返回按纽事件 */
+				$('.goback-header').find('.back-icon').unbind('click').click(function() {
+					if($('.list').css('display') != 'none'){
+						goBack();
+					} else if ($('.coupon-choice-box').css('display') != 'none'){
+						$('.voucher-list').hide();
+						$('.list').show();
+						$('#head_tit').html($('title').text());
+					} else if ($('.address-choice').css('display') != 'none'){
+						if($('.address-choice li').length < 1){
+							/* 收货地址为空时 */
+							$('#h_name').html('<input type="hidden" name="address_id" value=""/><p class="name2 true_name">添加地址</p>');
+							$('#address-describe').html('<p class="phone1"></p><p class="address-word"></p>');
+							addressoff = false;
+							$('#payment').addClass('bg');
+						} else {
+							var address_id = $('#address').find('input[name="address_id"]').val();
+							var newaddress = $('li[addressid="'+address_id+'"]');
+							$('#h_name').html(newaddress.find('.address-name').html());
+							$('#address-describe').html(newaddress.find('.address-describe-list').html());
+						}
+						$('.address-choice').hide();
+						$('.list').show();
+						$('#head_tit').html($('title').text());
+					} else if ($('.address-edit-page').css('display') != 'none'){
+						$('.address-edit-page').hide();
+						$('.address-choice').show();
+						$('#head_tit').html('地址管理');
+					}
+				});
+				/*展开优惠券列表*/
+				$('#order').on('click','.coupon',function(){
+					$(".list").hide();
+					$(".coupon-choice-box").show();
+					$('#head_tit').html('优惠券');
+					/* 判断是否选择了优惠券 */
+					if($('.coupon input[name="coupon_id"]').val() == ''){
+						$('.coupon-btn').hide();
+					} else {
+						$('.coupon-btn').show();
+					}
+				});
+				/*选择优惠券*/
+				$("#order").on('click','.coupon-li',function(){
+					/*判断优惠券是否可用*/
+					var sumprice = parseFloat($('#sumprice').text())*100;
+					var couponprice = parseFloat($(this).find('#maxcoupon').text())*100;
+					if(sumprice >= couponprice){
+						$('#discount').html($(this).find('.coupon-price').text());
+						$('#discount').next().html('¥&nbsp;-');
+					}else{
+						$('#discount').html(0);
+						shopdz_alert('此优惠券不可用！');
+						return false;
+					}
+					$(this).find(".voucher-top").addClass("coupon-bg3").parents("li").siblings().find(".voucher-top").removeClass("coupon-bg3");
+					$(this).find(".top-left").children("span").addClass("size-color2").parents("li").siblings().find(".top-left").children("span").removeClass("size-color2");
+					/*修改优惠的金额*/
+					$('.coupon').children('p').removeClass('none');
+					$('.coupon').find("input[name='coupon_id']").val($(this).find("input[name='coupon_id']").val());
+					$('#coupon-name').html('满'+$(this).find('#maxcoupon').text()+'元可用');
+					$('#coupon-price').html($(this).find('.coupon-price').text());
+					$(".list").show();
+					$('#head_tit').html($('title').text());
+					$(".coupon-choice-box").hide();
+					/* 改变选中的优惠券的位置 */
+					var coupon = $(this).clone(true);
+					$(".coupon-choice-box ul").prepend(coupon);
+					$(this).remove();
+					realprice()
+				});
+				/* 取消优惠券 */
+				$('#order').on('click','.coupon-btn',function(){
+					// $('.coupon-list span').removeClass("size-color2");
+					// $('.coupon-list div').removeClass("coupon-bg3");
+					$('.coupon').html('<input type="hidden" name="coupon_id" value=""/><p class="left" id="coupon-name">请选择优惠券</p><p class="right none" style="margin-right:8%;"><span class="right wordred" id="coupon-price">0.00</span><span class="right wordred">¥</span></p><div class="jt-r2"><img src="img/jt-r.png"/></div>');
+					$('#discount').next().html('¥');
+					$('#discount').html('0.00');
+					$('.voucher-list').hide();
+					$('.list').show();
+					$('#head_tit').html($('title').text());
+					realprice()
+				});
+				/* 点击展开地址列表 */
+				$('#order').on('click','#address',function(event){
+					$('.list').hide();
+					$('.address-choice').show();
+					$('#head_tit').html('地址管理');
+				});
+				/* 选中状态 */ 
+			    $('.content').on('click','.address-describe',function(){
+					$(this).parents('li').addClass('border-redleft').siblings().removeClass('border-redleft');
+				});
+				/*点击更换选中的发货地址*/
+				$('#order').on('click','.address-describe-list',function(event){
+					//$(this).parents('li').addClass('border-redleft').siblings().removeClass('border-redleft');
+					$('#h_name').html($(this).prev().html());
+					$('#address-describe').html($(this).html());
+					$('.list').show();
+					$('#head_tit').html($('title').text());
+					$('.address-choice').hide();
+					event.stopPropagation();
+					addressoff = true;
+					$('#payment').removeClass('bg');
+				});
+				//结算事件
+				var tj = false;
+				$('#order').on('click','#payment',function(){
+					if(addressoff && goods){
+						goods = addressoff = false;
+						tj = true;
+						$('#payment').addClass('bg');
+						//可以提交
+						var cid = $('.coupon').find("input[name='coupon_id']").val();
+						var aid = $('#address').find("input[name='address_id']").val();
+						var order_message = $('#order_message').val();
+						if(get('id')){
+							addorder(get('id'), cid, aid,order_message);
+						}else if(get('goods_id')){
+							buyaddorder(get('goods_id'),get('goods_num'),cid,aid,order_message);
+						}
+						return true;
+					}
+					var str = '';
+					if(tj){
+						str = '订单已提交！';
+					}else if(!seroff){
+						str = '请同意平台协议！';
+					}else if(!goods){
+						str = '商品库存不足！';
+					}else{
+						str = '请刷新页面！';
+					}
+					shopdz_alert(str);
+					return false;
+				});
+			})
+		</script>
+		
+	</body>
+</html>

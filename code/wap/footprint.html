@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>我的足迹</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type="text/javascript" src="js/tmpl/footprint.js"></script>
+	
+	</head>
+	<body>
+		<div id="header_has_nav">
+		</div>
+		<!--wrapper开始-->
+		<div id="shopfavorites" class="wrapper" style="background: #f7f7f7;"> 
+		</div>
+			<!--header开始-->
+
+	 	<script id="shopfavoritescontent" type="text/html">
+			<!--header结束-->
+			<!--content开始-->
+			<div class="content">
+				
+		    	<% if (data.list && data.list.length > 0) {%>
+		    	<!--收藏商品列表开始-->
+		    		
+						<div class="spread-null nullbox firstli" style="display:none;">
+							<img src="img/collectNull.png" alt="" class="spreadnull-img"/>
+							<p class="spreadnull-remind">您还没有关注任何商品</p>
+							<p class="collectnull-remind">可以去看看哪些商品值得收藏</p>
+							<input type="button" name="" id="" value="随便逛逛" onclick="window.location.href='index.html';" class="alert-codebtn spread-btn"/>
+						</div>
+			    		
+		    			<% for (var i = 0; i < data.list.length; i++) {%>
+		    				<% var value = data.list[i]; %>
+		    			<div class="myorder1" style="margin-bottom: 1rem;">
+				    		<dl class="order-dl2">
+								<dt class="left"><a href="./goods_detail.html?id=<%=value.common_goods_id%>"><img src="<%=value['goods_image']%>" class="order-img1 img-bg"/></a></dt>
+								<dd>
+									<div class="dd-left left">
+										<a href="./goods_detail.html?id=<%=value.common_goods_id%>">
+											<p class="dd-p1 margin-t1" style="width:150px;height:21px;overflow:hidden;"><%=value['goods_name']%></p>
+										</a>
+										<p class="dd-p2">¥<span class="goods_price" ><%=value['log_price']%></span></p>
+									</div>
+									
+								</dd>
+							</dl>
+						</div>
+				    	
+				    	<%}%>
+		
+				<%} else {%>
+					
+			    			<div class="spread-null nullbox">
+								<img src="img/collectNull.png" alt="" class="spreadnull-img"/>
+								<p class="spreadnull-remind">您还没有浏览任何商品</p>
+								<p class="collectnull-remind">可以去看看哪些商品值得购买</p>
+								<input type="button" name="" id="" value="随便逛逛" onclick="window.location.href='index.html';" class="alert-codebtn spread-btn"/>
+							</div>
+					
+		    	<%}%>
+		    
+		    <!--收藏商品列表结束-->
+			</div>
+			
+		</script>
+			<!--content结束-->
+			
+			<!--返回顶部-->
+	    	<div style="display:none;" class="gotobtn" id="goTopBtn"><img border="0" src="img/goToTop.png">
+	    	</div> 
+    	
+		<!--wrapper结束-->
+		<div class="cover" style="display:none;"></div>
+		<div class="alertbox dele-sure" style="display:none;">
+			<p class="alert-p">要删除这些商品收藏？</p>
+			<div class="btnbox1">
+				<span class="cancelbtn1">取消</span>
+				<span class="cancelbtn1 cancel surebtn1">确定</span>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+		redirectindex();
+		var login = null;
+		var ajaxdel = true;
+		$(function() {
+			getfootprints();
+			initPage();
+            //全选/全不选
+	        $(document).on("click",'#check-all',function () { 
+	        	var ach = $("input[name='id']");
+	            for ( var i = 0; i < ach.length; i++) 
+	            { 
+	            	if($(ach[i]).attr('goodnum')){
+	            		continue;
+	            	}
+	                ach[i].checked=$(this).attr('checked');
+	            }
+	            sumprice()
+	        });
+	        $(document).on("click",'.checkid',function () {
+	        	if($(this).attr('goodnum')){
+	        		return false;
+	        	}
+	            var flag = true; 
+	            var ach = $('.checkid');
+	            for (var i = 0; i < ach.length; i++) {
+	            	if(!$(ach[i]).attr('checked')){
+	            		flag = false; 
+	            		break;
+	            	}
+	            };
+                $('#check-all').attr('checked', flag); 
+                sumprice()
+	        }); 
+            //删除购物车商品
+            $(document).on('click','.favorites-dele',function(){
+            	if(ajaxdel){
+            		ajaxdel = false;
+	            	$('.cover').css('display','block');
+	            	$('.dele-sure').css('display','block');
+	            	var that=$(this);
+	            	$('.cancel').unbind('click').click(function(){
+	            		that.parents('.myorder1').remove();
+	            		//删除数据库对应的商品信息
+		            	var id = that.attr('id');
+		            	var member_id = that.attr('mid');
+		            	delfavorites(id, member_id);
+		            	$('.cover').css('display','none');
+            			$('.dele-sure').css('display','none');
+	            	});
+	            }
+			}); 
+            $('.cancelbtn1').click(function(){
+            	ajaxdel = true;
+            	$('.cover').css('display','none');
+            	$('.dele-sure').css('display','none');
+            });
+            
+        });
+	 	//调用返回顶部的函数
+	    goTopEx();
+	    //jisuan();
+
+		</script>
+		<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixinshare.js"></script>
+	</body>
+</html>

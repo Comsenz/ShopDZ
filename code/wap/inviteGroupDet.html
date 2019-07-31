@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>被邀请团详情</title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	</head>
+	<body>
+		<!--wrapper开始-->
+		<div class="wrapper wrapper-bg">
+			<!--content开始-->
+			<div class="content contentT">
+				<!--拼团详情-->
+				<ul class="mine-group">
+					<li class="mine-list group-box-list">
+						<div class="mine-list-box">
+							<div class="group-img-box">
+								<img src="img/focus1.jpg" alt="" class="group-img group-list-img"/>
+							</div>
+							<div class="group-con">
+								<div class="group-name">
+									<span class="group-new">【新品推荐】</span>
+									<p class="mine-group-name">商名称商品名称商品名称</p>
+								</div>
+								<div class="fight-groups-det">
+									<img src="img/group2.png" class="fight-groups-icon" />
+									<p class="fight-det fight-per"><span class="fight-per-num">4人团</span><span>￥</span><span class="fight-money">30</span></p>
+									<p class="fight-det fight-pointer"><img src="img/jt-r2.png" alt="" class="step-jtr"/></p>
+								</div>
+								<div class="mine-group-limit">
+									<p class="limit-word">距离结束</p>
+									<p class="count-down"><span class="count-down-num t_h" id="t_h">00</span>：<span class="count-down-num t_m" id="t_m">00</span>：<span class="count-down-num t_s" id="t_s">00</span></p>
+								</div>
+							</div>
+						</div>
+						<div class="mine-group-btnbox2">
+							<p class="poor-per"><span class="poor-per-num">快来入团吧</span></p>
+							<p class="poor-remind">就差你啦</p>
+							<a href="#" class="invite-btn">我要参团</a>
+						</div>
+					</li>
+				</ul>
+				<div class="group-member-box">
+					<ul class="group-member-list">
+						<li class="group-head">
+							<div class="group-portrait head-portrait">
+								<img src="img/protrait.png" alt="" class="protrait-img head-protrait-img"/>
+								<p class="protrait-head">团长</p>
+							</div>
+							<p class="group-member-time">2016-09-20&nbsp;03:00:00<span class="member-action">开团</span></p>
+						</li>
+						<li>
+							<div class="group-portrait">
+								<img src="img/protrait.png" alt="" class="protrait-img"/>
+							</div>
+							<p class="group-member-time">2016-09-20&nbsp;03:00:00<span class="member-action">参团</span></p>
+						</li>
+						<li>
+							<div class="group-portrait">
+								<img src="img/protrait.png" alt=""  class="protrait-img"/>
+							</div>
+							<p class="group-member-time">2016-09-20&nbsp;03:00:00<span class="member-action">参团</span></p>
+						</li>
+					</ul>
+					<div class="group-member-more">
+						<p class="memebr-more-word">查看更多</p>
+						<img src="img/jiantouR.png" alt="" class="member-more-jtr"/>
+					</div>
+				</div>
+				<!--拼团步骤-->
+				<div class="fight-step">
+					<img src="img/group1.png" alt="" class="step-img"/>
+					<div class="step-btn-box">
+						<a href="#">
+							查看详情
+							<img src="img/jt-r2.png" alt="" class="step-jtr"/>
+						</a>
+					</div>
+				</div>
+				<div class="fight-group-btnbox">
+					<a href="#" class="group-btn">拼团首页</a>
+					<a href="#" class="group-btn">我的拼团</a>
+				</div>
+				
+			</div>
+			<!--content结束-->
+		</div>
+		<!--wrapper结束-->
+		
+		
+		<script type="text/javascript">
+			 function getRTime(){
+        var EndTime= new Date('2016/09/14 22:00:00'); //截止时间 前端路上 http://www.51xuediannao.com/qd63/
+        var NowTime = new Date();
+        var t =EndTime.getTime() - NowTime.getTime();
+        var d=Math.floor(t/1000/60/60/24);
+        var h=Math.floor(t/1000/60/60%24);
+        var m=Math.floor(t/1000/60%60);
+        var s=Math.floor(t/1000%60);
+
+      document.getElementById("t_h").innerHTML = h;
+      document.getElementById("t_m").innerHTML = m;
+      document.getElementById("t_s").innerHTML = s;
+    }
+    setInterval(getRTime,1000);
+		</script>
+	</body>
+</html>

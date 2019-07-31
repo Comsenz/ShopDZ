@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<meta charset="UTF-8">
+		<title>拼团订单详情</title>
+		<link rel="shortcut icon" href="../../../wap/favicon.ico">
+		<link rel="stylesheet" href="../../../wap/css/reset.css" />
+		<link rel="stylesheet" href="../../../wap/css/style.css" />
+		<link rel="stylesheet" href="../../../wap/css/common.css" />
+		<script type="text/javascript" src="../../../wap/js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="../../../wap/js/common.js"></script>
+		<script type="text/javascript" src="../../../wap/js/template.js"></script>
+		<script type="text/javascript" src="../public/js/group.js"></script>
+	</head>
+	<body>
+		<div id="header_has_nav">
+		</div>
+		<div id="orderdetails" class="wrapper content" style="background: #f5f5f5;">
+		</div>
+		<!--wrapper开始-->
+		<script id="orderdetailscontent" type="text/html">
+			<div class="myorder1 orderDet-head posi1" style="overflow:hidden;zoom:1;">
+				<%if(data.group_group.status == 1 && data.invisible != -1){%>
+					<img src="../../../wap/img/groupS.png" alt="" class="group-status-img2"/>
+				<%} else if(data.group_group.status == -1 && data.invisible != -1){%>
+					<img src="../../../wap/img/groupF.png" alt="" class="group-status-img2"/>
+				<%};%>
+				<div class="left" style="width:70%">
+					<p><span style="color: #888;">下单时间：</span><span><%=data['add_time_text']%></span></p>
+					<p><span style="color: #888;">订单编号：</span><span><%=data['order_sn']%></span></p>
+				</div>
+				<div class="right" style="width:30%;">
+					<%if(data['trade_no']){%>
+						<%if(data.group_group.status == -1){%>
+							<%if(data.refund_status == -1){%>
+								<p><span class="wordred right"style="width:70%;">退款失败</span></p>
+							<%}else if(data.refund_status == 1){%>
+								<p><span class="wordred right"style="width:70%;">已退款</span></p>
+							<%}else{%>
+								<p><span class="wordred right"style="width:70%;">等待退款</span></p>
+							<%};%>
+						<%}else{%>
+							<p><span class="wordred right"style="width:70%;">支付成功</span></p>
+						<%}%>
+					<%}else if(data.invisible == -1){%>
+						<p><span class="wordred right"style="width:70%;">支付超时</span></p>
+					<%}else{%>
+						<a class="btn-border1 borderred wordred right" href="<%=apiurl%>/Payment/routepay?payment_code=wx&pay_sn=<%= data['order_sn'] %>" style="width:70%;">
+							继续支付
+						</a>
+					<%};%>
+				</div>
+			</div>
+			
+	    	<ul class="order-list" style="background-color: #fff;">
+				<% if (data['gooddetails']) { %>
+				<% var value = data['gooddetails']; %>
+			    	<li>
+						<dl class="order-dl1 borderbot-none">
+							<dt class="left" ><img class="img-bg" src="<%= value['group_image'] %>"></dt>
+							<dd class="right">
+								<p class="tit-p1">
+								<%if(data['group_group']['status'] == 0){%>
+									<a href="./groupInvitation.html?active_id=<%=data['active_id']%>&group_id=<%=data['group_group']['id']%>" class="left tit-name"><%= value['goods_name'] %></a>
+								<%} else if(data['group_group']['status'] == 1){%>
+									<a href="./groupInvitation.html?active_id=<%=data['active_id']%>&group_id=<%=data['group_group']['id']%>" class="left tit-name"><%= value['goods_name'] %></a>
+								<%} else if(data['group_group']['status'] < 0){%>
+									<a href="./groupInvitation.html?active_id=<%=data['active_id']%>&group_id=<%=data['group_group']['id']%>" class="left tit-name"><%= value['goods_name'] %></a>
+								<%};%>
+									<span class="right">
+										<span>x</span>
+										<span>1</span>
+									</span>
+								</p>
+								<p class="tit-p1 total-price">
+									<span class="left spec-name"><%= value['goods_spec'] %></span>
+									<span>¥</span>
+									<span class="goodsum"><%= returnFloat((parseFloat(value['group_price']))) %>
+									</span>
+								</p>
+							</dd>
+						</dl>
+			    	</li>
+		    	<% } %>
+		    </ul>
+
+			<div class="orderD-con">
+			<% var reciver = data['buyinfo']['reciver_info']; %>
+				<ul class="order-con-ul">
+					<li class="clear-li">
+						<p class="left"><%= reciver['true_name'] %></p>
+						<p class="limit-p left"><%= reciver['tel_phone'] %></p>
+					</li>
+					<li>
+						<%= reciver['area_info'] %> <%= reciver['address'] %>
+					</li>
+				</ul>
+				<ul class="order-con-ul">
+				<%if (data['payment_code']) {%>
+					<li class="clear-li">
+						<p class="left">支付方式：</p>
+						<p class="limit-p left"><%= data['payment_code_text'] %></p>
+					</li>
+				<%};%>	
+					<li class="clear-li">
+						<p class="left">商品合计：</p>
+						<p class="limit-p left"><span>¥</span><span><%= returnFloat(data['goods_amount']) %></span></p>
+					</li>
+					<li class="clear-li">
+						<p class="left">运费：</p>
+						<p class="limit-p left"><span>¥</span><span><%= returnFloat(data['shipping_fee']) %></span></p>
+					</li>
+					<li class="clear-li">
+						<p class="left">优惠：</p>
+						<p class="limit-p left"><span>¥</span><span><%= returnFloat(data['coupon_amount']) %></span></p>
+					</li>
+				</ul>
+				<ul class="order-con-ul" style="border: none;">
+					<li class="clear-li">
+						<p class="left wordred">实付：</p>
+						<p class="limit-p left wordred"><span>¥</span><span><%= returnFloat(data['order_amount']) %></span></p>
+					</li>
+				</ul>
+			</div>
+			<div class="custom-service" style="display:none">
+				<p class="service1 left">电话客服</p>
+				<p class="service2 left">在线客服</p>
+			</div>
+		</script>
+		<!--wrapper结束-->
+		<div class="cover"  style="display:none"></div>
+	
+
+		<script type="text/javascript">
+			
+			$(function(){
+				$('.goback-header').find('.back-icon').unbind('click').click(function() {
+					window.location.href = rootUrl + 'plugins/group/wap/index.html';
+				});
+				initPage();
+				redirectindex();
+				getgrouporder();
+			})
+		</script>
+		<script type="text/javascript" src="../../../wap/js/tmpl/weixin.js"></script>
+		<script type="text/javascript" src="../../../wap/js/tmpl/weixinshare.js"></script>
+	</body>
+</html>

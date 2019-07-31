@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>申请退款</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type='text/javascript' src='js/upload/LocalResizeIMG.js'></script>
+		<script type='text/javascript' src='js/upload/mobileBUGFix.mini.js'></script>
+		<style type="text/css">
+			.bg{ background-color: #ccc; }
+			.none{ display: none;}
+		</style>
+	</head>
+	<body>
+		<div id="header_has_nav">
+		</div>
+		<!--wrapper开始-->
+		<div id="refund" class="wrapper">
+			<!--content开始-->
+			<div class="content">
+				<div id="goods"></div>
+				<div id="message"></div>
+			</div>
+		</div>
+		
+			
+			<script id="goodscontent" type="text/html">
+				<dl class="reason-choice">
+					<dt class="left">退款金额：</dt>
+					<dd class="left">
+						<span class="refund-money" style="border: none;"><%=data['order_amount']%></span>元
+					</dd>
+				</dl>
+			</script>
+
+			<script id="messagecontent" type="text/html">
+				<div class="reason-choice posi1"><select class="reason-sele" name="causes_id" value='0'><option value='0'>退款原因</option><%var datalen = data.length;%><%for (var i = 0; i < datalen; i++) {%><option value="<%=data[i]['causes_id']%>"><%=data[i]['causes_name']%></option><%};%></select><img src="img/jt-r.png" class="area-choice"/></div>
+				<div class="textarea-box">
+					<p class="textcount">剩余<span id="textCount">500</span>个字</p> 
+					<textarea name="causes" placeholder="退款说明" onfocus="if(this.placeholder=='退款说明') {this.placeholder='';}this.style.color='#333';" onblur="if(this.placeholder=='') {this.placeholder='退款说明';this.style.color='#333';}" id="TextArea1" class="options" onkeyup="words_deal();"maxlength="500"></textarea> 
+				</div>
+				<!--<div class="reason-choice">-->
+					<p class="uploda-tit">上传凭证</p>
+				<!--</div>-->
+				<ul class="upLoad-imgbox reason-upload">
+					<li class="liW">
+						<input type="file" id="uploadphoto" name="refund_images" value="请点击上传图片" class="upload-inp" /> 
+  						<img src="img/add-code.png" id="upload-images" class="upload-cover"/>
+					</li>
+					
+				</ul>
+				<div class="refund-foot foot-fixed foot-btn">
+					<input type="button" name="" id="" value="提交" class="refund-btn2"/>
+				</div>
+			</div>
+			<!--content结束-->
+		</script>
+		<div id="ser" class="address-remind">
+		</div>
+		<div class="cover"></div>
+		<div class="inner">
+		    <div class="load-container loading"> 
+		      	<div class="loader">Loading...</div> 
+		     </div>
+		</div>
+		<!--wrapper结束-->
+		<script type="text/javascript" src="js/tmpl/refund.js"></script>
+		<script type="text/javascript">
+		redirectindex();
+			//限制文本域只能输入500字，并提示可输入的剩余字数
+			function words_deal(){ 
+				var curLength=$("#TextArea1").val().length; 
+				if(curLength>500){ 
+					var num=$("#TextArea1").val().substr(0,500); 
+					$("#TextArea1").val(num); 
+					//alert("超过字数限制，多出的字将被截断！" ); 
+				} 
+				else{ 
+					$("#textCount").text(500-$("#TextArea1").val().length); 
+				} 
+			}
+			var imglen = 3;
+			var amount = 0;
+			var submit = true;
+			$(function(){
+				$('.goback-header').find('.back-icon').unbind('click').click(function() {
+					window.location.href = WapSiteUrl + '/orderdetails.html?order_sn=' + get('order_sn');
+				});
+				getcause();
+				getorder();
+				
+				/* 上传图片限制 */
+				$('#refund').on('click','.upload-inp',function(){
+					var lilen = $('.upload-inp').parent().siblings('.li-img').length;
+					if(lilen>=imglen){
+						shopdz_alert('最多上传三张图片！');
+						return false;
+					}
+				})
+				/* 提交事件 */
+				$('#refund').on('click','.refund-btn2',function(){
+					if($('select[name="causes_id"]').val() > 0){
+						if(submit){
+							submit = false;
+							$('.refund-btn2').addClass('bg');
+							setrefunddata();
+						}
+					} else {
+						shopdz_alert('请选择退款原因！');
+					}
+				})
+			})
+
+			SizeLimit($(".upload-cover"));
+
+
+		</script>
+		<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixinshare.js"></script>
+	</body>
+</html>

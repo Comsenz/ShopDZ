@@ -1,0 +1,297 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>表格模板</title>
+        
+        <link rel="stylesheet" type="text/css" href="./css/flexigrid.pack.css" />
+        <script type="text/javascript" src="./jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="./js/flexigrid.js"></script>
+    </head>
+    <body>
+        <h2>示例2</h2>
+        <table class="flexme2" style="display: none"></table>
+
+<div class="white-bg">
+                <div class="table-titbox">
+                    <div class="option">
+                        <h1 class="table-tit left boxsizing">退款管理</h1>
+                        <ul class="operation-list left">
+                            <li class="refresh-li"><a href="#"><span><i href="#" class="operation-icon refresh-icon"></i></span></a></li>
+                            <!-- <li class="export-li"><a href="#"><span><i href="#" class="operation-icon export-icon"></i></span></a></li> -->
+                        </ul>
+                    </div>
+                    <form method="get" class="form-horizontal" name="Search_form"  action="{:U('Presales/refunds')}">
+                        <input type="hidden" name="status" value="{$status}"/>
+                        <div class="search-box1 right">
+                            <div class="search-boxcon boxsizing radius3 left">
+                       
+                                <select id='refundsearch' class="sele-com1 search-sele boxsizing" name="where">
+                                    <option <?php if($_GET['where'] == 'refund_sn'){ echo  'selected="selected"';}?> value="refund_sn">退款单号</option>
+                                    <option <?php if($_GET['where'] == 'order_sn'){ echo  'selected="selected"';}?> value="order_sn">订单编号</option>
+                                    <option <?php if($_GET['where'] == 'member_mobile'){ echo  'selected="selected"';}?> value="member_mobile">买家帐号</option>
+                                </select>
+                                <input name="value" value="<?php echo $_GET['value'];?>" class="search-inp-con boxsizing" type="text"/>
+                            </div>
+                            <input value="搜索" class="search-btn right radius3" type="submit"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="comtable-box boxsizing">
+                    <table class="com-table">
+                        <thead>
+                            <tr>
+                                <th width="90">操作</th>
+                                <th width="160">订单编号</th>
+                                <th width="160">退款单号</th>
+                                <th width="160">买家帐号</th>
+                                <th width="160" class="text-l">退款金额</th>
+                                <th width="200" class="text-l">退款原因</th>
+                                <th width="200" class="text-l">处理状态</th>
+                                <th width="230" class="text-l">处理备注</th>
+                                <th width="200">申请时间</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <empty name="list">
+                                <tr class="tr-minH">
+                                    <td colspan="9">暂无数据！</td>
+                                    <td></td>
+                                </tr>
+                            <else />
+                            <foreach name="list" item="vo">
+                            <tr>
+                                <td>
+                                    <div class="table-iconbox">
+                                        <if condition="$vo.status_code eq '1' ">
+                                            <div class="edit-iconbox left edit-sele marginR10">
+                                                <a class="edit-word table-icon-a" href='{:U("Presales/editrefund/id/$vo[refund_id]")}'><i class="table-com-icon table-handle-icon"></i><span class="gap">审核</span></a>
+                                            </div>
+                                        <elseif condition="$vo.status_code eq '2' "/>
+                                            <div class="edit-iconbox left edit-sele marginR10">
+                                                <a class="edit-word table-icon-a" href='{:U("Presales/refunddetail/id/$vo[refund_id]/status/return")}'  data-refund_id="{$vo['refund_id']}"><i class="table-com-icon table-refund-icon"></i><span class="gap">退款</span></a>
+                                            </div>
+                                        <else/>
+                                            <div class="edit-iconbox left edit-sele marginR10">
+                                                <a class="edit-word table-icon-a" href='{:U("Presales/refunddetail/id/$vo[refund_id]/status/details")}'><i class="table-com-icon table-look-icon"></i><span class="gap">详情</span></a>
+                                            </div>
+                                        </if>
+                                    </div>
+                                </td>
+                                <td>{$vo.order_sn}</td>
+                                <td>{$vo.refund_sn}</td>
+                                <td>{$vo.member_mobile}</td>
+                                <td class="text-l">{$vo.refund_amount}</td>
+                                <td class="text-l">{$vo['causes_name']}</td>
+                                <td class="text-l">{$vo['status']}</td>
+                                <td class="text-l"><div class="word-overflow" title="{$vo['remark']}">{$vo['remark']}</div>{$vo['']}</td>
+                                <td>{:date('Y-m-d H:i:s',$vo['dateline'])}</td>
+                                <td></td>
+                            </tr>
+                            </foreach>
+                            </empty>
+                        </tbody>
+                    </table>
+                </div>
+                {$page}
+            </div>
+        <script type="text/javascript">
+
+            $(".flexme2").flexigrid({
+                url : 'example4.php',
+                dataType : 'json',
+                colModel : [
+                    {
+                        id: 'employeeID',//*****全选列必填，此项为数据的id
+                        display : '全选',//列名
+                        name : 'checkall',//字段名
+                        width : 90,//宽度
+                        sortable : false,//排序
+                        align : 'center',//内容对齐方式
+                        process: function(){},//回调函数
+                        
+                    },
+                    {
+                        display : '操作',//列名
+                        name : 'handle',//字段名
+                        width : 90,//宽度
+                        sortable : false,//排序
+                        align : 'center',//内容对齐方式
+                        process: '',
+                        button: function(data){} 
+                    },
+                    {
+                        display : 'EmployeeID',
+                        name : 'employeeID',
+                        width : 90,
+                        sortable : true,
+                        align : 'center'
+                    },
+                    {
+                        display : 'Name',
+                        name : 'name',
+                        width : 120,
+                        sortable : true,
+                        align : 'left'
+                    },
+                    {
+                        display : 'Primary Language',
+                        name : 'primary_language',
+                        width : 120,
+                        sortable : true,
+                        align : 'left'
+                    },
+                    {
+                        display : 'Favorite Color',
+                        name : 'favorite_color',
+                        width : 120,
+                        sortable : true,
+                        align : 'left',
+                        hide : true
+                    },
+                    {
+                        display : 'Favorite Animal',
+                        name : 'favorite_pet',
+                        width : 120,
+                        sortable : true,
+                        align : 'right'
+                    },
+                    {
+                        display : 'Favorite Animal',
+                        name : 'favorite_pet',
+                        width : 120,
+                        sortable : true,
+                        align : 'right'
+                    },
+                    {
+                        display : 'Favorite Animal',
+                        name : 'favorite_pet',
+                        width : 120,
+                        sortable : true,
+                        align : 'right'
+                    },
+                    {
+                        display : 'Favorite Animal',
+                        name : 'favorite_pet',
+                        width : 120,
+                        sortable : true,
+                        align : 'right'
+                    },
+                    {
+                        display : 'Favorite Animal',
+                        name : 'favorite_pet',
+                        width : 120,
+                        sortable : true,
+                        align : 'right'
+                    },
+                    {
+                        display : 'Favorite Animal',
+                        name : 'favorite_pet',
+                        width : 120,
+                        sortable : true,
+                        align : 'right'
+                    }
+                ],
+                combobuttons: false,/* buttons后面追加的下拉按纽 */
+                buttons : [ 
+                    {
+                        name : 'Add',
+                        bclass : 'add',
+                        onpress : Example4,
+                        bimage : false
+                    },
+                    {
+                        name : 'Delete',
+                        bclass : 'delete',
+                        onpress : Example4,
+                        bimage : false
+                    },
+                    {
+                        separator : true
+                    } 
+                ],
+                searchitems : [ 
+                    {
+                        display : '用户ID',
+                        name : 'user_id'
+                    },
+                    {
+                        display : '用户名',
+                        name : 'user_name',
+                        isdefault : true
+                    }
+                ],
+                sortname : "employeeID",
+                sortorder : "asc",
+                usepager : true,
+                title : '示例2',
+                useRp : true,
+                rp : 15,
+                showTableToggleBtn : false,
+                width : 750,
+                height : 200
+            });
+
+            function Example4(th, com, grid) {
+                $(document).on('click','#'+th,function(){
+                    if (com == 'Delete') {
+                        var conf = confirm('Delete ' + $('.trSelected', grid).length + ' items?')
+                        if(conf){
+                            $.each($('.trSelected', grid),
+                                function(key, value){
+                                    $.get('example4.php', { Delete: value.firstChild.innerText}
+                                        , function(){
+                                            // when ajax returns (callback), update the grid to refresh the data
+                                            $(".flexme2").flexReload();
+                                    });
+                            });    
+                        }
+                    }else if (com == 'Edit') {
+                        var conf = confirm('Edit ' + $('.trSelected', grid).length + ' items?')
+                        if(conf){
+                            $.each($('.trSelected', grid),
+                                function(key, value){
+                                    // collect the data
+                                    var OrgEmpID = value.children[0].innerText; // in case we're changing the key
+                                    var EmpID = prompt("Please enter the New Employee ID",value.children[0].innerText);
+                                    var Name = prompt("Please enter the Employee Name",value.children[1].innerText);
+                                    var PrimaryLanguage = prompt("Please enter the Employee's Primary Language",value.children[2].innerText);
+                                    var FavoriteColor = prompt("Please enter the Employee's Favorite Color",value.children[3].innerText);
+                                    var FavoriteAnimal = prompt("Please enter the Employee's Favorite Animal",value.children[4].innerText);
+
+                                    // call the ajax to save the data to the session
+                                    $.get('example4.php', 
+                                        { Edit: true
+                                            , OrgEmpID: OrgEmpID
+                                            , EmpID: EmpID
+                                            , Name: Name
+                                            , PrimaryLanguage: PrimaryLanguage
+                                            , FavoriteColor: FavoriteColor
+                                            , FavoritePet: FavoriteAnimal  }
+                                        , function(){
+                                            // when ajax returns (callback), update the grid to refresh the data
+                                            $(".flexme2").flexReload();
+                                    });
+                            });    
+                        }
+                    }else if (com == 'Add') {
+                        // collect the data
+                        var EmpID = prompt("Please enter the Employee ID","5");
+                        var Name = prompt("Please enter the Employee Name","Mark");
+                        var PrimaryLanguage = prompt("Please enter the Employee's Primary Language","php");
+                        var FavoriteColor = prompt("Please enter the Employee's Favorite Color","Tan");
+                        var FavoriteAnimal = prompt("Please enter the Employee's Favorite Animal","Dog");
+
+                        // call the ajax to save the data to the session
+                        $.get('example4.php', { Add: true, EmpID: EmpID, Name: Name, PrimaryLanguage: PrimaryLanguage, FavoriteColor: FavoriteColor, FavoritePet: FavoriteAnimal  }
+                            , function(){
+                                // when ajax returns (callback), update the grid to refresh the data
+                                $(".flexme2").flexReload();
+                        });
+                    }
+                })
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="aplus-terminal" content="1"/>
+    <meta name="keywords" content="SHOPDZ" />
+	<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>支付方式</title>
+	<link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/swiper.min.css">
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/common.css" />
+	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+	<script src="js/config.js"></script> -->
+	<script src="js/swiper.min.js"></script>
+	<script src="js/common.js"></script>
+	<script type="text/javascript">
+		redirectindex();
+		var pay_on_off = true;
+		var pay_code = Wx_Alipay();
+		if(pay_code == 'wx'){
+			window.location.href = ApiUrl + '/Payment/routepay?payment_code=wx&pay_sn=' + get('order_sn');
+		}
+		/* 获取商城支付设置 */
+		var conf = getwebConf('payment');
+		function Wx_Alipay(){
+			var ua = window.navigator.userAgent.toLowerCase();
+		    if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+		        return 'wx';
+		    }else if(ua.match(/AlipayClient/i) == 'alipayclient'){
+		        return 'alipay';
+		    }
+		    return false;
+		}
+	</script>
+</head>
+<body>
+
+	<div class="wrapper" style="background: #f5f5f5;display: none;">
+		<div class="contnet">
+    		<h2 class="pay-tit">请选择支付方式</h2>
+    		<div class="pay-box alipay" style="display: none;"> 
+    			<img src="img/zhifubao.png" alt="" class="pay-img"/>
+    			<img src="img/jt-r.png" alt="" class="pay-jt"/>
+    		</div>
+
+    		<div class="pay-box wx" style="display: none;">
+    			<img src="img/zhifuimg2.png" alt="" class="pay-img"/>
+    			<img src="img/jt-r.png" alt="" class="pay-jt"/>
+    		</div>
+    	</div>
+	</div>
+	<div class="cover"></div>
+	<div class="inner">
+		<div class="load-container native">
+			<p><img alt="" src="" style="width:150px;height:150px;"/></p>
+			<p><img alt="" src="img/wxpay.png" style="width:150px;"/></p>
+			<p><button>支付完成后，点击返回</button></p>
+		</div>
+	</div>
+	<!--wrapper结束-->
+	<script>
+	// getdata(ApiUrl + '/Payment/selectPay',{pay_sn:get('order_sn')},function(info){
+	// 	if(!info['code']){
+	// 		$('.wrapper').css('display','block');
+	// 	}else{
+	// 		shopdz_alert(info['msg'],0,function(){
+	// 			window.location.href = WapSiteUrl + '/index.html';
+	// 		});
+	// 	}
+	// });
+	$(function(){
+		if(pay_code == 'wx'){
+			/* 提示微信支付未开通 */
+			if(conf.wx != 1){
+				prompt_word = '暂未开通微信支付';
+				shopdz_alert(prompt_word);
+				pay_on_off = false;
+			}
+		}else if(pay_code == 'alipay'){
+			/* 提示支付宝支付未开通 */
+			if(conf.alipay == 1){
+				$('.wrapper').show();
+				$('.alipay').show();
+			}else{
+				prompt_word = '暂未开通支付宝支付';
+				shopdz_alert(prompt_word);
+				pay_on_off = false;
+			}
+		}else{
+			$('.wrapper').show();
+			/* 提示支付宝支付未开通 */
+			if(conf.alipay == 1){
+				$('.alipay').show();
+			}
+			/* 提示微信支付未开通 */
+			if(conf.wx == 1){
+				$('.wx').show();
+			}
+		}
+		
+		/* 支付宝 */
+		$('.alipay').click(function(){
+			/* 提示支付宝支付未开通 */
+			if(conf.alipay != 1){
+				prompt_word = '暂未开通支付宝支付';
+				shopdz_alert(prompt_word);
+				return false;
+			}
+			getdata(ApiUrl + '/Payment/selectPay',{pay_sn:get('order_sn')},function(info){
+				if(!info['code']){
+					window.location.href = ApiUrl + '/Payment/routepay?payment_code=alipay&pay_sn=' + get('order_sn');
+				}else{
+					shopdz_alert(info['msg'],3,function(){
+						window.location.href = WapSiteUrl + '/index.html';
+					});
+				}
+			});
+		});
+		
+		/* 去除遮罩层 */
+		$('.inner').click(function(){
+			$('.cover,.inner').hide();
+		})
+		/* 微信扫码 */
+		$('.wx').click(function(){
+			/* 提示微信支付未开通 */
+			if(conf.wx != 1){
+				prompt_word = '暂未开通微信支付';
+				shopdz_alert(prompt_word);
+				return false;
+			}
+			getdata(ApiUrl + '/Payment/selectPay',{pay_sn:get('order_sn')},function(info){
+				if(info['code']){
+					shopdz_alert(info['msg'],0,function(){
+						window.location.href = WapSiteUrl + '/index.html';
+					});
+				} else {
+					/* 判断pc端 手机端 */
+					if(isPhone()) {
+						// 手机端
+						window.location.href = ApiUrl + '/Payment/routepay?payment_code=wx&pay_sn=' + get('order_sn');
+					}else{
+						// PC 端
+						window.location.href = WapSiteUrl + '/wxpay.html?order_sn=' + get('order_sn');
+					}
+					
+				}
+			});
+		});
+		initPage();
+	})
+    </script>
+</body>
+</html>

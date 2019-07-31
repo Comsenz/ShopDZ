@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<link rel="shortcut icon" href="favicon.ico">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>商品详情</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/swiper.min.css">
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		
+		<style type="text/css">
+		/*商品库存不足的时候的购买按钮的样式*/
+		.disable_buy{background:#f0f0f0;color:#ccc;cursor:text;}
+		</style>
+	</head>
+	<body>
+		<!--header开始-->
+			<div  id="header_has_back"> 
+			</div>
+		<!--wrapper开始-->
+		<div class="wrapper">
+			<input id="op"  type="hidden"  value="buy">
+	    	<!--规格选择结束-->
+	    	<div class="cover"></div>
+	    	<div id="address-remind" class="address-remind">加入成功</div>
+<script type="text/html" id="goods_detail_template" >
+		<%
+			var first_goods  =   getFirstValue(goods_list);
+			var  goods_num  = countObj(goods_list);
+		%>
+		<div class="content" style="background-color: #f7f7f7;">
+				<!--焦点图轮播开始-->
+				<div class="posi1">
+					<div class="details-icon-box">
+						<p class="details-icon add_favorites" goods_common_id="<%=goods_common_id%>"><span class="details-icon-span collect-icon"></span><!--<img src="img/collecticon2.png" alt="" class="details-icon-img"/>--></p>
+						<p class="details-icon"><span class="details-icon-span share-icon"><!--<img src="img/shareicon.png" alt=""  class="details-icon-img"/>--></p>
+					</div>
+					<div class="swiper-container" style="">
+				        <div class="swiper-wrapper">
+				        <% for(i in goods_images){ %>
+				            <div class="swiper-slide"><img src="<%=goods_images[i]%>"/></div>
+				        <% } %>
+
+				        </div>
+			        	<!-- Add Pagination -->
+			        	<div class="swiper-pagination"></div>
+						<div id="wx_goods_image" style="display:none"><%=goods_image%></div>
+			    	</div>
+			    </div>
+		    	<!--焦点图轮播结束-->
+		    	<div class="details1">
+		    		<p class="details-tit1"><%=goods_name%></p>
+		    		<p class="details-subtit1"><%=goods_jingle%></p>
+		    		<% if(goods_num==1){ %>
+		    			<p class="details-price"><span>¥</span><span  class="goods_price" ><%=first_goods.goods_price%></span>
+		    		<% }else{ %>
+		    		<p class="details-price"><span>¥</span><span  class="goods_price" ><%=goods_price%></span></p>
+		    		<% } %>
+		    		
+		    	</div>
+		    	<div class="specbox">
+		    		<% if(goods_num==1){ %>	
+		    		<p class="spec-con" style="text-align:left;padding-left:15px;"><span id="spec_goods_name" class="spec_goods_name"  ><%=first_goods.spec_goods_name%></span><span > x</span><span class="goods_num" >1</span><span class="jt-r"></span></p>
+		    		<% }else{ %>
+		    		<span id="goods_id" style="display:none;" class="goods_id"  ><%=first_goods.goods_id%></span>
+		    		<p class="spec-con" style="text-align:left;padding-left:15px;"><span id="spec_goods_name" class="spec_goods_name"  >请选择规格和数量</span><span class="x" ></span><span class="goods_num" ></span><span class="jt-r"></span></p>
+		    		<% } %>
+		    	</div>
+
+		    	<%if(goods_param && goods_param.length>0){ %>
+		    	<div class="pro-parameter">
+		    		<p class="para-tit">商品参数</p>
+		    		<% for(i in goods_param){ %>
+		    		<% var  v = goods_param[i];%>
+		    		<div class="para-con specification">
+		    			<span class="spec-span1"><%=v.param_name%></span>
+		    			<span class="spec-span2"><%=v.param_value%></span>
+		    		</div>
+		    		<% } %>
+		    	</div>
+		    	<% }  %>
+		    	<div class="img-box1">
+		    		<%=#goods_detail%>
+		    	</div>
+		    	<div class="choice-foot foot-fixed foot-btn">
+					<a href="comment.html?goods_id=<%=goods_common_id%>" class="choice-back bgf9"><img src="img/detail-comment.png" class="choice-back-img"/></a>
+					<input type="button"  value="立即购买" data-old_value="立即购买"  class="bgf9 do_buy change_two buy_now choice-com-btn now-buy" />
+					<input type="button"  value="加入购物车"   data-old_value="加入购物车" class="do_buy change_two add_basket choice-com-btn add-shopcart borderR-none"/>
+				</div>
+			</div>
+
+			
+	    	<!--规格选择开始-->
+	    	<div class="spec-none">
+	    		<% if(goods_num==1){ %>	
+	    		<dl class="spec-dl1">
+					<dt class="spec-dl1-dt"><img class="goods_image"  src="<%=first_goods.goods_image%>"/></dt>
+					<dd class="spec-dl1-dd">
+						<p class="spec-dd-price ">¥<span class="goods_price" ><%=first_goods.goods_price%></span></p>
+						<p class="spec-none-tit"><span class="spec_goods_name"><%=first_goods.spec_goods_name%></span><span> x</span><span class="goods_num" >1</span></p>
+					</dd>
+				</dl>
+				<% }else{ %>
+				<dl class="spec-dl1">
+					<dt class="spec-dl1-dt"><img class="goods_image"  src="<%=goods_image%>"/></dt>
+					<dd class="spec-dl1-dd">
+						<p class="spec-dd-price ">¥<span class="goods_price" ><%=goods_price%></span></p>
+						<p class="spec-none-tit"><span class="spec_goods_name">请选择规格和数量</span><span class="x"></span><span class="goods_num" ></span></p>
+					</dd>
+				</dl>
+				<% } %>
+				<div class="spec-choice-box">
+					<div class="spec-choice">
+						<% for(spec_id in  spec){ %>
+						<%
+							var spec_name =     spec[spec_id].spec_name;
+							var  spec_values =  spec[spec_id].spec_value;    
+						%>
+						<p class="choice-tit"><%=spec_name%></p>
+						<div class="choice-box1">
+							<ul class="choice-ul choice-ul-<%=spec_id%>">
+								<% for(spec_value_id in  spec_values){ %>
+									<% if(goods_num==1){ %>	
+									<li class="spec_value_li spec_<%=spec_value_id%> <%if(spec_value_id==first_goods.goods_spec[spec_id]){%>active-bor<%}%>   "   data-spec_id="<%=spec_id%>" data-spec_value_id="<%=spec_value_id%>"  ><%=spec_values[spec_value_id]%><span <%if(spec_value_id==first_goods.goods_spec[spec_id]){%>class="active-bg"<%}%> ></span></li>
+									<% }else{ %>
+									<li class="spec_value_li spec_<%=spec_value_id%>"   data-spec_id="<%=spec_id%>" data-spec_value_id="<%=spec_value_id%>"  ><%=spec_values[spec_value_id]%><span></span></li>
+									<% } %>
+								<%}%>
+							</ul>
+						</div>
+						<% } %>
+						<div class="size1">
+							<p class="choice-tit">数量</p>
+							
+							<div class="m-selnum jia-jian" data-reactid=".0.1.0.1.1.1.1.0">
+								<span id="decrease_goods_num" class="jian less z-dis" style="border-right: none;" data-reactid=".0.1.0.1.1.1.1.0.0">
+									<i class="hx" data-reactid=".0.1.0.1.1.1.1.0.0.0"></i>
+								</span>
+								<div class="textWrap" data-reactid=".0.1.0.1.1.1.1.0.1">
+									<input type="number" id="goods_num" class="num-input" value="1" data-reactid=".0.1.0.1.1.1.1.0.1.0">
+								</div>
+								<span id="increase_goods_num" class="more jia" data-reactid=".0.1.0.1.1.1.1.0.2">
+									<i class="hx" data-reactid=".0.1.0.1.1.1.1.0.2.0"></i>
+									<i class="sx" data-reactid=".0.1.0.1.1.1.1.0.2.1"></i>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="choice-foot foot-fixed foot-btn" id="button_div" >
+						<span class="choice-back"><img src="img/detail-back.png" class="choice-back-img"/></span>
+						<input type="button"  data-old_value="立即购买"  value="立即购买"  class="do_buy buy_now choice-com-btn now-buy" />
+					<input type="button"   old_value_value="加入购物车" value="加入购物车" class="do_buy add_basket choice-com-btn add-shopcart borderR-none"/>
+					</div>
+				</div>
+			</div>
+	</script>
+			<!--分享弹层-->
+	    	<div class="details-share-box">
+	    		<h1 class="share-tit">分享</h1>
+	    		<ul class="modular-box spread-list share-list">
+					<li class="modular-li wx-code">
+						<a href="#">
+							<img src="img/spread1.png" class="modular-img"/>
+							<p class="modular-word">微信分享</p>
+						</a>
+					</li>
+					<li class="modular-li code-li">
+						<a href="#">
+							<img src="img/spread2.png" class="modular-img"/>
+							<p class="modular-word">二维码</p>
+						</a>
+					</li>
+					<li class="modular-li copy-li">
+						<a href="#">
+							<img src="img/spread3.png" class="modular-img"/>
+							<p class="modular-word">复制链接</p>
+						</a>
+					</li>
+				</ul>
+				<h1 class="share-cancel">取消</h1>
+	    	</div>
+	    	<!-- 分享弹层 -->
+	    	<div class="cover"></div>
+			<div class="savecode-box">
+				<img id="qrcode" src="" alt="" class="alert-code"/>
+				<input type="button" name="" id="" value="长按二维码图片保存" class="alert-codebtn"/>
+				<p class="alert-codetit">将图片发送给好友，吸引更多客流</p>
+			</div>
+			<div class="detail-cover code-cover"></div>
+			<img src="img/wxbg.png" alt="" class="wx-alert"/>
+			<div class="httpcode-box">
+				<p class="alert-http http"></p>
+				<input type="button" name="" value="长按网址复制"  class="alert-codebtn"/>
+				
+			</div>
+	    	<!--返回顶部-->
+    		<div style="display:none;" class="gotobtn" id="goTopBtn"><img border=0 src="img/goToTop.png"></div> 
+		</div>
+		<!--wrapper结束-->
+	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="js/parabola.js"></script>
+	<script type="text/javascript">
+		$(function(){
+
+			/* 弹出分享 */
+			$(document).on('click','.share-icon',function(){
+				$('.cover').show();//遮罩层显示
+				$('.details-share-box').slideDown();//分享弹出
+				//$('.wrapper').css('overflow-y','hidden');//禁止滚动
+			});
+			/* 点击遮罩层收起分享 */
+			$(document).on('click','.cover,.wx-alert,.share-cancel',function(){
+				$('.cover').hide();//遮罩层隐藏
+				$('.cover').css('z-index','887');//设置遮罩层层级(降级)
+				$('.details-share-box').slideUp();//分享收起
+				$('.wx-alert').hide();//微信分享提示收起
+				$('.savecode-box').hide();//二维码收起
+				$('.httpcode-box').hide();//链接收起
+				//$('.wrapper').css('overflow-y','');//开启滚动
+			});
+			/* 点击微信分享弹出 */
+			$(document).on('click','.wx-code',function(){
+				if(isWeiXin()){
+					$('.cover').show();//遮罩层显示
+					$('.wx-alert').show();//微信分享提示弹出
+					$('.details-share-box').slideUp();//分享收起
+					$('.cover').css('z-index','889');//设置遮罩层层级(升级)
+					//$('.wrapper').css('overflow-y','hidden');//禁止滚动
+				}else{
+					shopdz_alert('请在微信登陆！');
+				}
+			});
+			/* 点击二维码弹出 */
+			$(document).on('click','.code-li',function(){
+				$('.cover').show();//遮罩层显示
+				$('.savecode-box').show();//二维码弹出
+				$('.details-share-box').slideUp();//分享收起
+				$('.cover').css('z-index','889');//设置遮罩层层级(升级)
+				//$('.wrapper').css('overflow-y','hidden');//禁止滚动
+			});
+			/* 点击链接弹出 */
+			$(document).on('click','.copy-li',function(){
+				$('.cover').show();//遮罩层显示
+				$('.httpcode-box').show();//链接弹出
+				$('.details-share-box').slideUp();//分享收起
+				$('.cover').css('z-index','889');//设置遮罩层层级(升级)
+				//$('.wrapper').css('overflow-y','hidden');//禁止滚动
+			});
+			
+			var url = location.href.split('#')[0];
+
+			if(isWeiXin()) {
+				$.get(ApiUrl + '/Member/GetSignPackage', {"url": encodeURIComponent(url)}, function (data) {
+					if (data.code == 0) {
+						wx.config({
+							debug: false,
+							appId: data.data.appId,
+							timestamp: data.data.timestamp,
+							nonceStr: data.data.nonceStr,
+							signature: data.data.signature,
+							jsApiList: ['onMenuShareAppMessage','onMenuShareTimeline'
+								// 所有要调用的 API 都要加到这个列表中
+							]
+						});
+						;
+					}
+				}, 'json');
+				wx.ready(function () {
+
+					var uid = getCookies('uid');
+					var title = $('.details-tit1').text();
+					var desc = $('.details-subtit1').text();;
+					var imgurl = $('#wx_goods_image').text();
+					wx.onMenuShareAppMessage({
+						title: title,
+						desc: desc,
+						link: location.href.split('#')[0]+'&fromid='+uid,
+						imgUrl: imgurl,
+						type: '',
+						dataUrl: '',
+
+						success: function () {
+							$('.cover').hide();//遮罩层隐藏
+							$('.cover').css('z-index','887');//设置遮罩层层级(降级)
+							$('.details-share-box').slideUp();//分享收起
+							$('.wx-alert').hide();//微信分享提示收起
+							$('.savecode-box').hide();//二维码收起
+							$('.httpcode-box').hide();//链接收起
+							//$('.wrapper').css('overflow-y','auto');//开启滚动
+							// 用户确认分享后执行的回调函数
+
+						},
+						cancel: function () {
+							// 用户取消分享后执行的回调函数
+
+						}
+					});
+					wx.onMenuShareTimeline({
+						title:title+ '-' +desc,
+						link: location.href.split('#')[0]+'&fromid='+uid,
+						imgUrl: imgurl,
+						success: function () {
+							// 用户确认分享后执行的回调函数
+							$('.cover').hide();//遮罩层隐藏
+							$('.cover').css('z-index','887');//设置遮罩层层级(降级)
+							$('.details-share-box').slideUp();//分享收起
+							$('.wx-alert').hide();//微信分享提示收起
+							$('.savecode-box').hide();//二维码收起
+							$('.httpcode-box').hide();//链接收起
+							//$('.wrapper').css('overflow-y','auto');//开启滚动
+						},
+						cancel: function () {
+							// 用户取消分享后执行的回调函数
+						}
+					});
+				})
+			}
+			initPage();
+
+		})
+	</script>
+	<!--<script type="text/javascript" src="js/config.js"></script>	
+	<script type="text/javascript" src="js/gotoTop.js"></script> -->
+	<script type="text/javascript" src="js/common.js"></script>	
+	<script type="text/javascript" src="js/template.js"></script>
+	<script type="text/javascript" src="js/swiper.min.js"></script>
+	<script type="text/javascript" src="js/tmpl/AddSubstract.js"></script>
+	<script type="text/javascript" src="js/tmpl/basket.js"></script>
+	<script type="text/javascript" src="js/tmpl/goods_detail.js?a=344"></script>
+	<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+	</body>
+</html>

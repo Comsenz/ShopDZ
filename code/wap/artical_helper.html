@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>新闻</title>
+		<meta charset="utf-8">
+	    <meta name="aplus-terminal" content="1"/>
+	    <meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<link rel="shortcut icon" href="favicon.ico">
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+	</head>
+	<body>
+		<div id="header_has_nav">
+		</div>
+		<div class="wrapper">
+		<div class="content">
+			<h1 class="artical-tit" style="display:none"></h1>
+			<div class="mall-notice" style="display:none">
+				<div class="notice-tit">
+					<p class="notice-left"></p>
+					<p class="notice-right"></p>
+				</div>
+			</div>
+			<p class="artical-content"></p>
+		</div>
+		</div>
+		<script>
+		$(function(){
+			var agreementurl = ApiUrl + '/Cms/getcms';
+
+			getdata(agreementurl,{key:key,cms_id:get('id')},function(info){
+				if(info['code']){
+					shopdz_alert(info['msg'],3,function() {
+						goBack();
+					});
+				}else{
+					$('title').html(info['data']['article_title']);
+					$('#head_tit').html($('title').text());
+					$('.artical-tit').html(info['data']['article_title']);
+					$('.notice-left').html(info['data']['article_class_name']);
+					$('.notice-right').html(info['data']['article_publish_time']);
+					$('.artical-content').html(info['data']['article_content']);
+					initPage();
+				}
+			});
+		});
+		</script>
+		<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixinshare.js"></script>
+	</body>
+</html>

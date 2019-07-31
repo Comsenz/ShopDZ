@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="apple-mobile-web-app-title" content="TMALL"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>	
+		<title>优惠券</title>
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<body>
+		
+		<div class="wrapper wrapper-bg">
+			<!--header开始-->
+			<div class="header-box">
+				<div class="index-header">
+					<img src="img/logo.png" class="logo"/>
+					<span class="mine-span"><img src="img/mine.png" class="mine-img"/></span>
+					<a href="shopCart.html" class="shop-cart"><img src="img/cart.png" class="shop-cart-img"/><img src="img/redPoint.png" class="shop-cart-have"/></a>
+				</div>
+			</div>
+			<!--header结束-->
+			<div id="sidebar-tab" class="content"> 
+				<ul id="tab-title"> 
+					<li class="selected">未使用</li>
+					<li>已使用</li>
+					<li>已失效</li>
+				</ul> 
+				<div id="tab-content" class="tab-content"> 
+					<div class="show voucher-list">
+						<ul class="coupon-list">
+							<li class="not-used-coupon coupon-li">
+								<a href="#" class="coupon-box">
+									<div class="coupon-box-det coupon-det">
+										<div class="coupon-box-top">
+											<div class="coupon-top-con">
+												<p class="coupon-subtit">ShopDZ商城</p>
+												<span class="coupon-share">分享</span>
+												<p class="coupon-tit">￥100</p>
+												<p class="coupon-limit">订单满<span>100元（含运费）</span></p>
+												<p class="coupon-time">有效期：<span>2016/12/12</span>-<span>2016/08/08</span></p>
+											</div>
+										</div>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div> 
+					<div class="voucher-list">
+						<ul>
+							<li class="already-used-coupon coupon-li">
+								<a href="#" class="coupon-box">
+									<div class="coupon-box-det coupon-det">
+										<div class="coupon-box-top">
+											<div class="coupon-top-con">
+												<p class="coupon-subtit">ShopDZ商城</p>
+												<span class="coupon-share">分享</span>
+												<p class="coupon-tit">￥20</p>
+												<p class="coupon-limit">订单满<span>100元（含运费）</span></p>
+												<p class="coupon-time">有效期：<span>2016/12/12</span>-<span>2016/08/08</span></p>
+											</div>
+											<img src="img/couponused.png" alt="" class="statu-icon"/>
+										</div>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div> 
+					<div class="voucher-list">
+						<ul>
+							<li class="has-failed-coupon coupon-li">
+								<a href="#" class="coupon-box">
+									<div class="coupon-box-det coupon-det">
+										<div class="coupon-box-top">
+											<div class="coupon-top-con">
+												<p class="coupon-subtit">ShopDZ商城</p>
+												<span class="coupon-share">分享</span>
+												<p class="coupon-tit">￥50</p>
+												<p class="coupon-limit">订单满<span>100元（含运费）</span></p>
+												<p class="coupon-time">有效期：<span>2016/12/12</span>-<span>2016/08/08</span></p>
+											</div>
+											<img src="img/couponfailed.png" alt="" class="statu-icon"/>
+										</div>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div> 
+				</div> 
+			</div>
+			<div class="new-build foot-fixed">领取更多优惠券</div>
+		</div>
+		
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		
+		<script language="javascript"> 
+			$('#tab-title li').click(function(){ 
+				$(this).addClass("selected").siblings().removeClass();//removeClass就是删除当前其他类；只有当前对象有addClass("selected")；siblings()意思就是当前对象的同级元素，removeClass就是删除； 
+				$("#tab-content > div").hide().eq($('#tab-title li').index(this)).show(); 
+			}); 
+		</script>
+
+	</body>
+</html>

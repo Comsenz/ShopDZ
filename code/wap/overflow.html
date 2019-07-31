@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="apple-mobile-web-app-title" content="TMALL"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title></title>
+		<script type="text/javascript" src="js/jquery-1.9.1.min.js">
+		</script>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<style type="text/css">
+		button {
+			width: 80px;
+			height: 40px;
+		}
+			li {line-height: 50px;}
+		</style>
+	</head>
+	<body>
+		<button class="btn1">按钮1</button>
+		<button class="btn2">按钮2</button>
+		<ul>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+			<li>00000</li>
+		</ul>
+		<select name="" id="">
+			<option value="">00000</option>
+			<option value="">00000</option>
+			<option value="">00000</option>
+		</select>
+		
+		<script type="text/javascript">
+		var scrollTop = $('body').scrollTop();//body设置为fixed之后会飘到顶部，所以要动态计算当前用户所在高度
+			$('.btn1').click(function(){
+				alert('000');
+				$('body').css({
+				    'overflow':'hidden',
+				    'position': 'fixed',
+				    'top': scrollTop*-1
+				});
+				$('.btn2').click(function(){
+						alert('111');
+					/*取消后设置回来*/
+					$('body').css({
+					    'overflow':'auto',
+					    'position': 'static',
+					    'top': 'auto'
+					})
+				});
+				 
+				
+			})
+		</script>
+	</body>
+</html>

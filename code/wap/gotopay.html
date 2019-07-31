@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>支付宝支付</title>
+</head>
+<body>
+	<script>
+		document.addEventListener('AlipayJSBridgeReady', function () {
+			AlipayJSBridge.call('closeWebview');
+		}, false);
+	</script>
+</body>
+</html>

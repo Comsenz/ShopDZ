@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>	
+		<title>退款详情</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/swiper.min.css">
+		<link rel="stylesheet" href="css/common.css" />
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type="text/javascript" src="js/swiper.min.js"></script>
+		<script type="text/javascript" src="js/tmpl/retreat.js"></script>
+		<style type="text/css">
+			.swiper-pagination-bullet{
+				background: #fff;
+				opacity: .6;
+			}
+			.swiper-pagination-bullet-active{
+				background: #AB2B2B !important;
+			}
+			.refund-img-list {
+				width:77%;			
+			}
+			.refund-img-list li {
+				width:30%;
+				margin-right:3%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="header_has_nav">
+		</div>
+		<!--wrapper开始-->
+		<div id="details" class="wrapper" style="background: #f7f7f7;">
+		</div>
+		<script id="detailscontent" type="text/html">
+			<div  class="content"> 
+			<div class="myorder2">
+				<h2 class="refund-product-tit">我的退款申请</h2>
+				<div class="myorder2-det">
+					<span class="myorder2-det-span left">退款编号：</span>
+					<p class="myorder2-det-p left"><%= data['refund']['refund_sn'] %></p>
+					<span class="myorder2-det-span left">退款原因：</span>
+					<p class="myorder2-det-p left"><%= data['refund']['causes_name'] %></p>
+					<span class="myorder2-det-span left">退款金额：</span>
+					<p class="myorder2-det-p left">¥<%= data['refund']['refund_amount'] %></p>
+					<span class="myorder2-det-span left">退款说明：</span>
+					<p class="myorder2-det-p left"><%= data['refund']['causes'] %></p>
+					<span class="myorder2-det-span left">凭证上传：</span>
+					<ul class="con-img-list comment-img-list left refund-img-list">
+						<% for (var i = 0; i < data['refund']['refund_images'].length; i++) { %>
+							<li class="liW imgW"><img src="<%= data['refund']['refund_images'][i] %>" class="comment-img"/></li>
+						<% }; %>
+					</ul>
+				</div>
+			</div>
+			<!--<div class="refund-product-list">-->
+				<div class="myorder2">
+					<h2 class="refund-product-tit">商品信息</h2>
+					<% for (var i = 0; i < data['goodslist'].length; i++) { %>
+						<% var value = data['goodslist'][i] %>
+						<a href="goods_detail.html?id=<%= value.goods_common_id %>">
+							<dl class="order-dl3">
+								<dt class="left"><img src="<%= value['goods_image'] %>" class="order-img1 img-bg"/></dt>
+								<dd>
+									<div class="dd-left left">
+										<p class="dd-p1 margin-t1"><%= value['goods_name'] %></p>
+										<p class="dd-p3 spec-name"><%=value['goods_spec']%></p>
+									</div>
+									<div class="dd-right left">
+										<p class="dd-p1 margin-t1">x<%= value['goods_num'] %></p>
+										<p class="dd-p3 wordred">¥<%= parseFloat(value['goods_price'])*parseInt(value['goods_num']) %></p>
+									</div>
+								</dd>
+							</dl>
+						</a>
+					<% }; %>
+				</div>
+			<!--</div>-->
+			
+			<div class="myorder2">
+				<h2 class="refund-product-tit">商品退款处理</h2>
+				<div class="myorder2-det">
+					<span class="myorder2-det-span left">审核状态：</span>
+					<p class="myorder2-det-p left"><%= data['refund']['status_text'] %>
+					<% if (data['refund']['status'] == 4 && data['refund']['show'] != 1) {%>
+						<a href="refund.html?order_sn=<%= data['refund']['order_sn'] %>" class="right wordred" style="margin-left:6%;">
+							再次申请退款
+						</a>
+					<%}%>
+					</p>
+					<span class="myorder2-det-span left">审核备注：</span>
+					<p class="myorder2-det-p left"><%= data['refund']['remark'] %></p>
+				</div>
+			</div>
+			</div>
+		</script>
+		<!--wrapper结束-->
+		<script type="text/javascript">
+		redirectindex();
+			var back_url = '/orderdetails.html';
+			var status = 'refund';
+			$(function(){
+				getrefunddetails();
+			})
+			
+		</script>
+	</body>
+</html>

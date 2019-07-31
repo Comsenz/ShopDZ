@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>	
+		<title>提现详情</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/swiper.min.css">
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+
+		<style type="text/css">
+			.swiper-pagination-bullet{
+				background: #fff;
+				opacity: .6;
+			}
+			.swiper-pagination-bullet-active{
+				background: #AB2B2B !important;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="header_has_nav">
+		</div>
+		<!--wrapper开始-->
+		<div id="details" class="wrapper" style="background: #f7f7f7;">
+		</div>
+		<script id="detailscontent" type="text/html">
+			<div  class="content"> 
+				<div class="myorder2">
+					<h2 class="refund-product-tit">提现详情</h2>
+					<div class="myorder2-det">
+						<span class="myorder2-det-span left">提现单号：</span>
+						<p class="myorder2-det-p left"><%= withdraw['cash_sn'] %></p>
+						<span class="myorder2-det-span left">提现金额：</span>
+						<p class="myorder2-det-p left">¥<%= withdraw['cash_amount'] %></p>
+						<span class="myorder2-det-span left">收款银行：</span>
+						<p class="myorder2-det-p left"><%= withdraw['bank'] %></p>
+						<span class="myorder2-det-span left">收款帐号：</span>
+						<p class="myorder2-det-p left"><%= withdraw['bank_no'] %></p>
+						<span class="myorder2-det-span left">姓名：</span>
+						<p class="myorder2-det-p left"><%= withdraw['bank_name'] %></p>
+						<span class="myorder2-det-span left">状态：</span>
+						<p class="myorder2-det-p left"><%= withdraw['status_text'] %></p>
+						<span class="myorder2-det-span left">申请时间：</span>
+						<p class="myorder2-det-p left"><%= withdraw['add_time_text'] %></p>
+						<span class="myorder2-det-span left">处理说明：</span>
+						<p class="myorder2-det-p left"><%= withdraw['remark'] %></p>
+					</div>
+				</div>
+			</div>
+		</script>
+		<!--wrapper结束-->
+		<script type="text/javascript">
+		redirectindex();
+			var back_url = '/Spread/getwithdrawdetail';
+			$(function(){
+				getdata(ApiUrl + back_url,{key:key,cash_sn:get('sn')},function(info){
+					if(info['code']){
+						shopdz_alert(info['msg']);
+					}else{
+						var html = template('detailscontent',info['data']);
+						$('#details').html(html);
+						initPage();
+					}
+				});
+				
+			})
+			
+		</script>
+		<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixinshare.js"></script>
+	</body>
+</html>

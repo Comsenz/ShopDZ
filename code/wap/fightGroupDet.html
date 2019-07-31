@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>拼团详情</title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<link rel="stylesheet" href="css/swiper.min.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type="text/javascript" src="js/tmpl/fightgroup.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+		<script type="text/javascript" src="js/swiper.min.js"></script>
+	</head>
+	<body>
+		<div id="header_has_nav">
+		</div>
+		<!--wrapper开始-->
+		<div class="wrapper wrapper-bg">
+			<!--content开始-->
+			<div class="content contentT">
+				<!--拼团详情-->
+				<div class="group-box-list group-detail marginT0" id="groupgoodsdetail"></div>
+				<script id="groupgoodsdetailcontent" type="text/html">
+					<!--焦点图轮播开始-->
+					<div class="swiper-container">
+				        <div class="swiper-wrapper">
+				        <%for (var i in data['goods']['goods_images']) {%>
+				            <div class="swiper-slide"><img src="<%=data['goods']['goods_images'][i]%>"/></div>
+				        <%};%>
+				        </div>
+			        	<!-- Add Pagination -->
+			        	<div class="swiper-pagination"></div>
+			    	</div>
+			    	<!--焦点图轮播结束-->
+					<div class="group-con">
+						<div class="group-name">
+							<span class="group-new">【<%=data['group']['group_name']%>】</span><%=data['group']['goods_name']%>
+						</div>
+						<p class="group-pro-det"><%=data['group']['group_content']%></p>
+						<!--<div class="buy-box">-->
+							<div class="buy-btn-box">
+							<%if(data['group']['status']['status'] == 0){%>
+								<a href="groupsettlement.html?active_id=<%=data['group']['id']%>&group_id=<%=data['group_id']%>" class="buy-btn fight-group-money"><p class="buy-btn-left fight-btn-left"><%=data['group']['group_person_num']%><br/>人团</p><p class="buy-btn-money"><span>￥</span><span class="fight-money"><%=data['group']['group_price']%></span><span>/件</span></p></a>
+							<%}else{%>
+								<a href="javaScript:;" class="buy-btn fight-group-money gray-a"><p class="buy-btn-left fight-btn-left gray9"><%=data['group']['group_person_num']%><br/>人团</p><p class="buy-btn-money"><span>￥</span><span class="fight-money"><%=data['group']['group_price']%></span><span>/件</span></p></a>
+							<%};%>	
+								<a href="goods_detail.html?id=<%=data['goods']['goods_common_id']%>" class="buy-btn alone-group-money"><p class="buy-btn-left alone-btn-left">单人<br />购买</p><p class="buy-btn-money"><span>￥</span><span class="fight-money"><%=data['goods']['goods_price']%></span><span>/件</span></p></p></a>
+							</div>
+						<!--</div>-->
+						<p class="group-time">活动时间：<span><%=data['group']['starttime_text']%>-<%=data['group']['endtime_text']%></span></p>
+						<p class="fight-group-remind">支付开团并邀请<%=data['group']['group_person_num']-1%>人参团，人数不足自动退款，详见下方拼团玩法</p>
+						
+					</div>
+					<div class="fight-time-limit">
+						<h3 class="limit-time"><%=data['group']['group_hour']%>h</h3>
+					</div>
+				
+					<!--拼团步骤-->
+					<div class="fight-step">
+						<img src="img/group1.png" alt="" class="step-img"/>
+						<div class="step-btn-box">
+							<a href="fightGroupStep.html">
+								查看详情
+								<img src="img/jt-r2.png" alt="" class="step-jtr"/>
+							</a>
+						</div>
+					</div>
+					<div class="fight-group-btnbox">
+						<a href="fightGroupList.html" class="group-btn">拼团首页</a>
+						<a href="mineGroup.html" class="group-btn">我的拼团</a>
+					</div>
+				</script>
+			</div>
+			<!--content结束-->
+		</div>
+		<!--wrapper结束-->
+	<script type="text/javascript">
+		$(function(){
+			//焦点图
+		    
+			getgroupgoodsdetail();
+			initPage();
+		});
+    </script>
+	</body>
+</html>

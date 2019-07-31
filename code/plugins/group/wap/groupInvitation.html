@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>团邀请</title>
+		<link rel="shortcut icon" href="../../../wap/favicon.ico">
+		<link rel="stylesheet" href="../public/css/reset.css" />
+		<link rel="stylesheet" href="../public/css/style.css" />
+		<link rel="stylesheet" href="../../../wap/css/common.css" />
+
+	</head>
+	<body>
+	<div id="plugins_header_has_nav">
+	</div>
+	<div id="groupdetail">
+
+		<script id="groupdetailcontent" type="text/html">
+		<div class="wrapper bgfa">
+
+			<div class="content-top content-bot">
+				<div class="myGroup-box groupInvite-box">
+					<dl class="myGroup-commodity">
+						<dt class="myGroup-comDt"><img src="<%=data['group']['group_image']%>" alt="我的拼团列表商品图片"  class="myGroup-comImg"/></dt>
+						<dd class="myGroup-comDd">
+							<div class="myGroup-statu">
+								<span class="groupPerson-num"><%=data['group']['group_person_num']%>人团</span>
+								<div class="mine-group-limit">
+									<p class="limit-word">距离<br/>结束</p>
+									<p class="count-down">
+										<%if (data['groupinfo']['day'] > 0){%>
+											<span class="count-down-num t_d" id="t_d">00</span><span style="font-size: 1.4rem; padding: 0 .3rem;">天</span><% } %><span class="count-down-num t_h" id="t_h">00</span>&nbsp;:&nbsp;<span class="count-down-num t_m" id="t_m">00</span>&nbsp;:&nbsp;<span class="count-down-num t_s" id="t_s">00</span>
+									</p>
+								</div>
+							</div>
+							<p class="myGroup-comName"><%=data['group']['goods_name']%></p>
+							<div class="myGroup-comSpec"><span><%=data['goods']['spec_name']%></span></div>
+							<div class="myGroup-comDet">
+								<span class="group-newPrice">¥<%=data['group']['group_price']%></span>
+								<span class="group-oldPrice">¥<%=data['goods']['goods_price']%></span>
+							</div>
+						</dd>
+					</dl>
+				</div>
+				<%if(data['group']['status']['status'] == 5){%>
+					<!-- 团长或团员-->
+					<%if( data['groupinfo']['status'] == 0){%>
+					<div class="groupInvi-btnBox">
+						<p class="poor-per font-red">还差<span class="poor-per-num min-num"><%=data['group']['group_person_num'] - data['groupinfo']['join_num']%></span>人哦，一起拼团享受低价！</p>
+						<p class="poor-remind">快去邀请好友一起参团吧！</p>
+						<a href="#" class="invite-btn wx-code" >邀请好友</a>
+					</div>
+					<%}else if(data['groupinfo']['status'] == 1 ){%>
+
+						<div class="groupInvi-btnBox groupSuccess-btnBox">
+							<p class="poor-per font-red">组团成功</p>
+							<p class="poor-remind">我们会尽快为您发货，请耐心等待。</p>
+							<a href="#" class="invite-btn groupdet-btn" onclick="creatgroup()">再次拼团</a>
+						</div>
+						<img src="../public/images/groupS.png" alt="" class="groupStatu-icon"/>
+					<%}else if(data['groupinfo']['status'] == -1){%>
+						<div class="groupInvi-btnBox groupSuccess-btnBox">
+						<p class="poor-per font-red">组团失败</p>
+						<p class="poor-remind">我们会尽快为您退款，请耐心等待。</p>
+						<a href="#" class="invite-btn groupdet-btn" onclick="creatgroup()">重新开团</a>
+						</div>
+						<img src="../public/images/groupF.png" alt="" class="groupStatu-icon"/>
+
+					<%}%>
+					
+				<%}else{%>
+					<%if(data['groupinfo']['status'] == 0){%>
+					<div class="groupInvi-btnBox">
+						<p class="poor-per font-red">还差<span class="poor-per-num min-num"> <%=data['group']['group_person_num'] - data['groupinfo']['join_num']%></span>人哦，一起拼团享受低价！</p>
+						<p class="poor-remind">就差你了！</p>
+						<a href="#" class="invite-btn groupdet-btn" onclick="joingroup()">我要参团</a>
+					</div>
+					<%}else if(data['groupinfo']['status'] == 1){%>
+						<div class="groupInvi-btnBox groupSuccess-btnBox">
+							<p class="poor-per font-red">组团成功</p>
+							<p class="poor-remind">您来晚了！该团已经组团成功</p>
+							<a href="#" class="invite-btn groupdet-btn" onclick="creatgroup()">我要开团</a>
+						</div>
+						<img src="../public/images/groupS.png" alt="" class="groupStatu-icon"/>
+					<%}else if(data['groupinfo']['status'] == -1){%>
+						<div class="groupInvi-btnBox groupSuccess-btnBox">
+							<p class="poor-per font-red">组团失败</p>
+							<p class="poor-remind">您来晚了！该团组团失败了！</p>
+							<a href="#" class="invite-btn groupdet-btn" onclick="creatgroup()">我要开团</a>
+						</div>
+						<img src="../public/images/groupF.png" alt="" class="groupStatu-icon"/>
+					<%}%>
+				<%}%>
+			
+			<!-- 	<div class="groupInvi-btnBox">
+				<p class="poor-per">还差<span class="poor-per-num min-num">2</span>人哦，一起拼团享受低价！</p>
+				<p class="poor-remind">快来参团吧，就差你啦！</p>
+				<a href="#" class="invite-btn">我要参团</a>
+			</div> -->
+				<div class="group-member-box">
+					<ul class="group-member-list">
+					
+						 <%for(var i = 0;i<3;i++){%>
+						 <%if(data['groupjoin'][i]){%>
+						 	<%var v = data['groupjoin'][i];%>
+							<li class="group-head">
+								<div class="group-portrait head-portrait">
+									<img src="<%=v['member_avatar']%>" alt="" class="protrait-img head-protrait-img"/>
+									<%if(data['groupinfo']['buyer_id'] == v['buyer_id']){%><img src="../public/images/protraitHead.png" alt="团长图片标志"  class="protrait-head"/><%};%>
+								</div>
+								<p class="group-member-time"><%=v['add_time_text']%><span class="member-action"><%if(data['groupinfo']['buyer_id'] == v['buyer_id']){%>开团<%}else{%>参团<%};%></span></p>
+							</li>
+						<%};%>
+						<%};%>
+					</ul>
+						<%if(data['groupjoin'].length > 3){%>
+							<div class="group-member-more">
+								<p class="memebr-more-word">查看更多</p>
+							<img src="../public/images/jtr.png" alt="" class="member-more-jtr"/>
+							</div>
+						<%};%>
+				
+				</div>
+				<div class="playGroup-way groupInvite-way">
+					<div class="playGroup">
+						<a href="./groupplay.html">
+							<span class="playGroup-tit">拼团玩法</span>
+							<img src="../public/images/jtr.png" alt="" class="playGroup-point"/>
+						</a>
+					</div>
+					<ul class="groupStep-list">
+						<li><span class="groupStep-num">1</span>选择商品</li>
+						<li><span class="groupStep-num">2</span>支付开团</li>
+						<li><span class="groupStep-num">3</span>邀请好友</li>
+						<li><span class="groupStep-num">3</span>拼团成功</li>
+					</ul>
+					<p class="playGroup-remind">支付开团并邀请<%=data['group']['group_person_num']%>人参团，人数不足自动退款，详情点击上方拼团玩法</p>
+				</div>
+					<!--商品详情-->
+					<div class="commodity-details">
+						<h1 class="commodityDet-tit">商品详情</h1>
+						<div id="goods_detail" class="img-box1"></div>
+					</div>
+				<!--商品详情-->
+			</div>
+			
+		
+			<!--content结束-->
+			<div class="foot-fixed foot-btnbox">
+				<a href="<%=rootUrl%>plugins/group/wap/index.html" class="foot-combtn foot-leftBtn">拼团活动</a>
+				<a href="#" class="foot-combtn foot-rightBtn wx-code">拼团邀请</a>
+			</div>
+		</div>
+		<div class="comCover"></div>
+		<div class="cover code-cover"></div>
+		<img src="../../../wap/img/wxbg.png" alt="" class="wx-alert"/>
+</script>
+</div>
+		<!--弹框-->
+		<div class="comAlert-box">
+			<div class="comAlert-tit">
+				<span class="comAlert-close"><img src="../public/images/close.png" alt="关闭按钮图片" class="comAlert-closeIcon"/></span>
+			</div>
+			<div class="comAlert-con">
+				<p class="comAlert-word">对不起，您来晚了！</p>
+			</div>
+			<div class="comAlert-btnBox">
+				<input type="button" value="重新开团" class="alert-onlyBtn"/>
+			</div>
+		</div>
+		<script type="text/javascript" src="../../../wap/js/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="../../../wap/js/common.js"></script>
+		<script type="text/javascript" src="../../../wap/js/template.js"></script>
+		<script type="text/javascript" src="../../../wap/js/tmpl/weixin.js"></script>
+	
+		<script type="text/javascript">
+		 function getRTime(EndTime, Rtime){
+		        var NowTime = new Date();
+		        var t = EndTime*1000 - NowTime.getTime();
+		        var d=Math.floor(t/1000/60/60/24);
+		        var h=Math.floor(t/1000/60/60%24);
+		        var m=Math.floor(t/1000/60%60);
+		        var s=Math.floor(t/1000%60);
+		        if(t < 0){
+		        	clearInterval(Rtime);
+		        	d = 0; h = 0; m = 0; s = 0;
+		        	shopdz_alert('该团已结束！',2,function(){
+		        		$('.oldgroup').hide();
+		        		$('.newgroup').show();
+		        	});
+		        	
+		        }
+		        if (document.getElementById("t_d")){
+		    		document.getElementById("t_d").innerHTML = d<10?'0'+d:d;
+		        }
+		    	document.getElementById("t_h").innerHTML = h<10?'0'+h:h;
+		    	document.getElementById("t_m").innerHTML = m<10?'0'+m:m;
+		    	document.getElementById("t_s").innerHTML = s<10?'0'+s:s;
+		    }
+		    $(function(){
+		    	getgroupdetail();
+				$(document).on('click','.wx-code',function(){
+					if(isWeiXin()){
+						$('.cover').show();
+						$('.wx-alert').show();
+					}else{
+						shopdz_alert('请在微信登陆！');
+					}
+				});
+				$(document).on('click','.wx-alert',function(){
+					$('.wrapper').css('overflow','');
+					$('.cover').hide();
+					$(this).hide();
+				});
+				$('.comAlert-close').on('click',function(){
+					$('.comCover').hide();
+					$('.comAlert-box').hide();
+				});
+		    })
+		</script>
+			<script type="text/javascript" src="../public/js/group.js"></script>
+	</body>
+</html>

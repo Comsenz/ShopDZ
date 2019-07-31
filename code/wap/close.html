@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>商城关闭</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<body>
+		<div class="content wrapper">
+			<h1 class="close-tit">系统信息</h1>
+			<p class="ellipsis"></p>
+			<p class="close-remind">由此给你带来的不便敬请谅解</p>
+		</div>
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/config.js"></script> -->
+
+		<script type="text/javascript">
+			$(function(){
+				var m = /^(https?:\/\/.+)\/wap/i.exec(location.href);
+				if (m && m.length > 1) {
+					SiteUrl = m[1] + '/index.php';
+					ApiUrl = m[1] + '/api.php';
+					WapSiteUrl = m[1] + '/wap';
+					LogoUrl = m[1] + '/data/Attach/';
+				}
+					$.ajax({
+						url:ApiUrl + '/index/getSettings',
+						type:'post',
+						data:{},
+						async: false,
+						success: function(result) {
+							result = eval("("+result+")");
+							if (result.code == 20002) {
+								$('.ellipsis').html(result.msg);
+							}else{
+								window.location.href = WapSiteUrl;
+							}
+						}
+					});
+			})
+		</script>
+	</body>
+</html>

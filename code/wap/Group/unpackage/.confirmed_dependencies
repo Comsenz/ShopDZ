@@ -1,0 +1,30 @@
+{
+	"index.html": {
+		"resources": [
+			"images/groupH.png",
+			"images/groupBan1.png",
+			"js/jquery-1.9.1.min.js",
+			"images/img2.png",
+			"css/style.css",
+			"images/com.png",
+			"images/jtr.png",
+			"css/reset.css",
+			"groupInvitation.html"
+		],
+		"refer": [
+			"groupInvitation.html"
+		]
+	},
+	"groupInvitation.html": {
+		"resources": [
+			"images/close.png",
+			"images/protraitHead.png",
+			"images/protrait.png",
+			"js/jquery-1.9.1.min.js",
+			"images/img2.png",
+			"css/style.css",
+			"images/jtr.png",
+			"css/reset.css"
+		]
+	}
+}

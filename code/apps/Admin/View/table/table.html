@@ -1,0 +1,562 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+  <title>表格模板</title> 
+  <link rel="stylesheet" href="../reset.css" /> 
+  <link rel="stylesheet" href="../style.css" /> 
+  <link rel="stylesheet" type="text/css" href="./css/flexigrid.pack.css" /> 
+  <script type="text/javascript" src="./jquery-1.9.1.js"></script> 
+  <!--<script type="text/javascript" src="./js/flexigrid.js"></script>--> 
+ </head> 
+ <body style="cursor: default; -moz-user-select: inherit;"> 
+  <!--<h2>示例2</h2>--> 
+  <div style="width: 750px;" class="flexigrid">
+   <div style="display: none;" title="Hide/Show Columns" class="nBtn">
+    <div></div>
+   </div>
+   <div style="margin-bottom: -200px; display: none; top: 124px; -moz-user-select: inherit; height: auto; width: auto;" class="nDiv">
+    <table cellpadding="0" cellspacing="0">
+     <tbody>
+      <tr>
+       <td class="ndcol1"><input checked="checked" class="togCol" value="1" type="checkbox" /></td>
+       <td class="ndcol2">操作</td>
+      </tr>
+      <tr>
+       <td class="ndcol1"><input checked="checked" class="togCol" value="2" type="checkbox" /></td>
+       <td class="ndcol2">EmployeeID</td>
+      </tr>
+      <tr>
+       <td class="ndcol1"><input checked="checked" class="togCol" value="3" type="checkbox" /></td>
+       <td class="ndcol2">Name</td>
+      </tr>
+      <tr>
+       <td class="ndcol1"><input checked="checked" class="togCol" value="4" type="checkbox" /></td>
+       <td class="ndcol2">Primary Language</td>
+      </tr>
+      <tr>
+       <td class="ndcol1"><input class="togCol" value="5" type="checkbox" /></td>
+       <td class="ndcol2">Favorite Color</td>
+      </tr>
+      <tr>
+       <td class="ndcol1"><input checked="checked" class="togCol" value="6" type="checkbox" /></td>
+       <td class="ndcol2">Favorite Animal</td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+   <div class="mDiv">
+    <!--<div class="ftitle">
+     示例2
+    </div>-->
+   </div>
+   <div class="tDiv">
+    <div class="tDiv2">
+     <div id="Add" class="fbutton">
+      <div>
+       <span class="add"></span>
+      </div>
+     </div>
+     <div id="Edit" class="fbutton">
+      <div>
+       <span class="edit"></span>
+      </div>
+     </div>
+     <div id="Delete" class="fbutton">
+      <div>
+       <span class="delete"></span>
+      </div>
+     </div>
+     <!--<div class="pReload fbutton">
+      <span></span>
+     </div>
+     <div class="show-row fbutton">
+      <span></span>
+     </div>-->
+    </div>
+    <div style="clear:both"></div>
+   </div>
+   <div class="sDiv">
+    <div class="sDiv2"> 
+     <select name="qtype"><option value="user_id">用户ID&nbsp;&nbsp;</option><option value="user_name" selected="selected">用户名&nbsp;&nbsp;</option></select> 
+     <input value="" size="30" name="q" class="qsbox" type="text" /> 
+     <input value="搜索" class="search-submit" type="button" />
+    </div>
+   </div>
+   <div class="hDiv" style="clear: both;">
+    <div class="hDivBox">
+     <table cellpadding="0" cellspacing="0">
+      <thead>
+       <tr>
+        <th checkall="1" abbr="checkall" axis="col0" align="center">
+         <div style="text-align: center; width: 90px;">
+          <input id="check-all" class="regular-radio" type="checkbox" />
+          <label for="check-all"></label>全选
+         </div></th>
+        <th class="" handle="1" axis="col1" align="center">
+         <div style="text-align: center; width: 90px;">
+          操作
+         </div></th>
+        <th class="sorted" abbr="employeeID" axis="col2" align="center">
+         <div style="text-align: center; width: 90px;" class="sasc">
+          EmployeeID
+         </div></th>
+        <th abbr="name" axis="col3" align="left">
+         <div style="text-align: left; width: 120px;">
+          Name
+         </div></th>
+        <th abbr="primary_language" axis="col4" align="left">
+         <div style="text-align: left; width: 120px;">
+          Primary Language
+         </div></th>
+        <th style="display: none;" abbr="favorite_color" axis="col5" align="left" hidden="">
+         <div style="text-align: left; width: 80px;">
+          Favorite Color
+         </div></th>
+        <th abbr="favorite_pet" axis="col6" align="right">
+         <div style="text-align: right; width: 80px;">
+          Favorite Animal
+         </div></th>
+         <th class="" handle="1" axis="col1" align="center">
+         <div style="text-align: center; width: 90px;">
+          操作
+         </div></th>
+         <th class="" handle="1" axis="col1" align="center">
+         <div style="text-align: center; width: 90px;">
+          操作
+         </div></th>
+         <th class="" handle="1" axis="col1" align="center">
+         <div style="text-align: center; width: 90px;">
+          操作
+         </div></th>
+         <th class="" handle="1" axis="col1" align="center">
+         <div style="text-align: center; width: 90px;">
+          操作
+         </div></th>
+       </tr>
+      </thead>
+     </table>
+    </div>
+   </div>
+   <div class="bDiv">
+    <table class="flexme2" style="" border="0" cellpadding="0" cellspacing="0">
+     <tbody>
+      <tr data-id="1" id="row1">
+       <td abbr="checkall" align="center">
+        <div style="text-align: center; width: 90px;">
+         <input id="check-1" class="regular-radio" value="1" type="checkbox" />
+         <label for="check-1"></label>
+        </div></td>
+       <td align="center">
+        <div style="text-align: center; width: 90px;">
+         undefined
+        </div></td>
+       <td class="sorted" abbr="employeeID" align="center">
+        <div style="text-align: center; width: 90px;">
+         1
+        </div></td>
+       <td abbr="name" align="left">
+        <div style="text-align: left; width: 120px;">
+         Tony
+        </div></td>
+       <td abbr="primary_language" align="left">
+        <div style="text-align: left; width: 120px;">
+         english
+        </div></td>
+       <td style="display: none;" abbr="favorite_color" align="left">
+        <div style="text-align: left; width: 80px;">
+         green
+        </div></td>
+       <td abbr="favorite_pet" align="right">
+        <div style="text-align: right; width: 80px;">
+         hamster
+        </div></td>
+        <td abbr="checkall" align="center">
+        <div style="text-align: center; width: 90px;">
+         <input id="check-2" class="regular-radio" value="2" type="checkbox" />
+         <label for="check-2"></label>
+        </div></td>
+        <td abbr="checkall" align="center">
+        <div style="text-align: center; width: 90px;">
+         <input id="check-2" class="regular-radio" value="2" type="checkbox" />
+         <label for="check-2"></label>
+        </div></td>
+        <td abbr="checkall" align="center">
+        <div style="text-align: center; width: 90px;">
+         <input id="check-2" class="regular-radio" value="2" type="checkbox" />
+         <label for="check-2"></label>
+        </div></td>
+        <td abbr="checkall" align="center">
+        <div style="text-align: center; width: 90px;">
+         <input id="check-2" class="regular-radio" value="2" type="checkbox" />
+         <label for="check-2"></label>
+        </div></td>
+      </tr>
+      <tr data-id="2" id="row2" class="erow">
+       <td abbr="checkall" align="center">
+        <div style="text-align: center; width: 90px;">
+         <input id="check-2" class="regular-radio" value="2" type="checkbox" />
+         <label for="check-2"></label>
+        </div></td>
+       <td align="center">
+        <div style="text-align: center; width: 90px;">
+         undefined
+        </div></td>
+       <td class="sorted" abbr="employeeID" align="center">
+        <div style="text-align: center; width: 90px;">
+         2
+        </div></td>
+       <td abbr="name" align="left">
+        <div style="text-align: left; width: 120px;">
+         Mary
+        </div></td>
+       <td abbr="primary_language" align="left">
+        <div style="text-align: left; width: 120px;">
+         spanish
+        </div></td>
+       <td style="display: none;" abbr="favorite_color" align="left">
+        <div style="text-align: left; width: 80px;">
+         red
+        </div></td>
+       <td abbr="favorite_pet" align="right">
+        <div style="text-align: right; width: 80px;">
+         groundhog
+        </div></td>
+        <td abbr="checkall" align="center">
+        <div style="text-align: center; width: 90px;">
+         <input id="check-2" class="regular-radio" value="2" type="checkbox" />
+         <label for="check-2"></label>
+        </div></td>
+        <td abbr="checkall" align="center">
+        <div style="text-align: center; width: 90px;">
+         <input id="check-2" class="regular-radio" value="2" type="checkbox" />
+         <label for="check-2"></label>
+        </div></td>
+        <td abbr="checkall" align="center">
+        <div style="text-align: center; width: 90px;">
+         <input id="check-2" class="regular-radio" value="2" type="checkbox" />
+         <label for="check-2"></label>
+        </div></td>
+        <td abbr="checkall" align="center">
+        <div style="text-align: center; width: 90px;">
+         <input id="check-2" class="regular-radio" value="2" type="checkbox" />
+         <label for="check-2"></label>
+        </div></td>
+      </tr>
+      <tr data-id="3" id="row3">
+       <td abbr="checkall" align="center">
+        <div style="text-align: center; width: 90px;">
+         <input id="check-3" class="regular-radio" value="3" type="checkbox" />
+         <label for="check-3"></label>
+        </div></td>
+       <td align="center">
+        <div style="text-align: center; width: 90px;">
+         undefined
+        </div></td>
+       <td class="sorted" abbr="employeeID" align="center">
+        <div style="text-align: center; width: 90px;">
+         3
+        </div></td>
+       <td abbr="name" align="left">
+        <div style="text-align: left; width: 120px;">
+         Seth
+        </div></td>
+       <td abbr="primary_language" align="left">
+        <div style="text-align: left; width: 120px;">
+         french
+        </div></td>
+       <td style="display: none;" abbr="favorite_color" align="left">
+        <div style="text-align: left; width: 80px;">
+         silver
+        </div></td>
+       <td abbr="favorite_pet" align="right">
+        <div style="text-align: right; width: 80px;">
+         snake
+        </div></td>
+        <td abbr="checkall" align="center">
+        <div style="text-align: center; width: 90px;">
+         <input id="check-2" class="regular-radio" value="2" type="checkbox" />
+         <label for="check-2"></label>
+        </div></td>
+        <td abbr="checkall" align="center">
+        <div style="text-align: center; width: 90px;">
+         <input id="check-2" class="regular-radio" value="2" type="checkbox" />
+         <label for="check-2"></label>
+        </div></td>
+        <td abbr="checkall" align="center">
+        <div style="text-align: center; width: 90px;">
+         <input id="check-2" class="regular-radio" value="2" type="checkbox" />
+         <label for="check-2"></label>
+        </div></td>
+        <td abbr="checkall" align="center">
+        <div style="text-align: center; width: 90px;">
+         <input id="check-2" class="regular-radio" value="2" type="checkbox" />
+         <label for="check-2"></label>
+        </div></td>
+      </tr>
+      <tr data-id="4" id="row4" class="erow">
+       <td abbr="checkall" align="center">
+        <div style="text-align: center; width: 90px;">
+         <input id="check-4" class="regular-radio" value="4" type="checkbox" />
+         <label for="check-4"></label>
+        </div></td>
+       <td align="center">
+        <div style="text-align: center; width: 90px;">
+         undefined
+        </div></td>
+       <td class="sorted" abbr="employeeID" align="center">
+        <div style="text-align: center; width: 90px;">
+         4
+        </div></td>
+       <td abbr="name" align="left">
+        <div style="text-align: left; width: 120px;">
+         Sandra
+        </div></td>
+       <td abbr="primary_language" align="left">
+        <div style="text-align: left; width: 120px;">
+         mandarin
+        </div></td>
+       <td style="display: none;" abbr="favorite_color" align="left">
+        <div style="text-align: left; width: 80px;">
+         blue
+        </div></td>
+       <td abbr="favorite_pet" align="right">
+        <div style="text-align: right; width: 80px;">
+         cat
+        </div></td>
+        <td abbr="checkall" align="center">
+        <div style="text-align: center; width: 90px;">
+         <input id="check-2" class="regular-radio" value="2" type="checkbox" />
+         <label for="check-2"></label>
+        </div></td>
+        <td abbr="checkall" align="center">
+        <div style="text-align: center; width: 90px;">
+         <input id="check-2" class="regular-radio" value="2" type="checkbox" />
+         <label for="check-2"></label>
+        </div></td>
+        <td abbr="checkall" align="center">
+        <div style="text-align: center; width: 90px;">
+         <input id="check-2" class="regular-radio" value="2" type="checkbox" />
+         <label for="check-2"></label>
+        </div></td>
+        <td abbr="checkall" align="center">
+        <div style="text-align: center; width: 90px;">
+         <input id="check-2" class="regular-radio" value="2" type="checkbox" />
+         <label for="check-2"></label>
+        </div></td>
+      </tr>
+     </tbody>
+    </table>
+    <div style="display: none;" class="iDiv"></div>
+   </div>
+   <div class="pDiv">
+    <div class="pDiv2">
+     <div class="pGroup">
+      <select name="rp"><option value="10">10&nbsp;&nbsp;</option><option value="15" selected="selected">15&nbsp;&nbsp;</option><option value="20">20&nbsp;&nbsp;</option><option value="30">30&nbsp;&nbsp;</option><option value="50">50&nbsp;&nbsp;</option></select>
+     </div> 
+     <div class="table-paging">
+     	<div class="btnseparator"></div>
+	     <div class="pGroup">
+	      <div class="pFirst pButton">
+	       <span></span>
+	      </div>
+	      <div class="pPrev pButton">
+	       <span></span>
+	      </div>
+	     </div>
+	     <div class="btnseparator"></div>
+	     <div class="pGroup">
+	      <span class="pcontrol">跳至<input size="4" value="1" type="text" />当前<span>1</span></span>
+	     </div>
+	     <div class="btnseparator"></div>
+	     <div class="pGroup">
+	      <div class="pNext pButton">
+	       <span></span>
+	      </div>
+	      <div class="pLast pButton">
+	       <span></span>
+	      </div>
+	     </div>
+	     <div class="btnseparator"></div>
+     </div>
+     
+     <!--<div class="pGroup">
+      <span class="pPageStat">第 1 条 ~ 第 4 条 | 共 4 条</span>
+     </div>-->
+    </div>
+    <div style="clear:both"></div>
+   </div>
+   <div class="vGrip">
+    <span></span>
+   </div>
+   <div style="height: 356px;" class="hGrip">
+    <span></span>
+   </div>
+  </div> 
+  <script type="text/javascript">
+
+            $(".flexme2").flexigrid({
+                url : 'example4.php',
+                dataType : 'json',
+                colModel : [
+                    {
+                        id: 'employeeID',//*****全选列必填，此项为数据的id
+                        display : '全选',//列名
+                        name : 'checkall',//字段名
+                        width : 90,//宽度
+                        sortable : false,//排序
+                        align : 'center',//内容对齐方式
+                        process: function(){},//回调函数
+                        
+                    },
+                    {
+                        display : '操作',//列名
+                        name : 'handle',//字段名
+                        width : 90,//宽度
+                        sortable : false,//排序
+                        align : 'center',//内容对齐方式
+                        process: '',
+                        button: function(data){} 
+                    },
+                    {
+                        display : 'EmployeeID',
+                        name : 'employeeID',
+                        width : 90,
+                        sortable : true,
+                        align : 'center'
+                    },
+                    {
+                        display : 'Name',
+                        name : 'name',
+                        width : 120,
+                        sortable : true,
+                        align : 'left'
+                    },
+                    {
+                        display : 'Primary Language',
+                        name : 'primary_language',
+                        width : 120,
+                        sortable : true,
+                        align : 'left'
+                    },
+                    {
+                        display : 'Favorite Color',
+                        name : 'favorite_color',
+                        width : 80,
+                        sortable : true,
+                        align : 'left',
+                        hide : true
+                    },
+                    {
+                        display : 'Favorite Animal',
+                        name : 'favorite_pet',
+                        width : 80,
+                        sortable : true,
+                        align : 'right'
+                    } 
+                ],
+                combobuttons: false,/* buttons后面追加的下拉按纽 */
+                buttons : [ 
+                    {
+                        name : 'Add',
+                        bclass : 'add',
+                        onpress : Example4
+                    },
+                    {
+                        name : 'Edit',
+                        bclass : 'edit',
+                        onpress : Example4
+                    },
+                    {
+                        name : 'Delete',
+                        bclass : 'delete',
+                        onpress : Example4
+                    },
+                    {
+                        separator : true
+                    } 
+                ],
+                searchitems : [ 
+                    {
+                        display : '用户ID',
+                        name : 'user_id'
+                    },
+                    {
+                        display : '用户名',
+                        name : 'user_name',
+                        isdefault : true
+                    }
+                ],
+                sortname : "employeeID",
+                sortorder : "asc",
+                usepager : true,
+                title : '示例2',
+                useRp : true,
+                rp : 15,
+                showTableToggleBtn : false,
+                width : 750,
+                height : 200
+            });
+
+            function Example4(th, com, grid) {
+                $(document).on('click','#'+th,function(){
+                    if (com == 'Delete') {
+                        var conf = confirm('Delete ' + $('.trSelected', grid).length + ' items?')
+                        if(conf){
+                            $.each($('.trSelected', grid),
+                                function(key, value){
+                                    $.get('example4.php', { Delete: value.firstChild.innerText}
+                                        , function(){
+                                            // when ajax returns (callback), update the grid to refresh the data
+                                            $(".flexme2").flexReload();
+                                    });
+                            });    
+                        }
+                    }else if (com == 'Edit') {
+                        var conf = confirm('Edit ' + $('.trSelected', grid).length + ' items?')
+                        if(conf){
+                            $.each($('.trSelected', grid),
+                                function(key, value){
+                                    // collect the data
+                                    var OrgEmpID = value.children[0].innerText; // in case we're changing the key
+                                    var EmpID = prompt("Please enter the New Employee ID",value.children[0].innerText);
+                                    var Name = prompt("Please enter the Employee Name",value.children[1].innerText);
+                                    var PrimaryLanguage = prompt("Please enter the Employee's Primary Language",value.children[2].innerText);
+                                    var FavoriteColor = prompt("Please enter the Employee's Favorite Color",value.children[3].innerText);
+                                    var FavoriteAnimal = prompt("Please enter the Employee's Favorite Animal",value.children[4].innerText);
+
+                                    // call the ajax to save the data to the session
+                                    $.get('example4.php', 
+                                        { Edit: true
+                                            , OrgEmpID: OrgEmpID
+                                            , EmpID: EmpID
+                                            , Name: Name
+                                            , PrimaryLanguage: PrimaryLanguage
+                                            , FavoriteColor: FavoriteColor
+                                            , FavoritePet: FavoriteAnimal  }
+                                        , function(){
+                                            // when ajax returns (callback), update the grid to refresh the data
+                                            $(".flexme2").flexReload();
+                                    });
+                            });    
+                        }
+                    }else if (com == 'Add') {
+                        // collect the data
+                        var EmpID = prompt("Please enter the Employee ID","5");
+                        var Name = prompt("Please enter the Employee Name","Mark");
+                        var PrimaryLanguage = prompt("Please enter the Employee's Primary Language","php");
+                        var FavoriteColor = prompt("Please enter the Employee's Favorite Color","Tan");
+                        var FavoriteAnimal = prompt("Please enter the Employee's Favorite Animal","Dog");
+
+                        // call the ajax to save the data to the session
+                        $.get('example4.php', { Add: true, EmpID: EmpID, Name: Name, PrimaryLanguage: PrimaryLanguage, FavoriteColor: FavoriteColor, FavoritePet: FavoriteAnimal  }
+                            , function(){
+                                // when ajax returns (callback), update the grid to refresh the data
+                                $(".flexme2").flexReload();
+                        });
+                    }
+                })
+            }
+        </script>  
+ </body>
+</html>

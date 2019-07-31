@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>推广有礼</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<meta charset="utf-8">
+	    <meta name="aplus-terminal" content="1"/>
+	    <meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type="text/javascript" src="js/tmpl/generalize.js"></script>
+	</head>
+	<body>
+		<div id="header_has_nav">
+		</div>
+		<div class="wrapper bgf0">
+			<div class="content">
+				<div id="generalize" style="display:none;">
+					<div class="integral-show">
+						<div class="num-box">
+							<span class="number" id="all_price">1.20万</span>
+						</div>
+						<p class="integral-number">累计收益</p>
+					</div>
+					<ul class="integral-list">
+					</ul>
+					<div id="footer"></div>
+				</div>
+				<div class="spread-null nullbox" style="display:none;">
+					<img src="img/spreadNull.png" alt="" class="spreadnull-img"/>
+					<p class="spreadnull-remind">您还没有推广奖励信息</p>
+					<input type="button" name="" id="" value="去推广" onclick="goBack();" class="alert-codebtn spread-btn"/>
+				</div>
+			<script id="generalize_content" type="text/html"> 
+			<%if(data && data.length > 0){%>
+				<%for (var i = 0; i < data.length; i++) {%>
+					<%var value = data[i];%>
+					<li>
+						<div class="integral-con">
+							<div class="inte-con">
+								<p class="inte-tit">
+									<%if(value.spread_level == 1){%>
+										一级推广奖励
+									<%}else if(value.spread_level == 2){%>
+										二级推广奖励
+									<%}else if(value.spread_level == 3){%>
+										三级推广奖励
+									<%}%>
+								</p>
+								<p class="inte-num"><span class="inte-icon inte-addIcon"></span><span class="inte-number add-num"><%=value.last_amount%></span></p>
+							</div>
+							<div class="inte-sub">
+								<p class="inte-word">奖励<%=value.reward_amount%><%if(value.refund_amount > 0){%>-退款扣款<%=value.refund_amount%><%};%></p>
+								<p class="inte-time"><%=value.order_add_time_text%></p>
+							</div>
+						</div>
+					</li>
+				<%};%>
+			<%}%>
+			</script>
+			</div>
+		</div>
+		<script>
+		redirectindex();
+			$(function(){
+				getmypresales();
+				initPage();
+			});
+		</script>
+		<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixinshare.js"></script>
+	</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>团邀请</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<body>
+		<div class="wrapper bgfa">
+			<div class="content-top content-bot">
+				<div class="myGroup-box groupInvite-box">
+					<dl class="myGroup-commodity">
+						<dt class="myGroup-comDt"><img src="images/img2.png" alt="我的拼团列表商品图片"  class="myGroup-comImg"/></dt>
+						<dd class="myGroup-comDd">
+							<div class="myGroup-statu">
+								<span class="groupPerson-num">3人团</span>
+								<div class="mine-group-limit">
+									<p class="limit-word">距离<br/>结束</p>
+									<p class="count-down"><span class="count-down-num t_h" id="t_h">00</span>：<span class="count-down-num t_m" id="t_m">00</span>：<span class="count-down-num t_s" id="t_s">00</span></p>
+								</div>
+							</div>
+							<p class="myGroup-comName">商品名称商品名称商品名称商品名称商品名称商品名称商品名称</p>
+							<div class="myGroup-comSpec"><span>2米大床</span><span>清新蓝</span></div>
+							<div class="myGroup-comDet">
+								<span class="group-newPrice">¥2889</span>
+								<span class="group-oldPrice">¥5899</span>
+							</div>
+						</dd>
+					</dl>
+				</div>
+				<div class="groupInvi-btnBox">
+					<p class="poor-per">还差<span class="poor-per-num min-num">2</span>人哦，一起拼团享受低价！</p>
+					<p class="poor-remind">快来参团吧，就差你啦！</p>
+					<a href="#" class="invite-btn">我要参团</a>
+				</div>
+				<div class="group-member-box">
+					<ul class="group-member-list">
+						<li class="group-head">
+							<div class="group-portrait head-portrait">
+								<img src="images/protrait.png" alt="" class="protrait-img head-protrait-img"/>
+								<img src="images/protraitHead.png" alt="团长图片标志"  class="protrait-head"/>
+							</div>
+							<p class="group-member-time">2016-09-20&nbsp;03:00:00<span class="member-action">开团</span></p>
+						</li>
+						<li>
+							<div class="group-portrait">
+								<img src="images/protrait.png" alt="" class="protrait-img"/>
+							</div>
+							<p class="group-member-time">2016-09-20&nbsp;03:00:00<span class="member-action">参团</span></p>
+						</li>
+						<li>
+							<div class="group-portrait">
+								<img src="images/protrait.png" alt=""  class="protrait-img"/>
+							</div>
+							<p class="group-member-time">2016-09-20&nbsp;03:00:00<span class="member-action">参团</span></p>
+						</li>
+					</ul>
+					<div class="group-member-more">
+						<p class="memebr-more-word">查看更多</p>
+						<img src="images/jtr.png" alt="" class="member-more-jtr"/>
+					</div>
+				</div>
+				<div class="playGroup-way groupInvite-way">
+					<div class="playGroup">
+						<a href="#">
+							<span class="playGroup-tit">拼团玩法</span>
+							<img src="images/jtr.png" alt="" class="playGroup-point"/>
+						</a>
+					</div>
+					<ul class="groupStep-list">
+						<li><span class="groupStep-num">1</span>选择商品</li>
+						<li><span class="groupStep-num">2</span>支付开团</li>
+						<li><span class="groupStep-num">3</span>邀请好友</li>
+						<li><span class="groupStep-num">3</span>拼团成功</li>
+					</ul>
+					<p class="playGroup-remind">支付开团并邀请4人参团，人数不足自动退款，详情点击上方拼团玩法</p>
+				</div>
+			</div>
+			<!--content结束-->
+			<div class="foot-fixed foot-btnbox">
+				<a href="#" class="foot-combtn foot-leftBtn">拼团首页</a>
+				<a href="#" class="foot-combtn foot-rightBtn">拼团邀请</a>
+			</div>
+		</div>
+		<div class="comCover"></div>
+		<!--弹框-->
+		<div class="comAlert-box">
+			<div class="comAlert-tit">
+				<span class="comAlert-close"><img src="images/close.png" alt="关闭按钮图片" class="comAlert-closeIcon"/></span>
+			</div>
+			<div class="comAlert-con">
+				<p class="comAlert-word">对不起，您来晚了！</p>
+			</div>
+			<div class="comAlert-btnBox">
+				<input type="button" value="重新开团" class="alert-onlyBtn"/>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript">
+			 function getRTime(){
+		        var EndTime= new Date('2016/11/24 00:00:00'); //截止时间 前端路上 http://www.51xuediannao.com/qd63/
+		        var NowTime = new Date();
+		        var t =EndTime.getTime() - NowTime.getTime();
+//		        var d=Math.floor(t/1000/60/60/24);
+		        var h=Math.floor(t/1000/60/60%24);
+		        var m=Math.floor(t/1000/60%60);
+		        var s=Math.floor(t/1000%60);
+		        if(h<10){
+		        	h = '0' + h;
+		        }
+				if(m<10){
+		        	m = '0' + m;
+		        }
+				if(s<10){
+		        	s = '0' + s;
+		        }
+		      document.getElementById("t_h").innerHTML = h;
+		      document.getElementById("t_m").innerHTML = m;
+		      document.getElementById("t_s").innerHTML = s;
+		    }
+		    setInterval(getRTime,1000);
+		    $(function(){
+		    	$('.invite-btn').on('click',function(){
+		    		$('.comCover').show();
+		    		$('.comAlert-box').show();
+		    	});
+		    	$('.comAlert-close').on('click',function(){
+		    		$('.comCover').hide();
+		    		$('.comAlert-box').hide();
+		    	});
+		    })
+		</script>
+	</body>
+</html>

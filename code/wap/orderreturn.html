@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<meta charset="UTF-8">
+		<title>商品退货</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type="text/javascript" src="js/tmpl/myorders.js"></script>
+		<style>
+			.overf{
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				width:60%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="header_has_nav">
+		</div>
+		<div id="orderdetails" class="wrapper" style="background: #f5f5f5;">
+		</div>
+		<!--wrapper开始-->
+		<script id="orderdetailscontent" type="text/html">
+		<div class="content" style="background: #f5f5f5;">
+			<div class="myorder1" osn="<%= data['order_sn'] %>">
+			</div>
+			<%if(data['gooddetails'] && data['gooddetails'].length>0){%>
+    		<% var datalen = data['gooddetails'].length; %>
+			<% for (var i = 0; i < datalen; i++) { %>
+			<% var value = data['gooddetails'][i]; %>
+		    	<div class="myorder1" style="padding:1rem 5%">
+					<dl class="order-dl1 borderbot-none">
+						<dt class="left" onclick="window.location.href='./goods_detail.html?id=<%= value['goods_common_id'] %>'"><img class="img-bg" src="<%= value['goods_image'] %>"></dt>
+						<dd class="right" style="margin-top:-0.8rem">
+							<p class="tit-p1">
+								<span onclick="window.location.href='goods_detail.html?id=<%= value['goods_common_id'] %>'" class="left tit-name overf"><%= value['goods_name'] %></span>
+								<span class="right wordred" style="width:35%;text-align:center">
+									<% if (value['status'] == 1) { %>
+										退货审核
+									<% } else if (value['status'] == 2) { %>
+										正在退货
+									<% } else if (value['status'] == 3) { %>
+										退货完成
+									<% } else if (value['status'] == 4) { %>
+										拒绝退货
+									<% } else if (value['status'] == 5) { %>
+										退货失败
+									<% } else { %>
+										<%= data['order_state_text'] %>
+									<% }; %>
+								</span>
+							</p>
+							<p class="tit-p1">
+								<span class="left spec-name overf"> <%=value['goods_spec']%></span>
+								<% if ( value['status'] == 0 ) { %>
+									<a href="returngoods.html?order_sn=<%=data['order_sn']%>&rec_id=<%=value['rec_id']%>" class="btn-border1 right" style="width:35%;padding:0;margin-top:0;">
+										申请退货
+									</a>
+								<% } else {%>
+									<a href="returnproductlist.html?return_sn=<%= value['return_sn'] %>" class="btn-border1 right" style="width:35%;padding:0;margin-top:0;">
+										查看退货
+									</a>
+								<% } %>
+							</p>
+						</dd>
+					</dl>
+		    	</div>
+	    	<%}%>
+	    	<%}%>
+		</div>
+		</script>
+		<!--wrapper结束-->
+	</body>
+	<script type="text/javascript">
+	redirectindex();
+		$(function(){
+			
+			$('.goback-header').find('.back-icon').unbind('click').click(function() {
+				window.location.href = WapSiteUrl + '/orderdetails.html?order_sn=' + get('order_sn');
+			});
+			redirectindex();
+			var osn = get('order_sn');
+			getorderdetails(osn);
+		})
+	</script>
+	<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+	<script type="text/javascript" src="js/tmpl/weixinshare.js"></script>
+</html>

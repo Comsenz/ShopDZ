@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="aplus-terminal" content="1"/>
+	<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>管理员绑定</title>
+    <link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/common.css" />
+	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	<script src="js/common.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="contentT">
+			<div class="statu-iconBox">
+				<img src="img/suce.png" alt="" class="pay-statuIcon"/>
+				<p class="pay-statuWord WxSuce-word"></p>
+			</div>
+
+			<div class="text-c">
+				<a href="./index.html" class="go-mall">去商城逛一逛</a>
+			</div>
+			<!-- <div class="pay-extension">
+				<a href="#">
+					推广
+				</a>
+			</div> -->
+		</div>
+	</div>
+	<script>
+		$(function(){
+			var type = get('type');
+			if(type == 1){
+				$('.WxSuce-word').html('绑定成功');
+			}else if(type == 2){
+				$('.WxSuce-word').html('绑定失败');
+			}else{
+				$('.WxSuce-word').html('微信配置错误');
+			}
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+@charset "utf-8";
+/* ======================================== */
+/* 商家中心相关样式表单						*/
+/* Author:				Hulihutu			*/
+/* Copyright:			www.shopnc.net		*/
+/* Create Date:			Oct-15-2013			*/
+/* Retrofit Date:		May-15-2015			*/
+/* ======================================== */
+
+body { color: #666; background-color: #F6F7FB;}
+html{ height:100%;}
+h2 { font: 24px/40px "microsoft yahei"; color: #27A9E3;}
+h1, h2, h3, h4, h5, h6 { font-family:  "microsoft yahei"; font-weight: normal;}
+h1 { font-size: 32px;}
+h2 { font-size: 25px;}
+h3 { font-size: 22px;}
+h5 { font-size: 15px;}
+h6 { font-size: 13px;}
+.lighter { font-weight: lighter;}
+.bolder { font-weight: bolder;}
+h1.smaller { font-size: 31px;}
+h2.smaller { font-size: 24px;}
+h3.smaller { font-size: 21px;}
+h4.smaller { font-size: 17px;}
+h5.smaller { font-size: 14px;}
+h6.smaller { font-size: 12px;}
+h1.bigger { font-size: 33px;}
+h2.bigger { font-size: 26px;}
+h3.bigger { font-size: 23px;}
+h4.bigger { font-size: 19px;}
+h5.bigger { font-size: 16px;}
+h6.bigger { font-size: 14px;}
+h1.block, h2.block, h3.block, h4.block, h5.block, h6.block { margin-bottom: 16px;}
+i { font-size: 1.2em;}
+a:focus, a:active { text-decoration: none;}
+.hidden { display: none;}
+.center { text-align: center;}
+.position-relative { position: relative;}
+.position-absolute { position: absolute;}
+.dark { color: #333333 !important;}
+.white { color: #FFFFFF !important;}
+.red { color: #DD5A43 !important;}
+.light-red { color: #FF7777 !important;}
+.blue { color: #27A9E3 !important;}
+.light-blue { color: #93CBF9 !important;}
+.green { color: #69AA46 !important;}
+.light-green { color: #B6E07F !important;}
+.orange { color: #FF892A !important;}
+.purple { color: #A069C3 !important;}
+.pink { color: #C6699F !important;}
+.pink2 { color: #D6487E !important;}
+.brown { color: #A52A2A !important;}
+.grey { color: #777777 !important;}
+
+/* ---------------------------------------- */
+/* 常用宽度、高度、边距、边框属性				*/
+/* ---------------------------------------- */
+
+.wrapper { width: 1200px; margin: auto;}
+.row-fluid { width: 100%;}
+.row-fluid:before, .row-fluid:after { content: ""; display: table; line-height: 0; }
+.row-fluid:after { clear: both;}
+.row-fluid [class*="span"] { -moz-box-sizing: border-box; display: block; width: 100%; min-height: 30px; float: left; margin-left: 2.5641%}
+.row-fluid [class*="span"]:first-child { margin-left: 0;}
+.row-fluid .controls-row [class*="span"] + [class*="span"] { margin-left: 2.5641%;}
+.row-fluid .span12 { width: 100%;}
+.row-fluid .span11 { width: 91.453%;}
+.row-fluid .span10 { width: 82.906%;}
+.row-fluid .span9 { width: 74.359%;}
+.row-fluid .span8 { width: 65.812%;}
+.row-fluid .span7 { width: 57.265%;}
+.row-fluid .span6 { width: 48.7179%;}
+.row-fluid .span5 { width: 40.1709%;}
+.row-fluid .span4 { width: 31.6239%;}
+.row-fluid .span3 { width: 23.0769%;}
+.row-fluid .span2 { width: 14.5299%;}
+.row-fluid .span1 { width: 5.98291%;}
+
+.fl { float: left;}
+.fr { float: right;}
+
+/* 发货单打印页面 */
+.print-layout { font-size:12px; background:#FAFAFA; border: solid 1px #CCC; position:relative; width:210mm; height:297mm; padding:5mm 50mm 5mm 5mm ; margin: 20px auto; box-shadow: 2px 2px 2px rgba(204,204,204,0.5); }
+.print-layout .print-btn {background:#FFF; border:  solid 1px #ccc;  position: absolute; z-index: 3; top:10mm; right:10mm; line-height:32px; padding:5px 10px; border-radius: 5px; box-shadow: 2px 2px 0 rgba(153,153,153,0.2); cursor: pointer;}
+.print-layout .print-btn:hover {  background: #555; box-shadow: none; border-color: #555;}
+.print-layout .print-btn i { background: url(../images/ncsc_bg_img.png); vertical-align: middle; display: inline-block; width: 32px; height: 32px;}
+.print-layout .print-btn a { font-family:"microsoft yahei"; font-size: 20px;padding: 0 0 0 10px; color: #555; font-weight:600; display:inline-block; vertical-align: middle;}
+.print-layout .print-btn:hover a, .print-layout .print-btn a:hover { color: #FFF;  text-decoration:none;}
+.print-layout .a5-size, .print-layout .a4-size { background:#FFF; border: dashed 1px #ccc; width: 210mm; position:absolute; top:5mm; left:5mm; padding:1px;}
+.print-layout .a5-size { height:148mm;  z-index:2;}
+.print-layout .a4-size { height:297mm; z-index:1;}
+.print-layout .a5-tip, .print-layout .a4-tip{ color:#333; width:36mm; position: absolute; z-index:2; right:8mm;}
+.print-layout .a5-tip { top:50mm;}
+.print-layout .a4-tip { top:160mm;}
+.print-layout dl dt h1 { font-family:"Arial Black", Gadget, sans-serif; font-size:72px; line-height:72px;}
+.print-layout dl dt em { font-family: Arial; font-size:11px; line-height:20px; background: #333; color: #FFF; padding: 0 8px; height:20px; border-radius:10px; -webkit-text-size-adjust:none;}
+.print-layout .a5-tip dd, .print-layout .a4-tip dd { line-height:24px;}
+.print-layout .print-page { width: 210mm; height:297mm; position:absolute; z-index:3; top:5mm; left:5mm; margin:1px;  overflow:auto;}
+.orderprint { background: #FFF; width: 190mm; height:130mm; padding:10mm 10mm 8mm 10mm; color:#000000; position:relative;}
+.orderprint .top { font-family:"microsoft yahei"; line-height:60px; width:190mm; height:60px; overflow:hidden; font-size:24px;}
+.orderprint .top .logo { width:200px; height:60px; float:left;text-align:left;}
+.orderprint .top .logo-title { text-align: center;  height: 60px; margin-left:10px; overflow:hidden;}
+.orderprint .top .full-title { width:100%; text-align:center;}
+.orderprint .explain { color: #555; line-height: 20px; width:550px; position: absolute; bottom:50px; left:50px;}
+.orderprint .seal {  position: absolute; bottom:30px; right:50px; }
+.orderprint .page { line-height:18px; color:#999; position: absolute; bottom:15px; left:50%; margin-left:-30px;}
+.orderprint table { font-family:Arial, Helvetica, sans-serif;  font-size:12px; line-height:18px; width:100%; border-collapse: collapse;}
+.buyer-info { margin: 15px 0;}
+.order-info thead th { background: #E7E7E7; text-align:center; border-bottom: solid 2px #000; border-top: solid 2px #000; padding:2px 0;}
+.order-info thead tr td {}
+.order-info tbody tr th {  background: #F7F7F7; padding:8px 0; text-align:center; font-weight:600;  border-bottom: solid 2px #000; border-top: solid 2px #000;}
+.order-info tbody tr td { padding: 8px 0; text-align: center;}
+.order-info tfoot tr th { border-bottom: solid 2px #000; padding: 6px 0;}
+.order-info tfoot tr th span { line-height:20px; white-space:nowrap; display:inline-block; width: 24%; height: 20px; padding:0; margin:0; border:0; overflow:hidden; text-overflow:ellipsis; }

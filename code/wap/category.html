@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="aplus-terminal" content="1"/>
+    <meta name="keywords" content="SHOPDZ" />
+	<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+	<title>分类</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/common.css" />
+</head>
+
+<body>
+	<!--header开始-->
+	<div id="header_has_search">
+    </div>
+	<!--header结束-->
+	<div class="wrapper">
+		
+		
+
+	</div>
+
+	
+
+	<script type="text/html" id="category">
+		<div class="TabMain">
+			<div id="tabItemCon">
+				<ul class="tabItemContainer">
+					<% for(i in category){ %>
+						<% if (i==0) { %>
+							<li><a class="tabItemCurrent"><%=category[i].gc_name %></a></li>
+						<% }else{ %>
+							<li><a><%=category[i].gc_name %></a></li>
+						<% } %>
+					<% } %>
+				</ul>
+			</div>
+			<div class="tabBodyContainer" id="tabBodyCon">
+				<% for(i in category){ %>
+					<% if (i==0) { %>
+						<div class="tabBodyItem tabBodyCurrent scroller">
+							<ul class="listul1">
+							<% var v1=category[i].child %>
+                               <% for(s in v1){ %>
+				                <li>
+				                   <a href="list.html?gc_id=<%=v1[s].gc_id %>">
+				                        <div class="tab-img">
+				                            <img src="<%=v1[s].gc_image %>">
+				                        </div>
+				                        <p class="tab-desc"><%=v1[s].gc_name %></p>
+				                    </a>
+				                </li>
+				                <% } %>
+				            </ul>
+						</div>
+					<% }else{ %>
+						<div class="tabBodyItem">
+							<ul class="listul1">
+				            <% var v2=category[i].child %>
+                               <% for(z in v2){ %>
+				                <li>
+				                   <a href="list.html?gc_id=<%=v2[z].gc_id %>">
+				                        <div class="tab-img">
+				                            <img src="<%=v2[z].gc_image %>">
+				                        </div>
+				                        <p class="tab-desc"><%=v2[z].gc_name %></p>
+				                    </a>
+				                </li>
+				                <% } %>
+				            </ul>
+						</div>
+					<% } %>
+
+				<% } %>
+			</div>
+		</div>
+	</script>
+
+<!-- <script type="text/javascript" src="http://www.pengyaou.com/jquery-1.4.min.js"></script> -->
+
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="js/iscroll.js"></script>
+<!-- <script type="text/javascript" src="js/config.js"></script>  -->
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/template.js"></script>
+<script type="text/javascript" src="js/tmpl/category.js"></script>
+
+<script src="js/swiper.min.js"></script>
+</body>
+</html>

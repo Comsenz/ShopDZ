@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="aplus-terminal" content="1"/>
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<meta charset="UTF-8">
+		<title>下单失败</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+	</head>
+	<body>
+		<div id="header_has_nav">
+		</div>
+		<!--wrapper开始-->
+		<div id="orderfail" class="wrapper" style="background: #f7f7f7;">
+			
+		</div>
+		<!--wrapper结束-->
+		<script id="orderfailcontent" type="text/html">
+		<div class="content">
+			<div class="success-header">
+				<img src="img/orderF.png" class="success-img"/>
+				<h1 class="success-tit">下单失败</h1>
+				<p class="fail-remind">请在<span class="wordred">5分钟内</span>完成付款<br />否则订单会被系统取消</p>
+				<p class="jump-link"><a href="mineGroupDet.html?active_id=<%= data['active_id'] %>&group_id=<%= data['group_id'] %>">拼团详情</a><a href="groupdetails.html?order_sn=<%=data['order_sn']%>">订单详情</a></p>
+			</div>
+			<div class="detail-box1">
+				<p class="details-p1"><span>订单号：</span><span><%=data['order_sn']%></span></p>
+				<p class="details-p1"><span>收货人：</span><span><%=data['buyinfo']['reciver_name']%></span></p>
+				<p class="details-p1"><span>手机：</span><span><%=data['buyinfo']['tel_phone']%></span></p>
+				<p class="details-p1 details-p2"><span class="details-span1">收货地址：</span><span class="details-span2"><%=data['buyinfo']['area_info']%></span></p>
+			</div>
+			<div class="detail-box1">
+				<p class="details-p1"><span>支付方式：</span><span><%=data['payment_code_text']%></span></p>
+				<p class="details-p1"><span>商品合计：</span><span><a>¥&nbsp;</a><%=data['goods_amount']%></span></p>
+				<p class="details-p1"><span>运费：</span><span><a>¥&nbsp;</a><%=data['shipping_fee']%></span></p>
+				<p class="details-p1"><span>优惠：</span><span><a>¥&nbsp;</a><%=data['coupon_amount']%></span></p>
+				<p class="details-p1"><span class="wordred">应付：</span><span class="wordred"><a class="wordred">¥&nbsp;</a><%=data['order_amount']%></span></p>
+			</div>
+			<div class="bottom-bg"></div>
+		</div>
+		</script>
+		<script type="text/javascript">
+		redirectindex();
+		$(function(){
+			var order_sn = get('order_sn');
+			if(!order_sn)
+				window.location.href = WapSiteUrl;
+			redirectindex();
+		$('.goback-header').find('.back-icon').bind('click',function() {
+			window.location.href = WapSiteUrl;
+		});
+			$.ajax({
+				type: 'POST',
+				url: ApiUrl+'/Payment/payResult',
+				data: {
+					key:key,
+					order_sn:get('order_sn')
+				},
+				success:function(info){
+					if(isNaN(parseFloat(info['data']['shopping_fee']))){
+						info['data']['shopping_fee'] = '0.00';
+					}
+					if(isNaN(parseFloat(info['data']['goods_amount']))){
+						info['data']['goods_amount'] = '0.00';
+					}
+					if(isNaN(parseFloat(info['data']['order_amount']))){
+						info['data']['order_amount'] = '0.00';
+					}
+					info['data']['coupon_amount'] = parseFloat((parseInt(info['data']['goods_amount']*100)+parseInt(info['data']['shipping_fee']*100)-parseInt(info['data']['order_amount']*100))/100);
+					if(isNaN(info['data']['coupon_amount']) || info['data']['coupon_amount'] == 0){
+						info['data']['coupon_amount'] = '0.00';
+					}
+					var html = template('orderfailcontent', info);
+					$('#orderfail').html(html);
+					initPage();
+				},
+				dataType: 'json'
+			});
+		})
+
+		</script>
+	</body>
+</html>

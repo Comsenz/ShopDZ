@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="aplus-terminal" content="1"/>
+    <meta name="keywords" content="SHOPDZ" />
+	<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>扫码支付</title>
+	<link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/swiper.min.css">
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/common.css" />
+	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	<script src="js/common.js"></script>
+</head>
+<body>
+<div id="header_has_nav_card"></div>
+<div class="wrapper" style="background: #f5f5f5;">
+	<div class="content">
+		<div>
+			<ul class="detail-list2 withdraw-list">
+				<li>
+					<div class="signIn-box account">
+						<span class="list-span1 boxsizing left">支付金额</span>
+						<input type="number" placeholder="" class="list-inp1 input-box withdraw-right" id="pay_amount" name="pay_amount" value=""/>
+					</div>
+				</li>
+			</ul>
+			<div class="new-build foot-fixed foot-btn" id="submit">确认支付</div>
+		</div>
+	</div>
+</div>
+<iframe id="iframe" src="" frameborder="0"></iframe>
+	<!--wrapper结束-->
+	<script>
+	var order_sn = '';
+	var pay_on_off=true;
+	$(function(){
+
+		/* 确认支付 */
+		$('#submit').click(function(){
+
+			if(pay_on_off){
+				prompt_word = '已提交支付请求，等待支付！';
+				pay_on_off = false;
+				var url = ApiUrl + '/Payment/addotherpay';
+				var data = {
+					'payment_code': 'newalipay',
+					'order_amount':$('#pay_amount').val()
+				};
+				getdata(url,data,function(info){
+					if(info['code'] == 0){
+
+						order_sn = info['data']['order_sn'];
+						
+						var pay_url = ApiUrl + '/Payment/aliqrPay';
+						pay_url += '?payment_code=newalipay';
+						pay_url += '&pay_sn='+info['data']['order_sn'];
+						getdata(pay_url,{payment_code:'newalipay',pay_sn:info['data']['order_sn']},function(mes){
+							alert(mes.data.qr_code);
+							// var iframe = document.getElementById('iframe');
+							// iframe.src = mes.data.qr_code;
+							//window.open(mes.data.qr_code);
+							window.location.href = mes.data.qr_code;
+						});
+						
+					}else{
+						shopdz_alert(info['msg']);
+					}
+				});
+				//shopdz_alert('正在为您创建订单，请稍等。');
+			}else{
+				shopdz_alert(prompt_word);
+			}
+			
+		});
+		
+		initPage();
+		
+	})
+    </script>
+</body>
+</html>

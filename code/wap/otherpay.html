@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="aplus-terminal" content="1"/>
+	<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>扫码支付</title>
+    <link rel="stylesheet" href="css/reset.css?v=2" />
+	<link rel="stylesheet" href="css/style.css?v=2" />
+	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	<script src="js/common.js?v=2"></script>
+	<style>
+
+	</style>
+</head>
+<body>
+	<div id="header_has_nav_card"></div>
+	<div class="wrapper wrapper-bg">
+		<div class="content" style="display:none;">
+			<div class="pay-shopName">
+				<div class="shopIcon-box shopIcon-WXbox">
+					<img src="img/shop.png" alt="" class="shop-icon"/>
+				</div>
+				<p class="shop-name">店铺名称：<span class="name"></span></p>
+			</div>
+			<div class="money-box">
+				<div class="write-money">
+					<p class="money-word">金额</p>
+					<span class="cursor"></span>
+					<a href="javaScript:;" name="numScreen" class="money-inp screen" id="money-inp"></a>
+					<!--<input type="text" name="numScreen"  value="" class="money-inp screen" onfocus="this.blur();"/>-->
+					<p class="money-yuan">¥</p>
+				</div>
+				<p class="money-remind">这里是一些活动说明</p>
+			</div>
+			<div class="keyboard-box">
+				<div class="keyboard-left">
+					<ul class="num-list">
+						<li onclick="command(1)"><a href="#">1</a></li>
+						<li onclick="command(2)"><a href="#">2</a></li>
+						<li onclick="command(3)" class="borderR-none"><a href="#">3</a></li>
+						<li onclick="command(4)"><a href="#">4</a></li>
+						<li onclick="command(5)"><a href="#">5</a></li>
+						<li onclick="command(6)" class="borderR-none"><a href="#">6</a></li>
+						<li onclick="command(7)"><a href="#">7</a></li>
+						<li onclick="command(8)"><a href="#">8</a></li>
+						<li onclick="command(9)" class="borderR-none"><a href="#">9</a></li>
+						<li onclick="command(0)" class="zero-li borderbot-none"><a href="#">0</a></li>
+						<li onclick="dot()" class="border-none"><a href="#">.</a></li>
+					</ul>
+				</div>
+				<div class="keyboard-right">
+					<div class="inp-dele" onclick="del()">
+						<img src="img/dele.png" alt="" class="dele-icon"/>
+					</div>
+					<div class="paySure pay-sure2">确认<br/>支付</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var pay_code = Wx_Alipay();
+		var pay_on_off = true;
+		var prompt_word = '';
+		var phone = '';
+		var order_sn = '';
+		/* 获取商城支付设置 */
+		var conf = getwebConf('payment');
+		if(pay_code == 'wx'){
+				$('.shopIcon-box').removeClass('shopIcon-ZFBbox');
+				$('.shopIcon-box').addClass('shopIcon-WXbox');
+
+				$('.paySure').removeClass('pay-sure');
+				$('.paySure').addClass('pay-sure2');
+			phone = '&phone='+get('phone');
+			/* 提示微信支付未开通 */
+			if(conf.wx =='0'){
+				prompt_word = '暂未开通微信支付';
+				shopdz_alert(prompt_word);
+				pay_on_off = false;
+			}
+		}else if(pay_code == 'newalipay'){
+				$('.shopIcon-box').removeClass('shopIcon-WXbox');
+				$('.shopIcon-box').addClass('shopIcon-ZFBbox');
+
+				$('.paySure').removeClass('pay-sure2');
+				$('.paySure').addClass('pay-sure');
+			phone = '&phone='+isPhone();
+			/* 提示支付宝支付未开通 */
+			if(conf.alipay =='0'){
+				prompt_word = '暂未开通支付宝支付';
+				shopdz_alert(prompt_word);
+				pay_on_off = false;
+			}
+		}else{
+			prompt_word = '请在使用微信或者支付宝扫码！';
+			shopdz_alert(prompt_word);
+			pay_on_off = false;
+		}
+		function Wx_Alipay(){
+			var ua = window.navigator.userAgent.toLowerCase();
+		    if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+		        return 'wx';
+		    }else if(ua.match(/AlipayClient/i) == 'alipayclient'){
+		        return 'newalipay';
+		    }
+		    return false;
+		}
+		$(function(){
+			$('.content').show();
+			if(pay_code == 'wx'){
+				$('.shopIcon-box').removeClass('shopIcon-ZFBbox');
+				$('.shopIcon-box').addClass('shopIcon-WXbox');
+
+				$('.paySure').removeClass('pay-sure');
+				$('.paySure').addClass('pay-sure2');
+			}else{
+				$('.shopIcon-box').removeClass('shopIcon-WXbox');
+				$('.shopIcon-box').addClass('shopIcon-ZFBbox');
+
+				$('.paySure').removeClass('pay-sure2');
+				$('.paySure').addClass('pay-sure');
+			}
+			// 设置商城
+			$('.name').html(getwebConf('shop_name'));
+			/* 确认支付 */
+			$('.paySure').click(function(){
+				if(pay_code == 'wx'){
+					$('.paySure').removeClass('pay-sure2S');
+					$('.paySure').addClass('pay-sure2');
+				}else{
+					$('.paySure').removeClass('pay-sureS');
+					$('.paySure').addClass('pay-sure');
+				}
+				if(pay_on_off){
+					prompt_word = '已提交支付请求，等待支付！';
+					pay_on_off = false;
+					var url = ApiUrl + '/Payment/addotherpay';
+					var data = {
+						'payment_code': pay_code,
+						'order_amount':parseFloat($('#money-inp').html())
+					};
+					getdata(url,data,function(info){
+						if(info['code'] == 0){
+							order_sn = info['data']['order_sn'];
+							if(pay_code == 'wx'){
+								var wxurl = ApiUrl + '/Payment/pay?payment_code=wx&pay_sn=' +order_sn+phone+'&oid='+get('oid');
+								getdata(wxurl,{payment_code:'wx',pay_sn:order_sn,oid:get('oid'),phone:3},function(mes){
+										if (typeof WeixinJSBridge == "undefined"){
+										    if( document.addEventListener ){
+										        document.addEventListener('WeixinJSBridgeReady', function(){jsApiCall(mes['data'])}, false);
+										    }else if (document.attachEvent){
+										        document.attachEvent('WeixinJSBridgeReady', function(){jsApiCall(mes['data'])}); 
+										        document.attachEvent('onWeixinJSBridgeReady', function(){jsApiCall(mes['data'])});
+										    }
+										}else{
+										    jsApiCall(mes['data']);
+										}
+								});
+							}else if(pay_code == 'newalipay'){
+								var pay_url = ApiUrl + '/Payment/pay';
+								pay_url += '?payment_code='+pay_code;
+								pay_url += '&pay_sn='+info['data']['order_sn'];
+								pay_url += phone;
+								AlipayJSBridge.call('pushWindow', {
+								  url: pay_url,
+								  param: {
+								    transparent: true
+								  }
+								});
+								var refund_url = setInterval(function(){
+									getdata(ApiUrl + '/Payment/selectPay',{pay_sn:info['data']['order_sn']},function(info){
+										if(info.data.trade_no.length > 20){
+											clearInterval(refund_url);
+											window.location.href = 'successAlipay.html?order_sn='+info['data']['order_sn'];
+										}else{
+
+										}
+									});
+								},1000);
+							}
+						}else{
+							shopdz_alert(info['msg']);
+						}
+					});
+				}else{
+					shopdz_alert(prompt_word);
+				}
+			});
+			
+			initPage();
+			function jsApiCall(mes){
+				WeixinJSBridge.invoke(
+					'getBrandWCPayRequest',
+					{
+			        	"appId":mes['appId'],     //公众号名称，由商户传入     
+			        	"timeStamp":mes['timeStamp'],         //时间戳，自1970年以来的秒数     
+			        	"nonceStr":mes['nonceStr'], //随机串     
+			        	"package":mes['package'],     
+			        	"signType":mes['signType'],         //微信签名方式：     
+			        	"paySign":mes['paySign'] //微信签名 
+			    	},
+					function(res){
+						WeixinJSBridge.log(res.err_msg);
+						//alert(res.err_code+res.err_desc+res.err_msg);
+						if(res.err_msg == "get_brand_wcpay_request:ok"){
+							window.location.href=WapSiteUrl+'/successWx.html?order_sn='+order_sn;
+						}else{
+							// 支付失败
+						}
+						pay_on_off = true;
+					}
+				);
+			}
+		})
+
+
+	</script>
+	<script type="text/javascript">
+		var num=0,result=0,numshow="0"; 
+		var operate=0; //判断输入状态的标志 
+		var calcul=0; //判断计算状态的标志 
+		var quit=0; //防止重复按键的标志 
+		function command(num){ 
+			var str=String(document.getElementById('money-inp').innerHTML); //获得当前显示数据 
+			str=(str!="") ? ((operate=="") ? str : "") : "";
+			str=str + String(num); //给当前值追加字符 
+			document.getElementById('money-inp').innerHTML=str; //刷新显示 
+			if($('.money-inp').html().length != 0){
+				if(pay_code == 'wx'){
+					$('.paySure').removeClass('pay-sureS');
+					$('.paySure').addClass('pay-sure2S');
+				}else{
+					$('.paySure').removeClass('pay-sure2S');
+					$('.paySure').addClass('pay-sureS');
+				}
+			}  
+			$('.money-inp').css('border-right','1px solid ##8bcce9');
+			operate=""; //重置输入状态 
+			quit=""; //重置防止重复按键的标志 
+		} 
+		function dzero(){ 
+			var str=String(document.getElementById('money-inp').innerHTML); 
+			str=(str!="") ? ((operate=="") ? str + "" : "") : ""; 
+			document.getElementById('money-inp').innerHTML=str; 
+			operate=""; 
+		} 
+		function dot(){ 
+			var str=String(document.getElementById('money-inp').innerHTML); 
+			str=(str!="") ? ((operate=="") ? str : "") : ""; 
+			for(i=0; i<=str.length;i++){ //判断是否已经有一个点号 
+				if(str.substr(i,1)==".") return false; //如果有则不再插入 
+			} 
+			str=str + "."; 
+			document.getElementById('money-inp').innerHTML=str; 
+			operate=""; 
+		} 
+		function del(){ //退格 
+			var str=String(document.getElementById('money-inp').innerHTML); 
+			str=(str!="") ? str : ""; 
+			str=str.substr("",str.length-1); 
+			if(str.length == 0) {
+				$('.pay-sure').css('background','#8bcce9');
+			}
+			str=(str!="") ? str : ""; 
+			document.getElementById('money-inp').innerHTML=str; 
+		} 
+	</script>
+</body>
+</html>

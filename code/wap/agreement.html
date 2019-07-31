@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta charset="utf-8">
+	    <meta name="aplus-terminal" content="1"/>
+	    <meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<link rel="shortcut icon" href="favicon.ico">
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+	</head>
+	<body>
+		<div id="header_has_nav">
+		</div>
+		<div class="wrapper">
+		<div class="content">
+			<!-- <h1 class="artical-tit">服务条款</h1>
+			<div class="mall-notice">
+				<div class="notice-tit">
+					<p class="notice-left">商城公告</p>
+					<p class="notice-right">2016-08-08</p>
+				</div>
+			</div> -->
+			<p class="artical-content"></p>
+
+		</div>
+		</div>
+		<script>
+		$(function(){
+			var agreementurl = ApiUrl + '/Cms/getcms';
+
+			getdata(agreementurl,{key:key,type:'register'},function(info){
+				$('.artical-content').html(info['data']['article_content']);
+				$('#head_tit').html(info['data']['article_title']);
+				document.title= info['data']['article_title'];
+			});
+			initPage();
+				/*
+				$('.sign-btn1').click(function(){
+					getdata(agreementurl,{type:'register'},function(info){
+						$('.cover').show();
+						$('.agreement-content').show();
+						$('.agreement-content').html(info['data']['article_content']);
+						$('.agreement-content').prepend('<h1>'+info['data']['article_title']+'</h1>');
+
+						$('.content2').hide();
+					})
+					
+					initPage();
+				});
+				$('.cover').click(function(){
+					$('.cover').hide();
+					$('.agreement-content').hide();
+					$('.content2').show();
+				})
+				*/
+		});
+		</script>
+	</body>
+</html>

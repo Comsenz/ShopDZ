@@ -1,0 +1,84 @@
+.mb-item-edit-content .goods-list{
+	max-width:500px;
+}
+.mb-item-edit-content {
+    background: #EFFAFE url(__PUBLIC__/img/cms_edit_bg_line.png) repeat-y scroll 0 0;
+}
+.jurisdiction dl{
+	background: #fff !important;
+}
+.mb-item-edit-content .search-goods-list a{
+	position: absolute;
+	z-index: 1;
+	background-color: #1ab394;
+    border-color: #1ab394;
+    color: #FFF;
+    height: 20px;
+    padding: 0 6px;
+    line-height: 20px;
+    display: inline-block;
+    border: none;
+    font-size: 12px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+.jurisdictio-shop {
+    width: 100%;
+    min-width: 1px
+}
+.juris-dl-shop {
+    width: 100%;
+    min-width: 1px;
+}
+
+/*首页管理页面分页样式开始*/
+.pagination {
+    text-align: center;
+    display: block;
+    padding: 15px 0;
+    margin: 0!important;
+}
+.pagination ul {
+    font-size: 0;
+    display: inline-block;
+    margin: 0 auto!important;
+    padding: 0;
+    zoom: 1;
+}
+.pagination ul li {
+    vertical-align: middle;
+    letter-spacing: normal;
+    word-spacing: normal;
+    display: inline-block;
+    width: auto!important;
+    height: auto!important;
+    padding: 0!important;
+    margin: 0 !important;
+    border: none !important;
+    zoom: 1;
+}
+.pagination li a span, .pagination li a:visited span {
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+.pagination li span {
+    font-size: 12px;
+    line-height: 24px;
+    color: #AAA;
+    list-style-type: none;
+    background-color: #F5F5F5;
+    display: block;
+    height: 24px;
+    padding: 0px 8px;
+    margin: 0px;
+    border: 1px solid;
+    border-color: #DCDCDC #DCDCDC #B8B8B8 #DCDCDC;
+}
+.pagination li span.currentpage {
+    color: #FFF;
+    font-weight: bold;
+    background-color: #41BEDD;
+    border-color: #3AABC6 #3AABC6 #318EA6 #3AABC6;
+    border-radius: 0;
+}

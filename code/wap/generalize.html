@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>推广有礼</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<meta charset="utf-8">
+	    <meta name="aplus-terminal" content="1"/>
+	    <meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type="text/javascript" src="js/tmpl/generalize.js"></script>
+		<script type="text/javascript" src="js/ZeroClipboard.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+	</head>
+	<body class="bgf0">
+		<div id="header_has_nav">
+		</div>
+		<div class="wrapper">
+			<div class="content content-mar">
+			<div id="generalize"></div>
+			<script id="generalize_content" type="text/html"> 
+			
+				<div class="totle-box">
+					<div class="spread-top totle-top">
+						<h1 class="spread-num"><%=all_price%></h1>
+						<p class="spread-remind">累计奖励</p>
+						<a href="generalizedetails.html?all=<%=all_price%>"><img src="img/jt-r.png" alt="" class="spread-jtR"/></a>
+					</div>
+					<div class="reward-box">
+						<h2 class="reward-tit"><p class="reward-titp left">未结算奖励</p><span class="reward-titnum right"><%=no_settlement_price%></span></h2>
+						<ul class="modular-box spread-list">
+							<li class="modular-li wx-code">
+								<a href="#">
+									<img src="img/spread1.png" class="modular-img"/>
+									<p class="modular-word">微信分享</p>
+								</a>
+							</li>
+							<li class="modular-li code-li">
+								<a href="#">
+									<img src="img/spread2.png" class="modular-img"/>
+									<p class="modular-word">二维码</p>
+								</a>
+							</li>
+							<li class="modular-li copy-li">
+								<a href="#" >
+									<img src="img/spread3.png" class="modular-img"/>
+									<p class="modular-word" id='copy-botton' >复制链接</p>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="cash-box">
+					<div class="spread-top cash-top">
+						<h1 class="spread-num"><%=settlement_price%></h1>
+						<p class="spread-remind">可提现奖励</p>
+					</div>
+					<div class="reward-box">
+						<h2 class="reward-tit"><p class="reward-titp left">提现冻结中</p><span class="reward-titnum right"><%=frozen_price%></span></h2>
+						<ul class="modular-box spread-list">
+							<li class="modular-li">
+								<a href="withdraw.html" id="callphone">
+									<img src="img/spread4.png" class="modular-img"/>
+									<p class="modular-word">申请提现</p>
+								</a>
+							</li>
+							<li class="modular-li">
+								<a  href="withdrawlist.html" id="callphone">
+									<img src="img/spread5.png" class="modular-img"/>
+									<p class="modular-word">提现记录</p>
+								</a>
+							</li>
+							<li class="modular-li">
+								<a <% if(member_mobile) {%> href="withdrawaccount.html" <%}else {%> href="wxlogin.html"   <%}%> >
+									<img src="img/spread6.png" class="modular-img"/>
+									<p class="modular-word">修改账户</p>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</script>
+				
+				<div class="cover code-cover"></div>
+				<div class="savecode-box">
+					<img id="qrcode" src="img/wxcode.png" alt="" class="alert-code"/>
+					<input type="button" name="" value="长按二维码图片保存"  class="alert-codebtn"/>
+					<p class="alert-codetit">将图片发送给好友，吸引更多客流</p>
+				</div>
+				<div class="httpcode-box">
+					<p class="alert-http http"></p>
+					<input type="button" name="" value="长按网址复制"  class="alert-codebtn"/>
+					
+				</div>
+				<div class="cover code-cover"></div>
+				<img src="img/wxbg.png" alt="" class="wx-alert"/>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+		redirectindex();
+			$(function(){
+				$(document).on('click','.copy-li',function(){
+					$('.cover').show();
+					$('.httpcode-box').show();
+				});
+				$(document).on('click','.code-li',function(){
+					$('.cover').show();
+					$('.savecode-box').show();
+				});
+				$(document).on('click','.code-cover',function(){
+					$('.cover').hide();
+					$('.wx-alert').hide();
+					$('.savecode-box').hide();
+					$('.httpcode-box').hide();
+				});
+				$(document).on('click','.wx-code',function(){
+					if(isWeiXin()){
+						$('.cover').show();
+						$('.wx-alert').show();
+					}else{
+						shopdz_alert('请在微信登陆！');
+					}
+				});
+				$(document).on('click','.wx-alert',function(){
+					$('.wrapper').css('overflow','');
+					$('.cover').hide();
+					$(this).hide();
+				});
+				var url = location.href.split('#')[0];
+				var conf = getwebConf();
+				if(isWeiXin()) {
+					$.get(ApiUrl + '/Member/GetSignPackage', {"url": encodeURIComponent(url)}, function (data) {
+						if (data.code == 0) {
+							wx.config({
+								debug: false,
+								appId: data.data.appId,
+								timestamp: data.data.timestamp,
+								nonceStr: data.data.nonceStr,
+								signature: data.data.signature,
+								jsApiList: ['onMenuShareAppMessage','onMenuShareTimeline'
+									// 所有要调用的 API 都要加到这个列表中
+								]
+							});
+							;
+						}
+					}, 'json');
+					wx.ready(function () {
+
+						var uid = getCookies('uid');
+						var title = $('.details-tit1').text();
+						var desc = $('.details-subtit1').text();;
+						var imgurl = $('#wx_goods_image').text();
+						wx.onMenuShareAppMessage({
+							title: conf.wx_sharetitle || conf.shop_name,
+                        	desc: conf.wx_sharedesc || conf.web_introduce,
+							link: $('.http').html(),
+							imgUrl: conf.wx_shareimg || conf.shop_logo,
+							type: '',
+							dataUrl: '',
+
+							success: function () {
+								$('.cover').hide();
+								$('.wx-alert').hide();
+								$('.savecode-box').hide();
+								$('.httpcode-box').hide();
+								// 用户确认分享后执行的回调函数
+
+							},
+							cancel: function () {
+								// 用户取消分享后执行的回调函数
+
+							}
+						});
+						wx.onMenuShareTimeline({
+							title: (conf.wx_sharetitle || conf.shop_name) + '-' + (conf.wx_sharedesc || conf.web_introduce),
+							link: $('.http').html(),
+							imgUrl: conf.wx_shareimg || conf.shop_logo,
+							success: function () {
+								// 用户确认分享后执行的回调函数
+								$('.cover').hide();
+								$('.wx-alert').hide();
+								$('.savecode-box').hide();
+								$('.httpcode-box').hide();
+							},
+							cancel: function () {
+								// 用户取消分享后执行的回调函数
+							}
+						});
+					})
+				}
+				getgeneralize();
+				initPage();
+			})
+		</script>
+	</body>
+</html>

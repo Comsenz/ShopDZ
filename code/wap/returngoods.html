@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="keywords" content="SHOPDZ" />
+		<meta name="apple-mobile-web-app-title" content="SHOPDZ"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<title>申请退货</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<!-- <script type="text/javascript" src="js/gotoTop.js"></script>
+		<script type="text/javascript" src="js/config.js"></script> -->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type='text/javascript' src='js/upload/LocalResizeIMG.js'></script>
+		<script type='text/javascript' src='js/upload/mobileBUGFix.mini.js'></script>
+		<style type="text/css">
+			.bg{ background-color: #ccc; }
+			.none{ display: none;}
+		</style>
+	</head>
+	<body>
+		<div id="header_has_nav">
+		</div>
+		<!--wrapper开始-->
+		<div id="return" class="wrapper">
+			<!--content开始-->
+			<div class="content">
+				<div id="goods"></div>
+				<div id="message"></div>
+			</div>
+		</div>
+			
+			<script id="goodscontent" type="text/html">
+				<ul class="refund-list">
+			    	<li>
+		    			<dl class="cart-list-rl cart-list-dl return-dl">
+		    				<dt class="cart-list-dt return-list-dt"><img src="<%=data['goods_image']%>" class="return-img"/></dt>
+		    				<dd class="cart-list-dd return-list-dd">
+		    					<h1 class="cart-dd-tit"><%=data['goods_name']%></h1>
+		    					<p class="cart-spec"><%=data['goods_spec']%></p>
+		    					<p class="cart-proprice">单价：¥<%=data['goods_price']%></p>
+		    				</dd>
+		    			</dl>
+			    	</li>
+			    </ul>
+			    <dl class="reason-choice">
+					<dt class="left">退货数量：</dt>
+					<dd class="left">
+						<div class="m-selnum jia-jian" style="position: relative;top: 1rem;" data-reactid=".0.1.0.1.1.1.1.0">
+							<span id="decrease_goods_num" class="jian less z-dis" style="border-right: none;" data-reactid=".0.1.0.1.1.1.1.0.0">
+								<i class="hx" data-reactid=".0.1.0.1.1.1.1.0.0.0"></i>
+							</span>
+							<div class="textWrap" data-reactid=".0.1.0.1.1.1.1.0.1">
+								<input type="text" id="goods_num" name="goods_num" style="position: absolute;top: 0;left: 0;" class="num-input" value="<%=data['goods_num']%>" data-reactid=".0.1.0.1.1.1.1.0.1.0">
+							</div>
+							<span id="increase_goods_num" class="more jia" data-reactid=".0.1.0.1.1.1.1.0.2">
+								<i class="hx" data-reactid=".0.1.0.1.1.1.1.0.2.0"></i>
+								<i class="sx" data-reactid=".0.1.0.1.1.1.1.0.2.1"></i>
+							</span>
+						</div>
+						件
+					</dd>
+				</dl>
+				<dl class="reason-choice">
+					<dt class="left">退货金额：</dt>
+					<dd class="left">
+						<input name="goods_amount" class="refund-money" value="<%=data['goods_price']*data['goods_num']%>">元
+					</dd>
+				</dl>
+			</script>
+
+			<script id="messagecontent" type="text/html">
+				<div class="reason-choice posi1">
+					<select class="reason-sele" name="causes_id" value='0'>
+						<option value='0'>退货原因</option>
+					<%var datalen = data.length;%>
+					<%for (var i = 0; i < datalen; i++) {%>
+						<option value="<%=data[i]['causes_id']%>"><%=data[i]['causes_name']%></option>
+					<%};%>
+					</select>
+					<img src="img/jt-r.png" class="area-choice"/>
+				</div>
+				<div class="textarea-box">
+					<p class="textcount">剩余<span id="textCount">500</span>个字</p> 
+					<textarea name="causes" placeholder="退货说明" onfocus="if(this.placeholder=='退货说明') {this.placeholder='';}this.style.color='#333';" onblur="if(this.placeholder=='') {this.placeholder='退货说明';this.style.color='#333';}" id="TextArea1" class="options" onkeyup="words_deal();" maxlength="500"></textarea> 
+				</div>
+				<!--<div class="reason-choice">-->
+					<p class="uploda-tit">上传凭证</p>
+				<!--</div>-->
+				<ul class="upLoad-imgbox reason-upload">
+					<li class="liW">
+						<input type="file" id="uploadphoto" name="refund_images" value="请点击上传图片" class="upload-inp" /> 
+  						<img src="img/add-code.png" id="upload-images" class="upload-cover"/>
+					</li>
+					
+				</ul>
+				<div class="refund-foot foot-fixed foot-btn">
+					<input type="button" name="" id="" value="提交" class="refund-btn2"/>
+				</div>
+			</script>
+		<div id="ser" class="address-remind">
+		</div>
+		<!--wrapper结束-->
+		<div class="cover"></div>
+		<div class="inner">
+		    <div class="load-container loading"> 
+		      	<div class="loader">Loading...</div> 
+		     </div>
+		</div>
+		<script type="text/javascript" src="js/tmpl/refund.js"></script>
+		<script type="text/javascript">
+		redirectindex();
+			//限制文本域只能输入500字，并提示可输入的剩余字数
+			function words_deal(){ 
+				var curLength=$("#TextArea1").val().length; 
+				if(curLength>500){ 
+					var num=$("#TextArea1").val().substr(0,500); 
+					$("#TextArea1").val(num); 
+					//alert("超过字数限制，多出的字将被截断！" ); 
+				} 
+				else{ 
+					$("#textCount").text(500-$("#TextArea1").val().length); 
+				} 
+			}
+			var imglen = 3;
+			var goods_num = 0;
+			var amount = 0;
+			var submit = true;
+			$(function(){
+				$('.goback-header').find('.back-icon').unbind('click').click(function() {
+					window.location.href = WapSiteUrl + '/orderreturn.html?order_sn=' + get('order_sn');
+				});
+				redirectindex();
+				getcause();
+				getordergoods();
+				$('#return').on('keyup','input[name="goods_num"]',function(){
+					var str = '';
+					var num = parseInt($(this).val());//获取退货数量
+					$(this).val(num);
+					submit = true;
+					if(num > goods_num){
+						str = '超过商品数量！';
+						num = goods_num;
+						$(this).val(num);
+					} else if(num <= 0 || isNaN(num)){
+						//str = '退货数量有误！';
+						num = 1;
+						$(this).val(num);
+						$('input[name="goods_amount"]').val(amount*num);//修改数量时设置金额
+						return true;
+					} else{
+						$('input[name="goods_amount"]').val(amount*num);//修改数量时设置金额
+						return true;
+					}
+					shopdz_alert(str);
+	 				$('input[name="goods_amount"]').val(amount*num);//修改数量时设置金额
+				})
+				$('#return').on('blur','input[name="goods_amount"]',function(){
+					var str = '';
+					var price = parseFloat($(this).val())*100;//获取退货金额
+					$(this).val(price/100);
+					if(price > amount*100*goods_num){
+						str = '超过商品金额！';
+						$(this).val(amount*goods_num);
+					} else if(price <= 0 || isNaN(price)){
+						str = '退货金额有误！';
+						$(this).val('');
+					} else {
+						submit = true;
+						return true;
+					}
+					submit = false;
+					shopdz_alert(str,2,function(){submit=true;});
+					return false;
+				})
+				/* 数量加减 */
+				$('#return').on('click','.jia',function(){
+					$('input[name="goods_num"]').val(parseInt($('input[name="goods_num"]').val())+1);
+					$('input[name="goods_num"]').keyup();
+				});
+				$('#return').on('click','.jian',function(){
+					if(intval($('input[name="goods_num"]').val())==1){
+						shopdz_alert('商品数量不能少于1');
+						return;
+					}
+					$('input[name="goods_num"]').val(parseInt($('input[name="goods_num"]').val())-1);
+					$('input[name="goods_num"]').keyup();
+				})
+				/* 上传图片限制 */
+				$('#return').on('click','.upload-inp',function(){
+					var lilen = $('.upload-inp').parent().siblings('.li-img').length;
+					if(lilen>=imglen){
+						shopdz_alert('最多上传三张图片！');
+						return false;
+					}
+				})
+				/* 提交事件 */
+				$('#return').on('click','.refund-btn2',function(){
+					if(submit){
+						if($('select[name="causes_id"]').val() > 0){
+							submit = false;
+							$('.refund-btn2').addClass('bg');
+							setreturngoodsdata();
+						} else {
+							shopdz_alert('请选择退货原因！');
+						}
+					}
+				})
+			})
+
+			
+
+
+		</script>
+		<script type="text/javascript" src="js/tmpl/weixin.js"></script>
+		<script type="text/javascript" src="js/tmpl/weixinshare.js"></script>
+	</body>
+</html>
+
