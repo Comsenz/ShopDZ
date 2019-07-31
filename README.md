@@ -13,3 +13,7 @@ git clone https://github.com/comsenz/shopdz.git
 ```
 
 - 直接下载源码包 releases 版本
+
+```
+https://github.com/comsenz/shopdz/archive/v1.5.1.zip
+```
