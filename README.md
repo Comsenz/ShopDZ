@@ -17,3 +17,7 @@ git clone https://github.com/comsenz/shopdz.git
 ```
 https://github.com/comsenz/shopdz/archive/v1.5.1.zip
 ```
+
+### 问题反馈
+
+[https://bbs.comsenz-service.com/forum-59-1.html](https://bbs.comsenz-service.com/forum-59-1.html)
